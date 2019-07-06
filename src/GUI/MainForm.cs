@@ -42,6 +42,7 @@ namespace Draw
 
         void ViewPortMouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
+            dialogProcessor.OnMouseDownPoint = e.Location;
             if (ButtonMainNavigator.Checked)
             {
                 dialogProcessor.Selection = dialogProcessor.ContainsPoint(e.Location);
@@ -52,10 +53,6 @@ namespace Draw
                     dialogProcessor.LastLocation = e.Location;
                     RerenderMainCanvas();
                 }
-            }
-            else if (ButtonMultiSelect.Checked)
-            {
-                dialogProcessor.OnMouseDownPoint_ForRotation = e.Location;
             }
             else if (ButtonFillColor.Checked)
             {
@@ -80,49 +77,101 @@ namespace Draw
 
         void ViewPortMouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
         {
+            dialogProcessor.OnMouseUpPoint = new PointF(e.X, e.Y);
             dialogProcessor.IsDragging = false;
             if (ButtonMultiSelect.Checked)
             {
-                dialogProcessor.OnMouseUpPoint_ForRotation = e.Location;
+                dialogProcessor.OnMouseUpPoint = e.Location;
                 ButtonMultiSelect.Checked = false;
                 var setOfShapesThatHasToBeRotated = TraverseOverSelectedMatrix(false);
                 ChageBorderOfSetOfShapes(this.dialogProcessor.ShapeList, GlobalConstants.DefaultDashStyle);
                 ChageBorderOfSetOfShapes(setOfShapesThatHasToBeRotated, DashStyle.Dot);
-                RerenderMainCanvas();
             }
+
+            var onMouseDownPoint = dialogProcessor.OnMouseDownPoint;
+            var onMouseUpPoint = dialogProcessor.OnMouseUpPoint;
+            var minX = Math.Min(onMouseDownPoint.X, onMouseUpPoint.X);
+            var minY = Math.Min(onMouseDownPoint.Y, onMouseUpPoint.Y);
+            var maxX = Math.Max(onMouseDownPoint.X, onMouseUpPoint.X);
+            var maxY = Math.Max(onMouseDownPoint.Y, onMouseUpPoint.Y);
+            var width = maxX - minX;
+            var height = maxY - minY;
+
+            if (ButtonDrowElipse.Checked)
+            {
+                dialogProcessor.AddEllipse(minX, minY, width, height);
+            }
+            if (ButtonDrowRectangle.Checked)
+            {
+                dialogProcessor.AddRectangle(minX, minY, width, height);
+            }
+            if (ButtonDrowTriangle.Checked)
+            {
+                dialogProcessor.AddRandomTriangle(
+                    new PointF(minX, maxY), new PointF(minX, minY), new PointF(maxX, minY));
+            }
+            RerenderMainCanvas();
         }
 
         void DrawRectangleSpeedButtonClick(object sender, EventArgs e)
         {
-            dialogProcessor.AddRandomRectangle();
-
-            statusBar.Items[0].Text = "Last action : Drawing a rectangle";
-
+            ButtonDrowTriangle.Checked = false;
+            ButtonMultiSelect.Checked = false;
+            ButtonMainNavigator.Checked = false;
+            ButtonDrowElipse.Checked = false;
+            ButtonFillColor.Checked = false;
             ResetRotationProcess(GlobalConstants.DefaultDashStyle, false, true);
-
             viewPort.Invalidate();
         }
 
         private void DrawTriangleSpeedButtonClick(object sender, EventArgs e)
         {
-            dialogProcessor.AddRandomTriangle();
-
-            statusBar.Items[0].Text = "Last action : Drawing a triangle";
-
+            ButtonMultiSelect.Checked = false;
+            ButtonMainNavigator.Checked = false;
+            ButtonDrowElipse.Checked = false;
+            ButtonFillColor.Checked = false;
+            ButtonDrowRectangle.Checked = false;
             ResetRotationProcess(GlobalConstants.DefaultDashStyle, false, true);
-
             viewPort.Invalidate();
         }
 
         private void DrawEllipseSpeedButtonClick(object sender, EventArgs e)
         {
-            dialogProcessor.AddRandomEllipse();
-
-            statusBar.Items[0].Text = "Last action : Drawing a ellipse";
-
+            ButtonDrowTriangle.Checked = false;
+            ButtonMultiSelect.Checked = false;
+            ButtonFillColor.Checked = false;
+            ButtonMainNavigator.Checked = false;
+            ButtonDrowRectangle.Checked = false;
             ResetRotationProcess(GlobalConstants.DefaultDashStyle, false, true);
-
             viewPort.Invalidate();
+        }
+
+        private void OnMainNavigatorClick(object sender, EventArgs e)
+        {
+            ButtonDrowTriangle.Checked = false;
+            ButtonMultiSelect.Checked = false;
+            ButtonFillColor.Checked = false;
+            ButtonDrowElipse.Checked = false;
+            ButtonDrowRectangle.Checked = false;
+            ResetRotationProcess(GlobalConstants.DefaultDashStyle, true, true);
+        }
+
+        private void OnMultiSelectClick(object sender, EventArgs e)
+        {
+            ButtonDrowTriangle.Checked = false;
+            ButtonMainNavigator.Checked = false;
+            ButtonFillColor.Checked = false;
+            ButtonDrowElipse.Checked = false;
+            ButtonDrowRectangle.Checked = false;
+        }
+
+        private void FillColor(object sender, EventArgs e)
+        {
+            ButtonDrowTriangle.Checked = false;
+            ButtonMultiSelect.Checked = false;
+            ButtonMainNavigator.Checked = false;
+            ButtonDrowElipse.Checked = false;
+            ButtonDrowRectangle.Checked = false;
         }
 
         private void SetFillColor(object sender, EventArgs e)
@@ -133,6 +182,8 @@ namespace Draw
             ResetRotationProcess(GlobalConstants.DefaultDashStyle, true, true);
             statusBar.Items[0].Text = $"Last Action : {sender.ToString()}";
         }
+
+        #region Rotation Process
 
         private void RotateRight(object sender, EventArgs e)
         {
@@ -147,17 +198,17 @@ namespace Draw
                 ResetRotationProcess(GlobalConstants.DefaultDashStyle, true, false);
                 ChageBorderOfSetOfShapes(setOfShapes, DashStyle.Dot);
                 RerenderMainCanvas();
-                
+
             }
         }
 
         private HashSet<Shape> TraverseOverSelectedMatrix(bool rotate)
         {
-            var minXCordinate = Convert.ToInt32(Math.Min(dialogProcessor.OnMouseDownPoint_ForRotation.X, dialogProcessor.OnMouseUpPoint_ForRotation.X));
-            var maxXCordinate = Convert.ToInt32(Math.Max(dialogProcessor.OnMouseDownPoint_ForRotation.X, dialogProcessor.OnMouseUpPoint_ForRotation.X));
+            var minXCordinate = Convert.ToInt32(Math.Min(dialogProcessor.OnMouseDownPoint.X, dialogProcessor.OnMouseUpPoint.X));
+            var maxXCordinate = Convert.ToInt32(Math.Max(dialogProcessor.OnMouseDownPoint.X, dialogProcessor.OnMouseUpPoint.X));
 
-            var minYCordinate = Convert.ToInt32(Math.Min(dialogProcessor.OnMouseDownPoint_ForRotation.Y, dialogProcessor.OnMouseUpPoint_ForRotation.Y));
-            var maxYCordinate = Convert.ToInt32(Math.Max(dialogProcessor.OnMouseDownPoint_ForRotation.Y, dialogProcessor.OnMouseUpPoint_ForRotation.Y));
+            var minYCordinate = Convert.ToInt32(Math.Min(dialogProcessor.OnMouseDownPoint.Y, dialogProcessor.OnMouseUpPoint.Y));
+            var maxYCordinate = Convert.ToInt32(Math.Max(dialogProcessor.OnMouseDownPoint.Y, dialogProcessor.OnMouseUpPoint.Y));
 
             var setOfShapesWhichNeedsToBeRotated = new HashSet<Shape>();
             var shapeListCount = dialogProcessor.ShapeList.Count;
@@ -199,6 +250,14 @@ namespace Draw
             }
         }
 
+        private void SetRotationMatrixToDefaultValues()
+        {
+            dialogProcessor.OnMouseDownPoint = new PointF(0F, 0F);
+            dialogProcessor.OnMouseUpPoint = new PointF(0F, 0F);
+        }
+
+        #endregion
+
         private void ChageBorderOfSetOfShapes(IEnumerable<Shape> setOfShapes, DashStyle dashStyle)
         {
             foreach (var shape in setOfShapes)
@@ -210,34 +269,9 @@ namespace Draw
             }
         }
 
-        private void SetRotationMatrixToDefaultValues()
-        {
-            dialogProcessor.OnMouseDownPoint_ForRotation = new PointF(0F, 0F);
-            dialogProcessor.OnMouseUpPoint_ForRotation = new PointF(0F, 0F);
-        }
-
         private void RerenderMainCanvas()
         {
             viewPort.Invalidate();
-        }
-
-        private void OnMainNavigatorClick(object sender, EventArgs e)
-        {
-            ButtonMultiSelect.Checked = false;
-            ButtonFillColor.Checked = false;
-            ResetRotationProcess(GlobalConstants.DefaultDashStyle, true, true);
-        }
-
-        private void OnMultiSelectClick(object sender, EventArgs e)
-        {
-            ButtonMainNavigator.Checked = false;
-            ButtonFillColor.Checked = false;
-        }
-
-        private void FillColor(object sender, EventArgs e)
-        {
-            ButtonMultiSelect.Checked = false;
-            ButtonMainNavigator.Checked = false;
         }
     }
 }

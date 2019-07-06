@@ -73,10 +73,10 @@
     <Compile Include="src\GUI\Program.cs" />
     <Compile Include="src\Helpers\GlobalConstants.cs" />
     <Compile Include="src\Helpers\PolygonHlp.cs" />
-    <Compile Include="src\Model\EllipseShape.cs" />
-    <Compile Include="src\Model\RectangleShape.cs" />
-    <Compile Include="src\Model\Shape.cs" />
-    <Compile Include="src\Model\TriangleShape.cs" />
+    <Compile Include="src\Models\EllipseShape.cs" />
+    <Compile Include="src\Models\RectangleShape.cs" />
+    <Compile Include="src\Models\Shape.cs" />
+    <Compile Include="src\Models\TriangleShape.cs" />
     <Compile Include="src\Processors\DialogProcessor.cs" />
     <Compile Include="src\Processors\DisplayProcessor.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

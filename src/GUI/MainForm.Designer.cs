@@ -32,8 +32,6 @@
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.imageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusBar = new System.Windows.Forms.StatusStrip();
@@ -64,8 +62,6 @@
             this.mainMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.editToolStripMenuItem,
-            this.imageToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
@@ -89,18 +85,6 @@
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItemClick);
             // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(47, 24);
-            this.editToolStripMenuItem.Text = "Edit";
-            // 
-            // imageToolStripMenuItem
-            // 
-            this.imageToolStripMenuItem.Name = "imageToolStripMenuItem";
-            this.imageToolStripMenuItem.Size = new System.Drawing.Size(63, 24);
-            this.imageToolStripMenuItem.Text = "Image";
-            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -112,7 +96,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(134, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.aboutToolStripMenuItem.Text = "About...";
             // 
             // statusBar
@@ -174,6 +158,7 @@
             // 
             // ButtonDrowRectangle
             // 
+            this.ButtonDrowRectangle.CheckOnClick = true;
             this.ButtonDrowRectangle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ButtonDrowRectangle.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDrowRectangle.Image")));
             this.ButtonDrowRectangle.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -184,6 +169,7 @@
             // 
             // ButtonDrowTriangle
             // 
+            this.ButtonDrowTriangle.CheckOnClick = true;
             this.ButtonDrowTriangle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ButtonDrowTriangle.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDrowTriangle.Image")));
             this.ButtonDrowTriangle.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -194,6 +180,7 @@
             // 
             // ButtonDrowElipse
             // 
+            this.ButtonDrowElipse.CheckOnClick = true;
             this.ButtonDrowElipse.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ButtonDrowElipse.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDrowElipse.Image")));
             this.ButtonDrowElipse.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -332,8 +319,6 @@
 		private System.Windows.Forms.ToolStripButton ButtonDrowRectangle;
 		private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem imageToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
 		private System.Windows.Forms.ToolStrip speedMenu;

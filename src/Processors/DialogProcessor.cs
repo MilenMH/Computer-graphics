@@ -5,11 +5,11 @@ using System.Drawing;
 
 namespace Draw
 {
-	public class DialogProcessor : DisplayProcessor
-	{
-		
-		public DialogProcessor()
-		{
+    public class DialogProcessor : DisplayProcessor
+    {
+
+        public DialogProcessor()
+        {
             Random = new Random();
             FillColor = Color.White;
         }
@@ -18,72 +18,55 @@ namespace Draw
 
         public Shape Selection { get; set; }
 
-        public bool IsDragging { get; set;  }
-		
-		public PointF LastLocation { get; set; }
+        public bool IsDragging { get; set; }
+
+        public PointF LastLocation { get; set; }
 
         public Color FillColor { get; set; }
 
-        public PointF OnMouseDownPoint_ForRotation { get; set; }
+        public PointF OnMouseDownPoint { get; set; }
 
-        public PointF OnMouseUpPoint_ForRotation { get; set; }
+        public PointF OnMouseUpPoint { get; set; }
 
-        public void AddRandomRectangle()
-		{
-			int x = Random.Next(100,1000);
-			int y = Random.Next(100,600);
-
-            //PointF first = new PointF(x, y);
-            //PointF second = new PointF(x + 50, y);
-            //PointF third = new PointF(x, y + 50);
-            //PointF fourth = new PointF(x +50, y + 50);
-            //
-            //var listOfPoints = new List<PointF>() { first, second, third, fourth };
-
-            Shape rect = new RectangleShape(x,y,100,200, Pens.Black, Color.White);
-			rect.FillColor = Color.White;
-
-			ShapeList.Add(rect);
-		}
-
-        public void AddRandomTriangle()
+        public void AddRectangle(float x, float y, float width, float height)
         {
-            int x = Random.Next(100, 1000);
-            int y = Random.Next(100, 600);
-            PointF first = new PointF(x, y);
-            PointF second = new PointF(x + 50, y);
-            PointF third = new PointF(x, y + 50);
+            Shape rect = new RectangleShape(x, y, width, height, Pens.Black, Color.White);
+            rect.FillColor = Color.White;
 
-            Shape rect = new TriangleShape(first, second, third, Pens.Black, Color.White);
+            ShapeList.Add(rect);
+        }
+
+        public void AddRandomTriangle(PointF p1, PointF p2, PointF p3)
+        {
+            Shape rect = new TriangleShape(p1, p2, p3, Pens.Black, Color.White);
             rect.FillColor = Color.White;
 
             ShapeList.Add(rect);
 
         }
 
-        public void AddRandomEllipse()
+        public void AddEllipse(float x, float y, float width, float height)
         {
-            int x = Random.Next(100, 1000);
-            int y = Random.Next(100, 600);
+            Shape ellipse = new EllipseShape(x, y, width, height, Pens.Black, Color.White);
+            ellipse.FillColor = Color.White;
 
-            Shape rect = new EllipseShape(100, 100, 100, 200, Pens.Black, Color.White);
-            rect.FillColor = Color.White;
-
-            ShapeList.Add(rect);
+            ShapeList.Add(ellipse);
         }
 
         public Shape ContainsPoint(PointF point)
-		{
-			for(int i = ShapeList.Count - 1; i >= 0; i--){
-				if (ShapeList[i].Contains(point)){
-					return ShapeList[i];
-				}	
-			}
-			return null;
-		}
-		
-		public void TranslateTo(PointF p)
-		{
+        {
+            for (int i = ShapeList.Count - 1; i >= 0; i--)
+            {
+                if (ShapeList[i].Contains(point))
+                {
+                    return ShapeList[i];
+                }
+            }
+            return null;
+        }
+
+        public void TranslateTo(PointF p)
+        {
             if (this.Selection != null)
             {
                 this.Selection.MoveToNextDestination(p, this.LastLocation);
