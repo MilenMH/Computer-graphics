@@ -8,7 +8,6 @@ E:\Users\Milen\Desktop\C#\VisualStudio2008-WinForms\obj\Debug\Draw.exe
 E:\Users\Milen\Desktop\C#\VisualStudio2008-WinForms\obj\Debug\Draw.pdb
 E:\Users\Milen\Desktop\C#\VisualStudio2008-WinForms\obj\Debug\Draw.Properties.Resources.resources
 E:\Users\Milen\Desktop\C#\VisualStudio2008-WinForms\obj\Debug\Draw.csprojResolveAssemblyReference.cache
-E:\Users\Milen\Desktop\C#\Computer-graphics repo\Computer-graphics\obj\Debug\Draw.csprojResolveAssemblyReference.cache
 E:\Users\Milen\Desktop\C#\Computer-graphics repo\Computer-graphics\obj\Debug\Draw.Properties.Resources.resources
 E:\Users\Milen\Desktop\C#\Computer-graphics repo\Computer-graphics\obj\Debug\Draw.DoubleBufferedPanel.resources
 E:\Users\Milen\Desktop\C#\Computer-graphics repo\Computer-graphics\obj\Debug\Draw.MainForm.resources
@@ -18,3 +17,4 @@ E:\Users\Milen\Desktop\C#\Computer-graphics repo\Computer-graphics\obj\Debug\Dra
 E:\Users\Milen\Desktop\C#\Computer-graphics repo\Computer-graphics\obj\Debug\Draw.pdb
 E:\Users\Milen\Desktop\C#\Computer-graphics repo\Computer-graphics\bin\Debug\Draw.exe
 E:\Users\Milen\Desktop\C#\Computer-graphics repo\Computer-graphics\bin\Debug\Draw.pdb
+E:\Users\Milen\Desktop\C#\Computer-graphics repo\Computer-graphics\obj\Debug\Draw.csprojResolveAssemblyReference.cache

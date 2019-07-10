@@ -25,6 +25,8 @@ namespace Draw
 
         public Guid UniqueIdentifier { get; set; }
 
+        public bool TemporaryFlag { get; set; }
+
         #endregion
 
         public bool Equals(Shape other)

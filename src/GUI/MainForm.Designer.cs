@@ -38,13 +38,15 @@
             this.currentStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.speedMenu = new System.Windows.Forms.ToolStrip();
             this.ButtonMainNavigator = new System.Windows.Forms.ToolStripButton();
+            this.ButtonDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.ButtonDrowRectangle = new System.Windows.Forms.ToolStripButton();
             this.ButtonDrowTriangle = new System.Windows.Forms.ToolStripButton();
-            this.ButtonDrowElipse = new System.Windows.Forms.ToolStripButton();
+            this.ButtonDrowEllipse = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ButtonMultiSelect = new System.Windows.Forms.ToolStripButton();
             this.ButtonRotateRight = new System.Windows.Forms.ToolStripButton();
+            this.ButtonMultiMove = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.ButtonFillColorRed = new System.Windows.Forms.ToolStripButton();
             this.ButtonFillColorYellow = new System.Windows.Forms.ToolStripButton();
@@ -96,7 +98,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(134, 26);
             this.aboutToolStripMenuItem.Text = "About...";
             // 
             // statusBar
@@ -121,13 +123,15 @@
             this.speedMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.speedMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ButtonMainNavigator,
+            this.ButtonDelete,
             this.toolStripSeparator3,
             this.ButtonDrowRectangle,
             this.ButtonDrowTriangle,
-            this.ButtonDrowElipse,
+            this.ButtonDrowEllipse,
             this.toolStripSeparator1,
             this.ButtonMultiSelect,
             this.ButtonRotateRight,
+            this.ButtonMultiMove,
             this.toolStripSeparator2,
             this.ButtonFillColorRed,
             this.ButtonFillColorYellow,
@@ -149,7 +153,18 @@
             this.ButtonMainNavigator.Name = "ButtonMainNavigator";
             this.ButtonMainNavigator.Size = new System.Drawing.Size(24, 24);
             this.ButtonMainNavigator.Text = "ButtonMainNavigator";
-            this.ButtonMainNavigator.Click += new System.EventHandler(this.OnMainNavigatorClick);
+            this.ButtonMainNavigator.Click += new System.EventHandler(this.OnMainNavigator_Click);
+            // 
+            // ButtonDelete
+            // 
+            this.ButtonDelete.CheckOnClick = true;
+            this.ButtonDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ButtonDelete.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDelete.Image")));
+            this.ButtonDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonDelete.Name = "ButtonDelete";
+            this.ButtonDelete.Size = new System.Drawing.Size(24, 24);
+            this.ButtonDelete.Text = "ButtonDelete";
+            this.ButtonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
             // 
             // toolStripSeparator3
             // 
@@ -165,7 +180,7 @@
             this.ButtonDrowRectangle.Name = "ButtonDrowRectangle";
             this.ButtonDrowRectangle.Size = new System.Drawing.Size(24, 24);
             this.ButtonDrowRectangle.Text = "ButtonDrowRectangle";
-            this.ButtonDrowRectangle.Click += new System.EventHandler(this.DrawRectangleSpeedButtonClick);
+            this.ButtonDrowRectangle.Click += new System.EventHandler(this.DrawRectangleSpeedButton_Click);
             // 
             // ButtonDrowTriangle
             // 
@@ -176,18 +191,18 @@
             this.ButtonDrowTriangle.Name = "ButtonDrowTriangle";
             this.ButtonDrowTriangle.Size = new System.Drawing.Size(24, 24);
             this.ButtonDrowTriangle.Text = "ButtonDrowTriangle";
-            this.ButtonDrowTriangle.Click += new System.EventHandler(this.DrawTriangleSpeedButtonClick);
+            this.ButtonDrowTriangle.Click += new System.EventHandler(this.DrawTriangleSpeedButton_Click);
             // 
             // ButtonDrowElipse
             // 
-            this.ButtonDrowElipse.CheckOnClick = true;
-            this.ButtonDrowElipse.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ButtonDrowElipse.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDrowElipse.Image")));
-            this.ButtonDrowElipse.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ButtonDrowElipse.Name = "ButtonDrowElipse";
-            this.ButtonDrowElipse.Size = new System.Drawing.Size(24, 24);
-            this.ButtonDrowElipse.Text = "ButtonDrowElipse";
-            this.ButtonDrowElipse.Click += new System.EventHandler(this.DrawEllipseSpeedButtonClick);
+            this.ButtonDrowEllipse.CheckOnClick = true;
+            this.ButtonDrowEllipse.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ButtonDrowEllipse.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDrowElipse.Image")));
+            this.ButtonDrowEllipse.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonDrowEllipse.Name = "ButtonDrowElipse";
+            this.ButtonDrowEllipse.Size = new System.Drawing.Size(24, 24);
+            this.ButtonDrowEllipse.Text = "ButtonDrowElipse";
+            this.ButtonDrowEllipse.Click += new System.EventHandler(this.DrawEllipseSpeedButton_Click);
             // 
             // toolStripSeparator1
             // 
@@ -204,7 +219,7 @@
             this.ButtonMultiSelect.Size = new System.Drawing.Size(24, 24);
             this.ButtonMultiSelect.Text = "ButtonMultiSelect";
             this.ButtonMultiSelect.ToolTipText = "ButtonMultiSelect";
-            this.ButtonMultiSelect.Click += new System.EventHandler(this.OnMultiSelectClick);
+            this.ButtonMultiSelect.Click += new System.EventHandler(this.OnMultiSelect_Click);
             // 
             // ButtonRotateRight
             // 
@@ -215,6 +230,18 @@
             this.ButtonRotateRight.Size = new System.Drawing.Size(24, 24);
             this.ButtonRotateRight.Text = "ButtonRotateRight";
             this.ButtonRotateRight.Click += new System.EventHandler(this.RotateRight);
+            // 
+            // ButtonMultiMove
+            // 
+            this.ButtonMultiMove.CheckOnClick = true;
+            this.ButtonMultiMove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ButtonMultiMove.Image = ((System.Drawing.Image)(resources.GetObject("ButtonMultiMove.Image")));
+            this.ButtonMultiMove.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonMultiMove.Name = "ButtonMultiMove";
+            this.ButtonMultiMove.Size = new System.Drawing.Size(24, 24);
+            this.ButtonMultiMove.Text = "ButtonMultiMove";
+            this.ButtonMultiMove.ToolTipText = "ButtonMultiMove";
+            this.ButtonMultiMove.Click += new System.EventHandler(this.ButtonMultiMove_Click);
             // 
             // toolStripSeparator2
             // 
@@ -272,7 +299,7 @@
             this.ButtonFillColor.Size = new System.Drawing.Size(24, 24);
             this.ButtonFillColor.Text = "ButtonFillColor";
             this.ButtonFillColor.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
-            this.ButtonFillColor.Click += new System.EventHandler(this.FillColor);
+            this.ButtonFillColor.Click += new System.EventHandler(this.FillColor_Click);
             // 
             // viewPort
             // 
@@ -325,7 +352,7 @@
 		private System.Windows.Forms.StatusStrip statusBar;
 		private System.Windows.Forms.MenuStrip mainMenu;
         private System.Windows.Forms.ToolStripButton ButtonDrowTriangle;
-        private System.Windows.Forms.ToolStripButton ButtonDrowElipse;
+        private System.Windows.Forms.ToolStripButton ButtonDrowEllipse;
         private System.Windows.Forms.ToolStripButton ButtonFillColorBlack;
         private System.Windows.Forms.ToolStripButton ButtonFillColorHotPink;
         private System.Windows.Forms.ToolStripButton ButtonFillColorYellow;
@@ -336,5 +363,7 @@
         private System.Windows.Forms.ToolStripButton ButtonMultiSelect;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton ButtonFillColor;
+        private System.Windows.Forms.ToolStripButton ButtonDelete;
+        private System.Windows.Forms.ToolStripButton ButtonMultiMove;
     }
 }
