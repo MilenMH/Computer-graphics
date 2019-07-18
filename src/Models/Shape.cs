@@ -34,6 +34,8 @@ namespace Draw
             return other.UniqueIdentifier == this.UniqueIdentifier;
         }
 
+        public override abstract string ToString();
+
         #region Custom Methods
 
         public abstract bool Contains(PointF point);

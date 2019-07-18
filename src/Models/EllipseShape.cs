@@ -1,4 +1,5 @@
-﻿using Draw.src.Helpers;
+﻿using Draw.src.Attributes;
+using Draw.src.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -9,7 +10,7 @@ namespace Draw.src.Model
 {
     public class EllipseShape : Shape
     {
-
+        [Importable]
         public EllipseShape(float x, float y, float width, float height, Pen borderColor, Color fillColor)
         {
             base.X = x;
@@ -82,6 +83,19 @@ namespace Draw.src.Model
             float height = maxY - minY;
 
             return new EllipseShape(minX, minY, width, height, this.BorderColor, base.FillColor);
+        }
+
+        public override string ToString()
+        {
+            var stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine("EllipseShape");
+            stringBuilder.AppendLine("X : " + base.X);
+            stringBuilder.AppendLine("Y : " + base.Y);
+            stringBuilder.AppendLine("Width : " + this.Width);
+            stringBuilder.AppendLine("Height : " + this.Height);
+            stringBuilder.AppendLine("BorderColor : " + base.BorderColor.Color.Name);
+            stringBuilder.AppendLine("FillColor : " + base.FillColor.Name);
+            return stringBuilder.ToString();
 
         }
     }

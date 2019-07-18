@@ -30,8 +30,9 @@
 		{
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.mainMenu = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.FileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusBar = new System.Windows.Forms.StatusStrip();
@@ -52,8 +53,10 @@
             this.ButtonFillColorYellow = new System.Windows.Forms.ToolStripButton();
             this.ButtonFillColorHotPink = new System.Windows.Forms.ToolStripButton();
             this.ButtonFillColorBlack = new System.Windows.Forms.ToolStripButton();
+            this.ButtonFillColorSilver = new System.Windows.Forms.ToolStripButton();
             this.ButtonFillColor = new System.Windows.Forms.ToolStripButton();
             this.viewPort = new Draw.DoubleBufferedPanel();
+            this.LoadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.speedMenu.SuspendLayout();
@@ -63,7 +66,7 @@
             // 
             this.mainMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
+            this.FileToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
@@ -72,20 +75,29 @@
             this.mainMenu.TabIndex = 1;
             this.mainMenu.Text = "menuStrip1";
             // 
-            // fileToolStripMenuItem
+            // FileToolStripMenuItem
             // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
-            this.fileToolStripMenuItem.Text = "File";
+            this.FileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.LoadToolStripMenuItem,
+            this.SaveToolStripMenuItem,
+            this.ExitToolStripMenuItem});
+            this.FileToolStripMenuItem.Name = "FileToolStripMenuItem";
+            this.FileToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
+            this.FileToolStripMenuItem.Text = "File";
             // 
-            // exitToolStripMenuItem
+            // SaveToolStripMenuItem
             // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(108, 26);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItemClick);
+            this.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem";
+            this.SaveToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.SaveToolStripMenuItem.Text = "Save";
+            this.SaveToolStripMenuItem.Click += new System.EventHandler(this.MainMenuButtonSave_Click);
+            // 
+            // ExitToolStripMenuItem
+            // 
+            this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.ExitToolStripMenuItem.Text = "Exit";
+            this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -137,6 +149,7 @@
             this.ButtonFillColorYellow,
             this.ButtonFillColorHotPink,
             this.ButtonFillColorBlack,
+            this.ButtonFillColorSilver,
             this.ButtonFillColor});
             this.speedMenu.Location = new System.Drawing.Point(0, 28);
             this.speedMenu.Name = "speedMenu";
@@ -193,13 +206,13 @@
             this.ButtonDrowTriangle.Text = "ButtonDrowTriangle";
             this.ButtonDrowTriangle.Click += new System.EventHandler(this.DrawTriangleSpeedButton_Click);
             // 
-            // ButtonDrowElipse
+            // ButtonDrowEllipse
             // 
             this.ButtonDrowEllipse.CheckOnClick = true;
             this.ButtonDrowEllipse.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ButtonDrowEllipse.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDrowElipse.Image")));
+            this.ButtonDrowEllipse.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDrowEllipse.Image")));
             this.ButtonDrowEllipse.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ButtonDrowEllipse.Name = "ButtonDrowElipse";
+            this.ButtonDrowEllipse.Name = "ButtonDrowEllipse";
             this.ButtonDrowEllipse.Size = new System.Drawing.Size(24, 24);
             this.ButtonDrowEllipse.Text = "ButtonDrowElipse";
             this.ButtonDrowEllipse.Click += new System.EventHandler(this.DrawEllipseSpeedButton_Click);
@@ -289,6 +302,17 @@
             this.ButtonFillColorBlack.Text = "ButtonFillColorBlack";
             this.ButtonFillColorBlack.Click += new System.EventHandler(this.SetFillColor);
             // 
+            // ButtonFillColorSilver
+            // 
+            this.ButtonFillColorSilver.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ButtonFillColorSilver.Image = ((System.Drawing.Image)(resources.GetObject("ButtonFillColorSilver.Image")));
+            this.ButtonFillColorSilver.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonFillColorSilver.Name = "ButtonFillColorSilver";
+            this.ButtonFillColorSilver.Size = new System.Drawing.Size(24, 24);
+            this.ButtonFillColorSilver.Text = "ButtonFillColorSilver";
+            this.ButtonFillColorSilver.ToolTipText = "ButtonFillColorSilver";
+            this.ButtonFillColorSilver.Click += new System.EventHandler(this.SetFillColor);
+            // 
             // ButtonFillColor
             // 
             this.ButtonFillColor.CheckOnClick = true;
@@ -313,6 +337,13 @@
             this.viewPort.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseDown);
             this.viewPort.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseMove);
             this.viewPort.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseUp);
+            // 
+            // LoadToolStripMenuItem
+            // 
+            this.LoadToolStripMenuItem.Name = "LoadToolStripMenuItem";
+            this.LoadToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.LoadToolStripMenuItem.Text = "Load";
+            this.LoadToolStripMenuItem.Click += new System.EventHandler(this.MainMenuButtonLoad_Click);
             // 
             // MainForm
             // 
@@ -346,8 +377,8 @@
 		private System.Windows.Forms.ToolStripButton ButtonDrowRectangle;
 		private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem ExitToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem FileToolStripMenuItem;
 		private System.Windows.Forms.ToolStrip speedMenu;
 		private System.Windows.Forms.StatusStrip statusBar;
 		private System.Windows.Forms.MenuStrip mainMenu;
@@ -365,5 +396,8 @@
         private System.Windows.Forms.ToolStripButton ButtonFillColor;
         private System.Windows.Forms.ToolStripButton ButtonDelete;
         private System.Windows.Forms.ToolStripButton ButtonMultiMove;
+        private System.Windows.Forms.ToolStripButton ButtonFillColorSilver;
+        private System.Windows.Forms.ToolStripMenuItem SaveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem LoadToolStripMenuItem;
     }
 }

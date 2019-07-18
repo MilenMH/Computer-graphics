@@ -58,6 +58,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="src\AssemblyInfo.cs" />
+    <Compile Include="src\Attributes\Importable.cs" />
     <Compile Include="src\GUI\DoubleBufferedPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -76,6 +77,7 @@
     <Compile Include="src\Helpers\GenericHolders\Quadruple.cs" />
     <Compile Include="src\Helpers\GenericHolders\Sextuple.cs" />
     <Compile Include="src\Helpers\GenericHolders\Tuple.cs" />
+    <Compile Include="src\Helpers\PropertyMapper.cs" />
     <Compile Include="src\Models\EllipseShape.cs" />
     <Compile Include="src\Models\RectangleShape.cs" />
     <Compile Include="src\Models\Shape.cs" />

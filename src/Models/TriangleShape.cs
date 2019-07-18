@@ -1,4 +1,5 @@
-﻿using Draw.src.Helpers;
+﻿using Draw.src.Attributes;
+using Draw.src.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -10,11 +11,12 @@ namespace Draw.src.Model
 {
     public class TriangleShape : Shape
     {
-        public TriangleShape(PointF p1, PointF p2, PointF p3, Pen borderColor, Color fillColor)
+        [Importable]    
+        public TriangleShape(PointF point1, PointF point2, PointF point3, Pen borderColor, Color fillColor)
         {
-            this.Point1 = p1;
-            this.Point2 = p2;
-            this.Point3 = p3;
+            this.Point1 = point1;
+            this.Point2 = point2;
+            this.Point3 = point3;
             base.BorderColor = borderColor;
             base.FillColor = fillColor;
             base.UniqueIdentifier = Guid.NewGuid();
@@ -71,6 +73,18 @@ namespace Draw.src.Model
             var center = PolygonHlp.GetCentroidGeneric(new List<PointF>() { this.Point1, this.Point2, this.Point3 });
             var rotatedPoints = PolygonHlp.RotatePolygon(listOfPoints, center, GlobalConstants.RadiansRepresentationOfNinetyDegrees);
             return new TriangleShape(rotatedPoints[0], rotatedPoints[1], rotatedPoints[2], this.BorderColor, base.FillColor);
+        }
+
+        public override string ToString()
+        {
+            var stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine("TriangleShape");
+            stringBuilder.AppendLine("Point : X : " + Point1.X + " : Y : " + Point1.Y);
+            stringBuilder.AppendLine("Point : X : " + Point2.X + " : Y : " + Point2.Y);
+            stringBuilder.AppendLine("Point : X : " + Point3.X + " : Y : " + Point3.Y);
+            stringBuilder.AppendLine("BorderColor : " + base.BorderColor.Color.Name);
+            stringBuilder.AppendLine("FillColor : " + base.FillColor.Name);
+            return stringBuilder.ToString();
         }
     }
 }

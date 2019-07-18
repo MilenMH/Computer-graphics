@@ -1,15 +1,18 @@
-﻿using Draw.src.Helpers;
+﻿using Draw.src.Attributes;
+using Draw.src.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Text;
 
-namespace Draw
+namespace Draw.src.Model
 {
 	public class RectangleShape : Shape
 	{
-		#region Constructor
-		
-		public RectangleShape(float x, float y, float width, float height, Pen borderColor, Color fillColor)
+        #region Constructor
+
+        [Importable]
+        public RectangleShape(float x, float y, float width, float height, Pen borderColor, Color fillColor)
 		{
             base.X = x;
             base.Y = y;
@@ -83,6 +86,19 @@ namespace Draw
 
             return new RectangleShape(minX, minY, width, height, this.BorderColor, base.FillColor);
 
+        }
+
+        public override string ToString()
+        {
+            var stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine("RectangleShape");
+            stringBuilder.AppendLine("X : " + base.X);
+            stringBuilder.AppendLine("Y : " + base.Y);
+            stringBuilder.AppendLine("Width : " + this.Width);
+            stringBuilder.AppendLine("Height : " + this.Height);
+            stringBuilder.AppendLine("BorderColor : " + base.BorderColor.Color.Name);
+            stringBuilder.AppendLine("FillColor : " + base.FillColor.Name);
+            return stringBuilder.ToString();
         }
 
         #endregion

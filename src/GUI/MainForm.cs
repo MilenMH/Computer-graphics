@@ -1,10 +1,13 @@
-﻿using Draw.src.Helpers;
+﻿using Draw.src.Attributes;
+using Draw.src.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Windows.Forms;
 
 namespace Draw
@@ -30,17 +33,17 @@ namespace Draw
                             p => (Color)p.GetValue(null, null));
         }
 
-        void ExitToolStripMenuItemClick(object sender, EventArgs e)
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        void ViewPortPaint(object sender, PaintEventArgs e)
+        private void ViewPortPaint(object sender, PaintEventArgs e)
         {
             dialogProcessor.ReDraw(sender, e);
         }
 
-        void ViewPortMouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void ViewPortMouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if (ButtonMultiMove.Checked)
             {
@@ -90,7 +93,7 @@ namespace Draw
             RerenderMainCanvas();
         }
 
-        void ViewPortMouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void ViewPortMouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if (dialogProcessor.IsDragging && !ButtonMultiMove.Checked)
             {
@@ -131,7 +134,7 @@ namespace Draw
             viewPort.Invalidate();
         }
 
-        void ViewPortMouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void ViewPortMouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             dialogProcessor.OnMouseUpPoint = e.Location;
             dialogProcessor.IsDragging = false;
@@ -163,8 +166,8 @@ namespace Draw
             {
                 dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
                 dialogProcessor.AddTriangle(
-                    new PointF(shapeParams.Item1, shapeParams.Item4), 
-                    new PointF(shapeParams.Item1, shapeParams.Item2), 
+                    new PointF(shapeParams.Item1, shapeParams.Item4),
+                    new PointF(shapeParams.Item1, shapeParams.Item2),
                     new PointF(shapeParams.Item3, shapeParams.Item2));
             }
             if (ButtonMultiMove.Checked)
@@ -194,7 +197,7 @@ namespace Draw
             RerenderMainCanvas();
         }
 
-        void DrawRectangleSpeedButton_Click(object sender, EventArgs e)
+        private void DrawRectangleSpeedButton_Click(object sender, EventArgs e)
         {
             ButtonDrowTriangle.Checked = false;
             ButtonMultiSelect.Checked = false;
@@ -398,6 +401,109 @@ namespace Draw
         private void RerenderMainCanvas()
         {
             viewPort.Invalidate();
+        }
+
+        private void MainMenuButtonSave_Click(object sender, EventArgs e)
+        {
+            var saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Title = "Save File";
+            saveFileDialog.CheckFileExists = true;
+            saveFileDialog.CheckPathExists = true;
+            saveFileDialog.DefaultExt = "txt";
+            saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog.FilterIndex = 2;
+            saveFileDialog.RestoreDirectory = true;
+            if (saveFileDialog.ShowDialog() == DialogResult.OK
+                && System.IO.File.Exists(saveFileDialog.FileName)
+                && System.IO.Path.GetExtension(saveFileDialog.FileName) == GlobalConstants.DefaultFileExtension)
+            {
+                using (var fs = new FileStream(saveFileDialog.FileName, FileMode.Truncate))
+                {
+                }
+                using (var fileStream = File.Open(saveFileDialog.FileName, FileMode.OpenOrCreate))
+                using (var streamWriter = new StreamWriter(fileStream))
+                {
+                    var lastShapesGuid = dialogProcessor.ShapeList.LastOrDefault()?.UniqueIdentifier;
+                    foreach (var shape in dialogProcessor.ShapeList)
+                    {
+                        streamWriter.Write(shape.ToString());
+                        if (shape.UniqueIdentifier != lastShapesGuid)
+                        {
+                            streamWriter.WriteLine(GlobalConstants.DefaultSeparator);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void MainMenuButtonLoad_Click(object sender, EventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Load File";
+            openFileDialog.CheckFileExists = true;
+            openFileDialog.CheckPathExists = true;
+            openFileDialog.DefaultExt = "txt";
+            openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            openFileDialog.FilterIndex = 2;
+            openFileDialog.RestoreDirectory = true;
+            if (openFileDialog.ShowDialog() == DialogResult.OK
+                && System.IO.File.Exists(openFileDialog.FileName)
+                && System.IO.Path.GetExtension(openFileDialog.FileName) == GlobalConstants.DefaultFileExtension)
+            {
+                using (var fileStream = File.Open(openFileDialog.FileName, FileMode.Open))
+                using (var streamReader = new StreamReader(fileStream))
+                {
+                    var stringBuilder = new StringBuilder();
+                    var line = streamReader.ReadLine();
+                    while (line != null)
+                    {
+                        stringBuilder.AppendLine(line);
+                        line = streamReader.ReadLine();
+                    }
+                    var arrayOfShapes = stringBuilder.ToString().Split(
+                        GlobalConstants.DefaultSeparator.ToCharArray(),
+                        StringSplitOptions.RemoveEmptyEntries);
+
+                    var propertyMapper = new PropertyMapper();
+
+                    foreach (var shapeAsString in arrayOfShapes)
+                    {
+                        try
+                        {
+                            var shapeParts = shapeAsString.ToString().Split(
+                                Environment.NewLine.ToCharArray(),
+                                StringSplitOptions.RemoveEmptyEntries);
+
+                            var type = GetType(Assembly.GetExecutingAssembly(), "Draw.src.Model", shapeParts[0]);
+                            var constructor = type.GetConstructors().Where(c => 
+                                c.GetCustomAttributes(false).Where(a 
+                                    => a.GetType() == typeof(Importable)).FirstOrDefault() != null)
+                                .FirstOrDefault();
+
+                            var constructorParameters = constructor.GetParameters();
+
+                            var parameters = propertyMapper.MapObjectProperties(shapeAsString);
+
+                            var instance =(Shape) Activator.CreateInstance(type, parameters);
+
+                            dialogProcessor.ShapeList.Add(instance);
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
+                    }
+
+                }
+            }
+        }
+        private Type GetType(Assembly assembly, string nameSpace, string typeName)
+        {
+            return
+              assembly.GetTypes()
+                      .Where(t => String.Equals(t.Namespace, nameSpace, StringComparison.Ordinal) 
+                            && String.Equals(t.Name, typeName, StringComparison.Ordinal))
+                      .FirstOrDefault();
         }
     }
 }
