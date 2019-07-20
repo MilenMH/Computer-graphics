@@ -1,5 +1,8 @@
 ﻿using Draw.src.Attributes;
 using Draw.src.Helpers;
+using Draw.src.Interfaces;
+using Draw.src.Workers;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -55,27 +58,21 @@ namespace Draw
 
             dialogProcessor.OnMouseDownPoint = e.Location;
             dialogProcessor.Selection = dialogProcessor.ContainsPoint(e.Location);
-            if (ButtonMainNavigator.Checked)
+
+            if (ButtonMainNavigator.Checked && dialogProcessor.Selection != null)
             {
-                if (dialogProcessor.Selection != null)
-                {
-                    dialogProcessor.IsDragging = true;
-                    dialogProcessor.LastLocation = e.Location;
-                }
+                dialogProcessor.IsDragging = true;
+                dialogProcessor.LastLocation = e.Location;
             }
-            if (ButtonFillColor.Checked)
+
+            if (ButtonFillColor.Checked && dialogProcessor.Selection != null)
             {
-                if (dialogProcessor.Selection != null)
-                {
-                    dialogProcessor.Selection.FillColor = dialogProcessor.FillColor;
-                }
+                dialogProcessor.Selection.FillColor = dialogProcessor.FillColor;
             }
-            if (ButtonDelete.Checked)
+
+            if (ButtonDelete.Checked && dialogProcessor.Selection != null)
             {
-                if (dialogProcessor.Selection != null)
-                {
-                    dialogProcessor.ShapeList.Remove(dialogProcessor.Selection);
-                }
+                dialogProcessor.ShapeList.Remove(dialogProcessor.Selection);
             }
 
             if (ButtonDrowRectangle.Checked)
@@ -115,7 +112,7 @@ namespace Draw
             {
                 dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
                 dialogProcessor.AddRectangle(
-                    shapeParams.Item1, shapeParams.Item2, shapeParams.Item5, shapeParams.Item6, true);
+                    shapeParams.Item1, shapeParams.Item2, shapeParams.Item5, shapeParams.Item6, DashStyle.Dot, true);
             }
             if (ButtonDrowTriangle.Checked && dialogProcessor.DrowTemporaryTriangle)
             {
@@ -123,13 +120,13 @@ namespace Draw
                 dialogProcessor.AddTriangle(
                     new PointF(shapeParams.Item1, shapeParams.Item4),
                     new PointF(shapeParams.Item1, shapeParams.Item2),
-                    new PointF(shapeParams.Item3, shapeParams.Item2), true);
+                    new PointF(shapeParams.Item3, shapeParams.Item2), DashStyle.Dot, true);
             }
             if (ButtonDrowEllipse.Checked && dialogProcessor.DrowTemporaryEllipse)
             {
                 dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
                 dialogProcessor.AddEllipse(
-                    shapeParams.Item1, shapeParams.Item2, shapeParams.Item5, shapeParams.Item6, true);
+                    shapeParams.Item1, shapeParams.Item2, shapeParams.Item5, shapeParams.Item6, DashStyle.Dot, true);
             }
             viewPort.Invalidate();
         }
@@ -154,13 +151,15 @@ namespace Draw
             {
                 dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
                 dialogProcessor.AddEllipse(
-                    shapeParams.Item1, shapeParams.Item2, shapeParams.Item5, shapeParams.Item6);
+                    shapeParams.Item1, shapeParams.Item2, shapeParams.Item5, shapeParams.Item6,
+                    DashStyle.Solid, false);
             }
             if (ButtonDrowRectangle.Checked)
             {
                 dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
                 dialogProcessor.AddRectangle(
-                    shapeParams.Item1, shapeParams.Item2, shapeParams.Item5, shapeParams.Item6);
+                    shapeParams.Item1, shapeParams.Item2, shapeParams.Item5, shapeParams.Item6,
+                    DashStyle.Solid, false);
             }
             if (ButtonDrowTriangle.Checked)
             {
@@ -168,7 +167,8 @@ namespace Draw
                 dialogProcessor.AddTriangle(
                     new PointF(shapeParams.Item1, shapeParams.Item4),
                     new PointF(shapeParams.Item1, shapeParams.Item2),
-                    new PointF(shapeParams.Item3, shapeParams.Item2));
+                    new PointF(shapeParams.Item3, shapeParams.Item2),
+                    DashStyle.Solid, false);
             }
             if (ButtonMultiMove.Checked)
             {
@@ -391,10 +391,7 @@ namespace Draw
         {
             foreach (var shape in setOfShapes)
             {
-                var oldColor = shape.BorderColor.Color;
-                var newPen = new Pen(oldColor);
-                newPen.DashStyle = dashStyle;
-                shape.BorderColor = newPen;
+                shape.DashStyle = dashStyle;
             }
         }
 
@@ -404,6 +401,23 @@ namespace Draw
         }
 
         private void MainMenuButtonSave_Click(object sender, EventArgs e)
+        {
+            var workerName = ((ToolStripMenuItem)sender).Name + "BehaviourWorker";
+            var type = GetType(Assembly.GetExecutingAssembly(), "Draw.src.Workers", workerName);
+            var worker = (ISaveFileWorker)Activator.CreateInstance(type);
+
+            this.SaveFile(dialogProcessor.ShapeList, worker);
+        }
+
+        private void MainMenuButtonLoad_Click(object sender, EventArgs e)
+        {
+            this.LoadFile();
+        }
+
+        #region Custom Export Import
+
+
+        private void SaveFile(IList<Shape> listOfShapes, ISaveFileWorker worker)
         {
             var saveFileDialog = new SaveFileDialog();
             saveFileDialog.Title = "Save File";
@@ -417,26 +431,13 @@ namespace Draw
                 && System.IO.File.Exists(saveFileDialog.FileName)
                 && System.IO.Path.GetExtension(saveFileDialog.FileName) == GlobalConstants.DefaultFileExtension)
             {
-                using (var fs = new FileStream(saveFileDialog.FileName, FileMode.Truncate))
-                {
-                }
-                using (var fileStream = File.Open(saveFileDialog.FileName, FileMode.OpenOrCreate))
-                using (var streamWriter = new StreamWriter(fileStream))
-                {
-                    var lastShapesGuid = dialogProcessor.ShapeList.LastOrDefault()?.UniqueIdentifier;
-                    foreach (var shape in dialogProcessor.ShapeList)
-                    {
-                        streamWriter.Write(shape.ToString());
-                        if (shape.UniqueIdentifier != lastShapesGuid)
-                        {
-                            streamWriter.WriteLine(GlobalConstants.DefaultSeparator);
-                        }
-                    }
-                }
+                worker.SaveFile(saveFileDialog.FileName, listOfShapes);
             }
         }
 
-        private void MainMenuButtonLoad_Click(object sender, EventArgs e)
+
+
+        private void LoadFile()
         {
             var openFileDialog = new OpenFileDialog();
             openFileDialog.Title = "Load File";
@@ -460,48 +461,60 @@ namespace Draw
                         stringBuilder.AppendLine(line);
                         line = streamReader.ReadLine();
                     }
-                    var arrayOfShapes = stringBuilder.ToString().Split(
-                        GlobalConstants.DefaultSeparator.ToCharArray(),
-                        StringSplitOptions.RemoveEmptyEntries);
-
-                    var propertyMapper = new PropertyMapper();
-
-                    foreach (var shapeAsString in arrayOfShapes)
+                    var stringReporesentation = stringBuilder.ToString();
+                    if (stringReporesentation.StartsWith("{\"$type\""))
                     {
-                        try
-                        {
-                            var shapeParts = shapeAsString.ToString().Split(
-                                Environment.NewLine.ToCharArray(),
-                                StringSplitOptions.RemoveEmptyEntries);
+                        JsonSerializerSettings settings = JSONSaveBehaviourWorker.GetJSONSettings();
 
-                            var type = GetType(Assembly.GetExecutingAssembly(), "Draw.src.Model", shapeParts[0]);
-                            var constructor = type.GetConstructors().Where(c => 
-                                c.GetCustomAttributes(false).Where(a 
-                                    => a.GetType() == typeof(Importable)).FirstOrDefault() != null)
-                                .FirstOrDefault();
-
-                            var constructorParameters = constructor.GetParameters();
-
-                            var parameters = propertyMapper.MapObjectProperties(shapeAsString);
-
-                            var instance =(Shape) Activator.CreateInstance(type, parameters);
-
-                            dialogProcessor.ShapeList.Add(instance);
-                        }
-                        catch (Exception ex)
-                        {
-
-                        }
+                        dialogProcessor.ShapeList.AddRange(
+                            JsonConvert.DeserializeObject<List<Shape>>(stringReporesentation, settings));
                     }
-
+                    else
+                    {
+                        CustomLoadFile(stringBuilder.ToString());
+                    }
                 }
             }
         }
+
+        private void CustomLoadFile(string shapesAsText)
+        {
+            var arrayOfShapes = shapesAsText.ToString().Split(
+                       GlobalConstants.DefaultSeparator.ToCharArray(),
+                       StringSplitOptions.RemoveEmptyEntries);
+
+            var propertyMapper = new PropertyMapper();
+
+            foreach (var shapeAsString in arrayOfShapes)
+            {
+
+                var shapeParts = shapeAsString.ToString().Split(
+                    Environment.NewLine.ToCharArray(),
+                    StringSplitOptions.RemoveEmptyEntries);
+
+                var type = GetType(Assembly.GetExecutingAssembly(), "Draw.src.Model", shapeParts[0]);
+                var constructor = type.GetConstructors().Where(c =>
+                    c.GetCustomAttributes(false).Where(a
+                        => a.GetType() == typeof(Importable)).FirstOrDefault() != null)
+                    .FirstOrDefault();
+
+                var constructorParameters = constructor.GetParameters();
+
+                var parameters = propertyMapper.MapObjectProperties(shapeAsString);
+
+                var instance = (Shape)Activator.CreateInstance(type, parameters);
+
+                dialogProcessor.ShapeList.Add(instance);
+            }
+        }
+
+        #endregion
+
         private Type GetType(Assembly assembly, string nameSpace, string typeName)
         {
             return
               assembly.GetTypes()
-                      .Where(t => String.Equals(t.Namespace, nameSpace, StringComparison.Ordinal) 
+                      .Where(t => String.Equals(t.Namespace, nameSpace, StringComparison.Ordinal)
                             && String.Equals(t.Name, typeName, StringComparison.Ordinal))
                       .FirstOrDefault();
         }

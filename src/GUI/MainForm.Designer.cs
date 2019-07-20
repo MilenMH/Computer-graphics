@@ -31,7 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.FileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.SaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.LoadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CustomSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.JSONSave = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,7 +58,6 @@
             this.ButtonFillColorSilver = new System.Windows.Forms.ToolStripButton();
             this.ButtonFillColor = new System.Windows.Forms.ToolStripButton();
             this.viewPort = new Draw.DoubleBufferedPanel();
-            this.LoadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.speedMenu.SuspendLayout();
@@ -79,18 +80,33 @@
             // 
             this.FileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.LoadToolStripMenuItem,
-            this.SaveToolStripMenuItem,
+            this.CustomSave,
+            this.JSONSave,
             this.ExitToolStripMenuItem});
             this.FileToolStripMenuItem.Name = "FileToolStripMenuItem";
             this.FileToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
             this.FileToolStripMenuItem.Text = "File";
             // 
-            // SaveToolStripMenuItem
+            // LoadToolStripMenuItem
             // 
-            this.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem";
-            this.SaveToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
-            this.SaveToolStripMenuItem.Text = "Save";
-            this.SaveToolStripMenuItem.Click += new System.EventHandler(this.MainMenuButtonSave_Click);
+            this.LoadToolStripMenuItem.Name = "LoadToolStripMenuItem";
+            this.LoadToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.LoadToolStripMenuItem.Text = "Load";
+            this.LoadToolStripMenuItem.Click += new System.EventHandler(this.MainMenuButtonLoad_Click);
+            // 
+            // CustomSave
+            // 
+            this.CustomSave.Name = "CustomSave";
+            this.CustomSave.Size = new System.Drawing.Size(181, 26);
+            this.CustomSave.Text = "Save";
+            this.CustomSave.Click += new System.EventHandler(this.MainMenuButtonSave_Click);
+            // 
+            // JSONSave
+            // 
+            this.JSONSave.Name = "JSONSave";
+            this.JSONSave.Size = new System.Drawing.Size(181, 26);
+            this.JSONSave.Text = "Save As JSON";
+            this.JSONSave.Click += new System.EventHandler(this.MainMenuButtonSave_Click);
             // 
             // ExitToolStripMenuItem
             // 
@@ -338,13 +354,6 @@
             this.viewPort.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseMove);
             this.viewPort.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseUp);
             // 
-            // LoadToolStripMenuItem
-            // 
-            this.LoadToolStripMenuItem.Name = "LoadToolStripMenuItem";
-            this.LoadToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
-            this.LoadToolStripMenuItem.Text = "Load";
-            this.LoadToolStripMenuItem.Click += new System.EventHandler(this.MainMenuButtonLoad_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -397,7 +406,8 @@
         private System.Windows.Forms.ToolStripButton ButtonDelete;
         private System.Windows.Forms.ToolStripButton ButtonMultiMove;
         private System.Windows.Forms.ToolStripButton ButtonFillColorSilver;
-        private System.Windows.Forms.ToolStripMenuItem SaveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CustomSave;
         private System.Windows.Forms.ToolStripMenuItem LoadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem JSONSave;
     }
 }

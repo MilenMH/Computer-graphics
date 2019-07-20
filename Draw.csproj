@@ -10,7 +10,7 @@
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <PublishUrl>publish\</PublishUrl>
@@ -28,6 +28,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <OutputPath>bin\Debug\</OutputPath>
@@ -36,6 +37,7 @@
     <Optimize>False</Optimize>
     <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -44,9 +46,13 @@
     <Optimize>True</Optimize>
     <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
     <DefineConstants>TRACE</DefineConstants>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -78,12 +84,15 @@
     <Compile Include="src\Helpers\GenericHolders\Sextuple.cs" />
     <Compile Include="src\Helpers\GenericHolders\Tuple.cs" />
     <Compile Include="src\Helpers\PropertyMapper.cs" />
+    <Compile Include="src\Interfaces\ISaveFileWorker.cs" />
     <Compile Include="src\Models\EllipseShape.cs" />
     <Compile Include="src\Models\RectangleShape.cs" />
     <Compile Include="src\Models\Shape.cs" />
     <Compile Include="src\Models\TriangleShape.cs" />
     <Compile Include="src\Processors\DialogProcessor.cs" />
     <Compile Include="src\Processors\DisplayProcessor.cs" />
+    <Compile Include="src\Workers\CustomSaveBehaviourWorker.cs" />
+    <Compile Include="src\Workers\JSONSaveBehaviourWorker.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -145,6 +154,7 @@
     <Content Include="src\Images\RectangleTool.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="src\Interfaces\" />
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

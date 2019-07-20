@@ -6,7 +6,7 @@ namespace Draw.src.Helpers
     {
         public static double RadiansRepresentationOfNinetyDegrees = 1.5707963268d;
 
-        public static DashStyle DefaultDashStyle = DashStyle.Solid;
+        public const DashStyle DefaultDashStyle = DashStyle.Solid;
 
         public static string DefaultFileExtension = ".txt";
 

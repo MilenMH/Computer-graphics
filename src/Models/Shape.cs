@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace Draw
 {
@@ -21,11 +22,13 @@ namespace Draw
 
         public Color FillColor { get ; set; }
 
-        public Pen BorderColor { get; set; }
+        public Color BorderColor { get; set; }
 
         public Guid UniqueIdentifier { get; set; }
 
         public bool TemporaryFlag { get; set; }
+
+        public DashStyle DashStyle { get; set; }
 
         #endregion
 

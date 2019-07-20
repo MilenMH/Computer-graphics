@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace Draw.src.Helpers
 {
@@ -16,6 +17,10 @@ namespace Draw.src.Helpers
 
         private delegate PointF MapStandartPointFPropertyDelegate(string[] parameters);
 
+        private delegate DashStyle MapStandartDashStylePropertyDelegate(string[] parameters);
+
+        private delegate bool MapStandartBoolPropertyDelegate(string[] parameters);
+
         public PropertyMapper()
         {
             Init();
@@ -24,13 +29,15 @@ namespace Draw.src.Helpers
         private void Init()
         {
             this.PropertyDictionary = new Dictionary<string, Delegate>();
-            this.PropertyDictionary.Add("x", new MapStandartFloatPropertyDelegate(MapStandartFroatPropertyFunc));
-            this.PropertyDictionary.Add("y", new MapStandartFloatPropertyDelegate(MapStandartFroatPropertyFunc));
-            this.PropertyDictionary.Add("width", new MapStandartFloatPropertyDelegate(MapStandartFroatPropertyFunc));
-            this.PropertyDictionary.Add("height", new MapStandartFloatPropertyDelegate(MapStandartFroatPropertyFunc));
-            this.PropertyDictionary.Add("bordercolor", new MapStandartPenPropertyDelegate(MapStandartPenPropertyFunc));
+            this.PropertyDictionary.Add("x", new MapStandartFloatPropertyDelegate(MapStandartFloatPropertyFunc));
+            this.PropertyDictionary.Add("y", new MapStandartFloatPropertyDelegate(MapStandartFloatPropertyFunc));
+            this.PropertyDictionary.Add("width", new MapStandartFloatPropertyDelegate(MapStandartFloatPropertyFunc));
+            this.PropertyDictionary.Add("height", new MapStandartFloatPropertyDelegate(MapStandartFloatPropertyFunc));
+            this.PropertyDictionary.Add("bordercolor", new MapStandartColorPropertyDelegate(MapStandartColorPropertyFunc));
             this.PropertyDictionary.Add("fillcolor", new MapStandartColorPropertyDelegate(MapStandartColorPropertyFunc));
             this.PropertyDictionary.Add("point", new MapStandartPointFPropertyDelegate(MapStandartPointFPropertyFunc));
+            this.PropertyDictionary.Add("dashstyle", new MapStandartDashStylePropertyDelegate(MapStandartDashStylePropertyFunc));
+            this.PropertyDictionary.Add("temporaryflag", new MapStandartBoolPropertyDelegate(MapStandartBoolPropertyFunc));
 
         }
 
@@ -51,7 +58,7 @@ namespace Draw.src.Helpers
             return listOfObjects.ToArray();
         }
 
-        private float MapStandartFroatPropertyFunc(string[] parameters)
+        private float MapStandartFloatPropertyFunc(string[] parameters)
         {
             return float.Parse(parameters[1].Trim());
         }
@@ -69,6 +76,16 @@ namespace Draw.src.Helpers
         private PointF MapStandartPointFPropertyFunc(string[] parameters)
         {
             return new PointF(float.Parse(parameters[2]), float.Parse(parameters[4]));
+        }
+
+        private DashStyle MapStandartDashStylePropertyFunc(string[] parameters)
+        {
+              return(DashStyle)Enum.Parse(typeof(DashStyle), parameters[1].Trim());
+        }
+
+        private bool MapStandartBoolPropertyFunc(string[] parameters)
+        {
+            return bool.Parse(parameters[1].Trim());
         }
     }
 }

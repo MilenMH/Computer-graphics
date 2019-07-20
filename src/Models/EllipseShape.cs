@@ -3,6 +3,7 @@ using Draw.src.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 
@@ -11,7 +12,9 @@ namespace Draw.src.Model
     public class EllipseShape : Shape
     {
         [Importable]
-        public EllipseShape(float x, float y, float width, float height, Pen borderColor, Color fillColor)
+        public EllipseShape(float x, float y, float width, float height, Color borderColor, 
+            Color fillColor, DashStyle dashStyle = GlobalConstants.DefaultDashStyle, 
+            bool temporaryFlag = false)
         {
             base.X = x;
             base.Y = y;
@@ -19,6 +22,8 @@ namespace Draw.src.Model
             this.Height = height;
             base.BorderColor = borderColor;
             base.FillColor = fillColor;
+            base.TemporaryFlag = temporaryFlag;
+            base.DashStyle = DashStyle;
             base.UniqueIdentifier = Guid.NewGuid();
         }
 
@@ -46,7 +51,9 @@ namespace Draw.src.Model
         public override void DrawSelf(Graphics grfx)
         {
             grfx.FillEllipse(new SolidBrush(FillColor), base.X, base.Y, this.Width, this.Height);
-            grfx.DrawEllipse(BorderColor, base.X, base.Y, this.Width, this.Height);
+            var border = new Pen(BorderColor);
+            border.DashStyle = DashStyle;
+            grfx.DrawEllipse(border, base.X, base.Y, this.Width, this.Height);
         }
 
         public override void MoveToNextDestination(PointF next, PointF last)
@@ -93,8 +100,10 @@ namespace Draw.src.Model
             stringBuilder.AppendLine("Y : " + base.Y);
             stringBuilder.AppendLine("Width : " + this.Width);
             stringBuilder.AppendLine("Height : " + this.Height);
-            stringBuilder.AppendLine("BorderColor : " + base.BorderColor.Color.Name);
+            stringBuilder.AppendLine("BorderColor : " + base.BorderColor.Name);
             stringBuilder.AppendLine("FillColor : " + base.FillColor.Name);
+            stringBuilder.AppendLine("DashStyle : " + base.DashStyle);
+            stringBuilder.AppendLine("TemporaryFlag : " + base.TemporaryFlag);
             return stringBuilder.ToString();
 
         }

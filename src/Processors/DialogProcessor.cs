@@ -38,54 +38,26 @@ namespace Draw
 
         public bool DrowTemporaryEllipse { get; set; }
 
-        public void AddRectangle(float x, float y, float width, float height, bool temporary = false)
+        public void AddRectangle(float x, float y, float width, float height, DashStyle dashStyle, bool temporary = false)
         {
-            Shape rectangle = new RectangleShape(x, y, width, height, Pens.Black, Color.White);
+            Shape rectangle = new RectangleShape(x, y, width, height, Color.Black, Color.White, dashStyle , temporary);
             rectangle.FillColor = Color.White;
-
-            if (temporary)
-            {
-                var oldColor = rectangle.BorderColor.Color;
-                var newPen = new Pen(oldColor);
-                newPen.DashStyle = DashStyle.Dot;
-                rectangle.BorderColor = newPen;
-                rectangle.TemporaryFlag = temporary;
-            }
 
             ShapeList.Add(rectangle);
         }
 
-        public void AddTriangle(PointF p1, PointF p2, PointF p3, bool temporary = false)
+        public void AddTriangle(PointF p1, PointF p2, PointF p3, DashStyle dashStyle, bool temporary = false)
         {
-            Shape triangle = new TriangleShape(p1, p2, p3, Pens.Black, Color.White);
+            Shape triangle = new TriangleShape(p1, p2, p3, Color.Black, Color.White, dashStyle, temporary);
             triangle.FillColor = Color.White;
 
-            if (temporary)
-            {
-                var oldColor = triangle.BorderColor.Color;
-                var newPen = new Pen(oldColor);
-                newPen.DashStyle = DashStyle.Dot;
-                triangle.BorderColor = newPen;
-                triangle.TemporaryFlag = temporary;
-            }
-
             ShapeList.Add(triangle);
-
         }
 
-        public void AddEllipse(float x, float y, float width, float height, bool temporary = false)
+        public void AddEllipse(float x, float y, float width, float height, DashStyle dashStyle, bool temporary = false)
         {
-            Shape ellipse = new EllipseShape(x, y, width, height, Pens.Black, Color.White);
+            Shape ellipse = new EllipseShape(x, y, width, height, Color.Black, Color.White, dashStyle, temporary);
             ellipse.FillColor = Color.White;
-
-            if (temporary)
-            {
-                var oldColor = ellipse.BorderColor.Color;
-                var newPen = new Pen(oldColor);
-                newPen.DashStyle = DashStyle.Dot;
-                ellipse.BorderColor = newPen;
-                ellipse.TemporaryFlag = temporary;
-            }
 
             ShapeList.Add(ellipse);
         }

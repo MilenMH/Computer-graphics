@@ -7,4 +7,7 @@ E:\Users\Milen\Desktop\C#\Computer-graphics repo\Computer-graphics\obj\Debug\Dra
 E:\Users\Milen\Desktop\C#\Computer-graphics repo\Computer-graphics\obj\Debug\Draw.csproj.CoreCompileInputs.cache
 E:\Users\Milen\Desktop\C#\Computer-graphics repo\Computer-graphics\obj\Debug\Draw.exe
 E:\Users\Milen\Desktop\C#\Computer-graphics repo\Computer-graphics\obj\Debug\Draw.pdb
+E:\Users\Milen\Desktop\C#\Computer-graphics repo\Computer-graphics\bin\Debug\Draw.exe.config
 E:\Users\Milen\Desktop\C#\Computer-graphics repo\Computer-graphics\obj\Debug\Draw.csprojResolveAssemblyReference.cache
+E:\Users\Milen\Desktop\C#\Computer-graphics repo\Computer-graphics\bin\Debug\Newtonsoft.Json.dll
+E:\Users\Milen\Desktop\C#\Computer-graphics repo\Computer-graphics\bin\Debug\Newtonsoft.Json.xml

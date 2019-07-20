@@ -3,6 +3,7 @@ using Draw.src.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 
@@ -12,13 +13,17 @@ namespace Draw.src.Model
     public class TriangleShape : Shape
     {
         [Importable]    
-        public TriangleShape(PointF point1, PointF point2, PointF point3, Pen borderColor, Color fillColor)
+        public TriangleShape(PointF point1, PointF point2, PointF point3, 
+            Color borderColor, Color fillColor, DashStyle dashStyle = GlobalConstants.DefaultDashStyle, 
+            bool temporaryFlag = false)
         {
             this.Point1 = point1;
             this.Point2 = point2;
             this.Point3 = point3;
             base.BorderColor = borderColor;
             base.FillColor = fillColor;
+            base.TemporaryFlag = temporaryFlag;
+            base.DashStyle = dashStyle;
             base.UniqueIdentifier = Guid.NewGuid();
         }
 
@@ -57,7 +62,9 @@ namespace Draw.src.Model
         {
             var points = new PointF[] { this.Point1, this.Point2, this.Point3 };
             grfx.FillPolygon(new SolidBrush(FillColor), points);
-            grfx.DrawPolygon(BorderColor, points);
+            var border = new Pen(BorderColor);
+            border.DashStyle = DashStyle;
+            grfx.DrawPolygon(border, points);
         }
 
         public override void MoveToNextDestination(PointF next, PointF last)
@@ -82,8 +89,10 @@ namespace Draw.src.Model
             stringBuilder.AppendLine("Point : X : " + Point1.X + " : Y : " + Point1.Y);
             stringBuilder.AppendLine("Point : X : " + Point2.X + " : Y : " + Point2.Y);
             stringBuilder.AppendLine("Point : X : " + Point3.X + " : Y : " + Point3.Y);
-            stringBuilder.AppendLine("BorderColor : " + base.BorderColor.Color.Name);
+            stringBuilder.AppendLine("BorderColor : " + base.BorderColor.Name);
             stringBuilder.AppendLine("FillColor : " + base.FillColor.Name);
+            stringBuilder.AppendLine("DashStyle : " + base.DashStyle);
+            stringBuilder.AppendLine("TemporaryFlag : " + base.TemporaryFlag);
             return stringBuilder.ToString();
         }
     }
