@@ -78,6 +78,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="src\GUI\Program.cs" />
+    <Compile Include="src\Helpers\DimentionCalculator.cs" />
     <Compile Include="src\Helpers\GlobalConstants.cs" />
     <Compile Include="src\Helpers\PolygonHlp.cs" />
     <Compile Include="src\Helpers\GenericHolders\Quadruple.cs" />

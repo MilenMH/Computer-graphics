@@ -41,6 +41,7 @@
             this.currentStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.speedMenu = new System.Windows.Forms.ToolStrip();
             this.ButtonMainNavigator = new System.Windows.Forms.ToolStripButton();
+            this.ButtonCopy = new System.Windows.Forms.ToolStripButton();
             this.ButtonDelete = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.ButtonDrowRectangle = new System.Windows.Forms.ToolStripButton();
@@ -57,6 +58,7 @@
             this.ButtonFillColorBlack = new System.Windows.Forms.ToolStripButton();
             this.ButtonFillColorSilver = new System.Windows.Forms.ToolStripButton();
             this.ButtonFillColor = new System.Windows.Forms.ToolStripButton();
+            this.ButtonBorderColor = new System.Windows.Forms.ToolStripButton();
             this.viewPort = new Draw.DoubleBufferedPanel();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
@@ -90,28 +92,28 @@
             // LoadToolStripMenuItem
             // 
             this.LoadToolStripMenuItem.Name = "LoadToolStripMenuItem";
-            this.LoadToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.LoadToolStripMenuItem.Size = new System.Drawing.Size(174, 26);
             this.LoadToolStripMenuItem.Text = "Load";
             this.LoadToolStripMenuItem.Click += new System.EventHandler(this.MainMenuButtonLoad_Click);
             // 
             // CustomSave
             // 
             this.CustomSave.Name = "CustomSave";
-            this.CustomSave.Size = new System.Drawing.Size(181, 26);
+            this.CustomSave.Size = new System.Drawing.Size(174, 26);
             this.CustomSave.Text = "Save";
             this.CustomSave.Click += new System.EventHandler(this.MainMenuButtonSave_Click);
             // 
             // JSONSave
             // 
             this.JSONSave.Name = "JSONSave";
-            this.JSONSave.Size = new System.Drawing.Size(181, 26);
+            this.JSONSave.Size = new System.Drawing.Size(174, 26);
             this.JSONSave.Text = "Save As JSON";
             this.JSONSave.Click += new System.EventHandler(this.MainMenuButtonSave_Click);
             // 
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(174, 26);
             this.ExitToolStripMenuItem.Text = "Exit";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -151,6 +153,7 @@
             this.speedMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.speedMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ButtonMainNavigator,
+            this.ButtonCopy,
             this.ButtonDelete,
             this.toolStripSeparator3,
             this.ButtonDrowRectangle,
@@ -166,7 +169,8 @@
             this.ButtonFillColorHotPink,
             this.ButtonFillColorBlack,
             this.ButtonFillColorSilver,
-            this.ButtonFillColor});
+            this.ButtonFillColor,
+            this.ButtonBorderColor});
             this.speedMenu.Location = new System.Drawing.Point(0, 28);
             this.speedMenu.Name = "speedMenu";
             this.speedMenu.Size = new System.Drawing.Size(924, 27);
@@ -183,6 +187,18 @@
             this.ButtonMainNavigator.Size = new System.Drawing.Size(24, 24);
             this.ButtonMainNavigator.Text = "ButtonMainNavigator";
             this.ButtonMainNavigator.Click += new System.EventHandler(this.OnMainNavigator_Click);
+            // 
+            // ButtonCopy
+            // 
+            this.ButtonCopy.CheckOnClick = true;
+            this.ButtonCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ButtonCopy.Image = ((System.Drawing.Image)(resources.GetObject("ButtonCopy.Image")));
+            this.ButtonCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonCopy.Name = "ButtonCopy";
+            this.ButtonCopy.Size = new System.Drawing.Size(24, 24);
+            this.ButtonCopy.Text = "ButtonCopy";
+            this.ButtonCopy.ToolTipText = "ButtonCopy";
+            this.ButtonCopy.Click += new System.EventHandler(this.ButtonCopy_Click);
             // 
             // ButtonDelete
             // 
@@ -341,6 +357,18 @@
             this.ButtonFillColor.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             this.ButtonFillColor.Click += new System.EventHandler(this.FillColor_Click);
             // 
+            // ButtonBorderColor
+            // 
+            this.ButtonBorderColor.CheckOnClick = true;
+            this.ButtonBorderColor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ButtonBorderColor.Image = ((System.Drawing.Image)(resources.GetObject("ButtonBorderColor.Image")));
+            this.ButtonBorderColor.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonBorderColor.Name = "ButtonBorderColor";
+            this.ButtonBorderColor.Size = new System.Drawing.Size(24, 24);
+            this.ButtonBorderColor.Text = "ButtonBorderColor";
+            this.ButtonBorderColor.ToolTipText = "ButtonBorderColor";
+            this.ButtonBorderColor.Click += new System.EventHandler(this.BorderColor_Click);
+            // 
             // viewPort
             // 
             this.viewPort.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -409,5 +437,7 @@
         private System.Windows.Forms.ToolStripMenuItem CustomSave;
         private System.Windows.Forms.ToolStripMenuItem LoadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem JSONSave;
+        private System.Windows.Forms.ToolStripButton ButtonCopy;
+        private System.Windows.Forms.ToolStripButton ButtonBorderColor;
     }
 }

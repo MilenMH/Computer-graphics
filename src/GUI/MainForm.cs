@@ -67,7 +67,12 @@ namespace Draw
 
             if (ButtonFillColor.Checked && dialogProcessor.Selection != null)
             {
-                dialogProcessor.Selection.FillColor = dialogProcessor.FillColor;
+                dialogProcessor.Selection.FillColor = dialogProcessor.Color;
+            }
+
+            if (ButtonBorderColor.Checked && dialogProcessor.Selection != null)
+            {
+                dialogProcessor.Selection.BorderColor = dialogProcessor.Color;
             }
 
             if (ButtonDelete.Checked && dialogProcessor.Selection != null)
@@ -86,6 +91,17 @@ namespace Draw
             if (ButtonDrowEllipse.Checked)
             {
                 dialogProcessor.DrowTemporaryEllipse = true;
+            }
+            if (ButtonCopy.Checked && dialogProcessor.Selection != null)
+            {
+                dialogProcessor.DrowTemporaryCopyShape = true;
+                dialogProcessor.LastLocation = e.Location;
+                var settings = JSONSaveBehaviourWorker.GetJSONSettings();
+                var copyOfSelection = JsonConvert.DeserializeObject<Shape>(JsonConvert.SerializeObject(dialogProcessor.Selection, settings), settings);
+                copyOfSelection.TemporaryFlag = true;
+                copyOfSelection.UniqueIdentifier = Guid.NewGuid();
+                dialogProcessor.SelectionCopy = copyOfSelection;
+                dialogProcessor.ShapeList.Add(dialogProcessor.SelectionCopy);
             }
             RerenderMainCanvas();
         }
@@ -107,7 +123,7 @@ namespace Draw
             }
             var startPoint = dialogProcessor.OnMouseDownPoint;
             var endPoint = e.Location;
-            var shapeParams = GetShapesParamsByTwoPoints(startPoint, endPoint);
+            var shapeParams = DimentionCalculator.GetShapesParamsByTwoPoints(startPoint, endPoint);
             if (ButtonDrowRectangle.Checked && dialogProcessor.DrowTemporaryRectangle)
             {
                 dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
@@ -128,6 +144,14 @@ namespace Draw
                 dialogProcessor.AddEllipse(
                     shapeParams.Item1, shapeParams.Item2, shapeParams.Item5, shapeParams.Item6, DashStyle.Dot, true);
             }
+            if (ButtonCopy.Checked && dialogProcessor.DrowTemporaryCopyShape && dialogProcessor.SelectionCopy != null)
+            {
+                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
+                dialogProcessor.SelectionCopy.MoveToNextDestination(e.Location, dialogProcessor.LastLocation);
+                dialogProcessor.SelectionCopy.UniqueIdentifier = Guid.NewGuid();
+                dialogProcessor.ShapeList.Add(dialogProcessor.SelectionCopy);
+                dialogProcessor.LastLocation = e.Location;
+            }
             viewPort.Invalidate();
         }
 
@@ -143,7 +167,7 @@ namespace Draw
                 ChageBorderOfSetOfShapes(setOfShapesThatHasToBeRotated, DashStyle.Dot);
             }
 
-            var shapeParams = GetShapesParamsByTwoPoints(
+            var shapeParams = DimentionCalculator.GetShapesParamsByTwoPoints(
                 dialogProcessor.OnMouseDownPoint, dialogProcessor.OnMouseUpPoint);
 
 
@@ -170,6 +194,17 @@ namespace Draw
                     new PointF(shapeParams.Item3, shapeParams.Item2),
                     DashStyle.Solid, false);
             }
+
+            if (ButtonFillColor.Checked)
+            {
+                ButtonFillColor.Checked = false;
+            }
+
+            if (ButtonBorderColor.Checked)
+            {
+                ButtonBorderColor.Checked = false;
+            }
+
             if (ButtonMultiMove.Checked)
             {
                 ButtonMultiMove.Checked = false;
@@ -194,6 +229,15 @@ namespace Draw
                 dialogProcessor.DrowTemporaryEllipse = false;
                 dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
             }
+            if (ButtonCopy.Checked && dialogProcessor.DrowTemporaryCopyShape)
+            {
+                ButtonCopy.Checked = false;
+                dialogProcessor.DrowTemporaryCopyShape = false;
+                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
+                dialogProcessor.SelectionCopy.TemporaryFlag = false;
+                dialogProcessor.ShapeList.Add(dialogProcessor.SelectionCopy);
+                dialogProcessor.SelectionCopy = null;
+            }
             RerenderMainCanvas();
         }
 
@@ -206,6 +250,8 @@ namespace Draw
             ButtonFillColor.Checked = false;
             ButtonDelete.Checked = false;
             ButtonMultiMove.Checked = false;
+            ButtonCopy.Checked = false;
+            ButtonBorderColor.Checked = false;
             ResetRotationProcess(GlobalConstants.DefaultDashStyle, false, true);
             viewPort.Invalidate();
         }
@@ -219,6 +265,8 @@ namespace Draw
             ButtonDrowRectangle.Checked = false;
             ButtonDelete.Checked = false;
             ButtonMultiMove.Checked = false;
+            ButtonCopy.Checked = false;
+            ButtonBorderColor.Checked = false;
             ResetRotationProcess(GlobalConstants.DefaultDashStyle, false, true);
             viewPort.Invalidate();
         }
@@ -232,6 +280,8 @@ namespace Draw
             ButtonDrowRectangle.Checked = false;
             ButtonDelete.Checked = false;
             ButtonMultiMove.Checked = false;
+            ButtonCopy.Checked = false;
+            ButtonBorderColor.Checked = false;
             ResetRotationProcess(GlobalConstants.DefaultDashStyle, false, true);
             viewPort.Invalidate();
         }
@@ -245,6 +295,8 @@ namespace Draw
             ButtonDrowRectangle.Checked = false;
             ButtonDelete.Checked = false;
             ButtonMultiMove.Checked = false;
+            ButtonCopy.Checked = false;
+            ButtonBorderColor.Checked = false;
             ResetRotationProcess(GlobalConstants.DefaultDashStyle, true, true);
         }
 
@@ -257,6 +309,8 @@ namespace Draw
             ButtonDrowRectangle.Checked = false;
             ButtonDelete.Checked = false;
             ButtonMultiMove.Checked = false;
+            ButtonCopy.Checked = false;
+            ButtonBorderColor.Checked = false;
         }
 
         private void FillColor_Click(object sender, EventArgs e)
@@ -268,6 +322,35 @@ namespace Draw
             ButtonDrowRectangle.Checked = false;
             ButtonDelete.Checked = false;
             ButtonMultiMove.Checked = false;
+            ButtonCopy.Checked = false;
+            ButtonBorderColor.Checked = false;
+        }
+
+
+        private void BorderColor_Click(object sender, EventArgs e)
+        {
+            ButtonDrowTriangle.Checked = false;
+            ButtonMultiSelect.Checked = false;
+            ButtonMainNavigator.Checked = false;
+            ButtonDrowEllipse.Checked = false;
+            ButtonDrowRectangle.Checked = false;
+            ButtonDelete.Checked = false;
+            ButtonMultiMove.Checked = false;
+            ButtonCopy.Checked = false;
+            ButtonFillColor.Checked = false;
+        }
+
+        private void ButtonCopy_Click(object sender, EventArgs e)
+        {
+            ButtonDrowTriangle.Checked = false;
+            ButtonMultiSelect.Checked = false;
+            ButtonMainNavigator.Checked = false;
+            ButtonDrowEllipse.Checked = false;
+            ButtonDrowRectangle.Checked = false;
+            ButtonFillColor.Checked = false;
+            ButtonMultiMove.Checked = false;
+            ButtonDelete.Checked = false;
+            ButtonBorderColor.Checked = false;
         }
 
         private void ButtonDelete_Click(object sender, EventArgs e)
@@ -279,6 +362,8 @@ namespace Draw
             ButtonDrowRectangle.Checked = false;
             ButtonFillColor.Checked = false;
             ButtonMultiMove.Checked = false;
+            ButtonCopy.Checked = false;
+            ButtonBorderColor.Checked = false;
         }
 
         private void ButtonMultiMove_Click(object sender, EventArgs e)
@@ -290,13 +375,15 @@ namespace Draw
             ButtonDrowRectangle.Checked = false;
             ButtonFillColor.Checked = false;
             ButtonDelete.Checked = false;
+            ButtonCopy.Checked = false;
+            ButtonBorderColor.Checked = false;
         }
 
         private void SetFillColor(object sender, EventArgs e)
         {
             var buttonColor = sender.ToString().Replace("ButtonFillColor", "");
             var colorProperty = this.colorsDictionary[buttonColor];
-            dialogProcessor.FillColor = colorProperty;
+            dialogProcessor.Color = colorProperty;
             ResetRotationProcess(GlobalConstants.DefaultDashStyle, true, true);
             statusBar.Items[0].Text = $"Last Action : {sender.ToString()}";
         }
@@ -376,16 +463,7 @@ namespace Draw
 
         #endregion
 
-        private Sextuple<float, float, float, float, float, float> GetShapesParamsByTwoPoints(PointF startPoint, PointF endPoint)
-        {
-            float minX = Math.Min(startPoint.X, endPoint.X);
-            float minY = Math.Min(startPoint.Y, endPoint.Y);
-            float maxX = Math.Max(startPoint.X, endPoint.X);
-            float maxY = Math.Max(startPoint.Y, endPoint.Y);
-            float width = maxX - minX;
-            float height = maxY - minY;
-            return new Sextuple<float, float, float, float, float, float>(minX, minY, maxX, maxY, width, height);
-        }
+
 
         private void ChageBorderOfSetOfShapes(IEnumerable<Shape> setOfShapes, DashStyle dashStyle)
         {
@@ -465,9 +543,9 @@ namespace Draw
                     if (stringReporesentation.StartsWith("{\"$type\""))
                     {
                         JsonSerializerSettings settings = JSONSaveBehaviourWorker.GetJSONSettings();
-
-                        dialogProcessor.ShapeList.AddRange(
-                            JsonConvert.DeserializeObject<List<Shape>>(stringReporesentation, settings));
+                        var shapes = JsonConvert.DeserializeObject<List<Shape>>(stringReporesentation, settings);
+                        shapes.ForEach(s => s.UniqueIdentifier = Guid.NewGuid());
+                        dialogProcessor.ShapeList.AddRange(shapes);
                     }
                     else
                     {

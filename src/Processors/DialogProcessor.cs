@@ -13,12 +13,14 @@ namespace Draw
         public DialogProcessor()
         {
             Random = new Random();
-            FillColor = Color.White;
+            Color = Color.White;
         }
 
         public Random Random { get; set; }
 
         public Shape Selection { get; set; }
+
+        public Shape SelectionCopy { get; set; }
 
         public IEnumerable<Shape> MultiSelection { get; set; }
 
@@ -26,7 +28,7 @@ namespace Draw
 
         public PointF LastLocation { get; set; }
 
-        public Color FillColor { get; set; }
+        public Color Color { get; set; }
 
         public PointF OnMouseDownPoint { get; set; }
 
@@ -37,6 +39,8 @@ namespace Draw
         public bool DrowTemporaryTriangle { get; set; }
 
         public bool DrowTemporaryEllipse { get; set; }
+
+        public bool DrowTemporaryCopyShape { get; set; }
 
         public void AddRectangle(float x, float y, float width, float height, DashStyle dashStyle, bool temporary = false)
         {
