@@ -59,7 +59,10 @@
             this.ButtonFillColorSilver = new System.Windows.Forms.ToolStripButton();
             this.ButtonFillColor = new System.Windows.Forms.ToolStripButton();
             this.ButtonBorderColor = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.ButtonPlus = new System.Windows.Forms.ToolStripButton();
             this.viewPort = new Draw.DoubleBufferedPanel();
+            this.ButtonMinus = new System.Windows.Forms.ToolStripButton();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.speedMenu.SuspendLayout();
@@ -170,7 +173,10 @@
             this.ButtonFillColorBlack,
             this.ButtonFillColorSilver,
             this.ButtonFillColor,
-            this.ButtonBorderColor});
+            this.ButtonBorderColor,
+            this.toolStripSeparator4,
+            this.ButtonPlus,
+            this.ButtonMinus});
             this.speedMenu.Location = new System.Drawing.Point(0, 28);
             this.speedMenu.Name = "speedMenu";
             this.speedMenu.Size = new System.Drawing.Size(924, 27);
@@ -369,6 +375,23 @@
             this.ButtonBorderColor.ToolTipText = "ButtonBorderColor";
             this.ButtonBorderColor.Click += new System.EventHandler(this.BorderColor_Click);
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 27);
+            // 
+            // ButtonPlus
+            // 
+            this.ButtonPlus.CheckOnClick = true;
+            this.ButtonPlus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ButtonPlus.Image = ((System.Drawing.Image)(resources.GetObject("ButtonPlus.Image")));
+            this.ButtonPlus.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonPlus.Name = "ButtonPlus";
+            this.ButtonPlus.Size = new System.Drawing.Size(24, 24);
+            this.ButtonPlus.Text = "ButtonPlus";
+            this.ButtonPlus.ToolTipText = "ButtonPlus";
+            this.ButtonPlus.Click += new System.EventHandler(this.Plus_Click);
+            // 
             // viewPort
             // 
             this.viewPort.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -381,6 +404,18 @@
             this.viewPort.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseDown);
             this.viewPort.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseMove);
             this.viewPort.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseUp);
+            // 
+            // ButtonMinus
+            // 
+            this.ButtonMinus.CheckOnClick = true;
+            this.ButtonMinus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ButtonMinus.Image = ((System.Drawing.Image)(resources.GetObject("ButtonMinus.Image")));
+            this.ButtonMinus.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonMinus.Name = "ButtonMinus";
+            this.ButtonMinus.Size = new System.Drawing.Size(24, 24);
+            this.ButtonMinus.Text = "ButtonMinus";
+            this.ButtonMinus.ToolTipText = "ButtonMinus";
+            this.ButtonMinus.Click += new System.EventHandler(this.Minus_Click);
             // 
             // MainForm
             // 
@@ -439,5 +474,8 @@
         private System.Windows.Forms.ToolStripMenuItem JSONSave;
         private System.Windows.Forms.ToolStripButton ButtonCopy;
         private System.Windows.Forms.ToolStripButton ButtonBorderColor;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripButton ButtonPlus;
+        private System.Windows.Forms.ToolStripButton ButtonMinus;
     }
 }

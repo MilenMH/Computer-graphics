@@ -82,6 +82,22 @@ namespace Draw.src.Model
             return new TriangleShape(rotatedPoints[0], rotatedPoints[1], rotatedPoints[2], this.BorderColor, base.FillColor);
         }
 
+        public override void Enlarge()
+        {
+            var points = PolygonHlp.GetEnlargedPolygon(new List<PointF>() { this.Point1, this.Point2, this.Point3}, -1F);
+            this.Point1 = points[0];
+            this.Point2 = points[1];
+            this.Point3 = points[2];
+        }
+
+        public override void Shrink()
+        {
+            var points = PolygonHlp.GetEnlargedPolygon(new List<PointF>() { this.Point1, this.Point2, this.Point3 }, 1F);
+            this.Point1 = points[0];
+            this.Point2 = points[1];
+            this.Point3 = points[2];
+        }
+
         public override string ToString()
         {
             var stringBuilder = new StringBuilder();
@@ -95,5 +111,7 @@ namespace Draw.src.Model
             stringBuilder.AppendLine("TemporaryFlag : " + base.TemporaryFlag);
             return stringBuilder.ToString();
         }
+
+
     }
 }

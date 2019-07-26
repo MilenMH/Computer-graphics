@@ -95,6 +95,22 @@ namespace Draw.src.Model
 
         }
 
+        public override void Enlarge()
+        {
+            this.X -= 1;
+            this.Y -= 1;
+            this.Width += 2;
+            this.Height += 2;
+        }
+
+        public override void Shrink()
+        {
+            this.X += 1;
+            this.Y += 1;
+            this.Width -= 2;
+            this.Height -= 2;
+        }
+
         public override string ToString()
         {
             var stringBuilder = new StringBuilder();

@@ -103,6 +103,16 @@ namespace Draw
                 dialogProcessor.SelectionCopy = copyOfSelection;
                 dialogProcessor.ShapeList.Add(dialogProcessor.SelectionCopy);
             }
+            if (ButtonPlus.Checked && dialogProcessor.Selection != null)
+            {
+                var selectionGuid =  dialogProcessor.Selection.UniqueIdentifier;
+                dialogProcessor.Selection.Enlarge();
+            }
+            if (ButtonMinus.Checked && dialogProcessor.Selection != null)
+            {
+                var selectionGuid = dialogProcessor.Selection.UniqueIdentifier;
+                dialogProcessor.Selection.Shrink();
+            }
             RerenderMainCanvas();
         }
 
@@ -252,6 +262,8 @@ namespace Draw
             ButtonMultiMove.Checked = false;
             ButtonCopy.Checked = false;
             ButtonBorderColor.Checked = false;
+            ButtonPlus.Checked = false;
+            ButtonMinus.Checked = false;
             ResetRotationProcess(GlobalConstants.DefaultDashStyle, false, true);
             viewPort.Invalidate();
         }
@@ -267,6 +279,8 @@ namespace Draw
             ButtonMultiMove.Checked = false;
             ButtonCopy.Checked = false;
             ButtonBorderColor.Checked = false;
+            ButtonPlus.Checked = false;
+            ButtonMinus.Checked = false;
             ResetRotationProcess(GlobalConstants.DefaultDashStyle, false, true);
             viewPort.Invalidate();
         }
@@ -282,6 +296,8 @@ namespace Draw
             ButtonMultiMove.Checked = false;
             ButtonCopy.Checked = false;
             ButtonBorderColor.Checked = false;
+            ButtonPlus.Checked = false;
+            ButtonMinus.Checked = false;
             ResetRotationProcess(GlobalConstants.DefaultDashStyle, false, true);
             viewPort.Invalidate();
         }
@@ -297,7 +313,10 @@ namespace Draw
             ButtonMultiMove.Checked = false;
             ButtonCopy.Checked = false;
             ButtonBorderColor.Checked = false;
+            ButtonPlus.Checked = false;
+            ButtonMinus.Checked = false;
             ResetRotationProcess(GlobalConstants.DefaultDashStyle, true, true);
+            viewPort.Invalidate();
         }
 
         private void OnMultiSelect_Click(object sender, EventArgs e)
@@ -311,6 +330,8 @@ namespace Draw
             ButtonMultiMove.Checked = false;
             ButtonCopy.Checked = false;
             ButtonBorderColor.Checked = false;
+            ButtonPlus.Checked = false;
+            ButtonMinus.Checked = false;
         }
 
         private void FillColor_Click(object sender, EventArgs e)
@@ -324,6 +345,10 @@ namespace Draw
             ButtonMultiMove.Checked = false;
             ButtonCopy.Checked = false;
             ButtonBorderColor.Checked = false;
+            ButtonPlus.Checked = false;
+            ButtonMinus.Checked = false;
+            ResetRotationProcess(GlobalConstants.DefaultDashStyle, true, true);
+            viewPort.Invalidate();
         }
 
 
@@ -338,6 +363,10 @@ namespace Draw
             ButtonMultiMove.Checked = false;
             ButtonCopy.Checked = false;
             ButtonFillColor.Checked = false;
+            ButtonPlus.Checked = false;
+            ButtonMinus.Checked = false;
+            ResetRotationProcess(GlobalConstants.DefaultDashStyle, true, true);
+            viewPort.Invalidate();
         }
 
         private void ButtonCopy_Click(object sender, EventArgs e)
@@ -351,6 +380,10 @@ namespace Draw
             ButtonMultiMove.Checked = false;
             ButtonDelete.Checked = false;
             ButtonBorderColor.Checked = false;
+            ButtonPlus.Checked = false;
+            ButtonMinus.Checked = false;
+            ResetRotationProcess(GlobalConstants.DefaultDashStyle, true, true);
+            viewPort.Invalidate();
         }
 
         private void ButtonDelete_Click(object sender, EventArgs e)
@@ -364,6 +397,10 @@ namespace Draw
             ButtonMultiMove.Checked = false;
             ButtonCopy.Checked = false;
             ButtonBorderColor.Checked = false;
+            ButtonPlus.Checked = false;
+            ButtonMinus.Checked = false;
+            ResetRotationProcess(GlobalConstants.DefaultDashStyle, true, true);
+            viewPort.Invalidate();
         }
 
         private void ButtonMultiMove_Click(object sender, EventArgs e)
@@ -377,6 +414,40 @@ namespace Draw
             ButtonDelete.Checked = false;
             ButtonCopy.Checked = false;
             ButtonBorderColor.Checked = false;
+            ButtonPlus.Checked = false;
+            ButtonMinus.Checked = false;
+        }
+
+        private void Plus_Click(object sender, EventArgs e)
+        {
+            ButtonDrowTriangle.Checked = false;
+            ButtonMultiSelect.Checked = false;
+            ButtonMainNavigator.Checked = false;
+            ButtonDrowEllipse.Checked = false;
+            ButtonDrowRectangle.Checked = false;
+            ButtonFillColor.Checked = false;
+            ButtonDelete.Checked = false;
+            ButtonCopy.Checked = false;
+            ButtonBorderColor.Checked = false;
+            ButtonMultiMove.Checked = false;
+            ButtonMinus.Checked = false;
+            ResetRotationProcess(GlobalConstants.DefaultDashStyle, true, true);
+        }
+
+        private void Minus_Click(object sender, EventArgs e)
+        {
+            ButtonDrowTriangle.Checked = false;
+            ButtonMultiSelect.Checked = false;
+            ButtonMainNavigator.Checked = false;
+            ButtonDrowEllipse.Checked = false;
+            ButtonDrowRectangle.Checked = false;
+            ButtonFillColor.Checked = false;
+            ButtonDelete.Checked = false;
+            ButtonCopy.Checked = false;
+            ButtonBorderColor.Checked = false;
+            ButtonMultiMove.Checked = false;
+            ButtonPlus.Checked = false;
+            ResetRotationProcess(GlobalConstants.DefaultDashStyle, true, true);
         }
 
         private void SetFillColor(object sender, EventArgs e)
@@ -596,5 +667,7 @@ namespace Draw
                             && String.Equals(t.Name, typeName, StringComparison.Ordinal))
                       .FirstOrDefault();
         }
+
+
     }
 }

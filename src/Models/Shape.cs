@@ -49,6 +49,10 @@ namespace Draw
 
         public abstract Shape NewShapeRotatedToRigth();
 
+        public abstract void Enlarge();
+
+        public abstract void Shrink();
+
         #endregion
     }
 }
