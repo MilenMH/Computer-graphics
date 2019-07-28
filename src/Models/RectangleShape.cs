@@ -120,7 +120,7 @@ namespace Draw.src.Model
             stringBuilder.AppendLine("Width : " + this.Width);
             stringBuilder.AppendLine("Height : " + this.Height);
             stringBuilder.AppendLine("BorderColor : " + base.BorderColor.Name);
-            stringBuilder.AppendLine("FillColor : " + base.FillColor.Name);
+            stringBuilder.AppendLine("FillColor : " + ColorTranslator.ToHtml(base.FillColor));
             stringBuilder.AppendLine("DashStyle : " + base.DashStyle);
             stringBuilder.AppendLine("TemporaryFlag : " + base.TemporaryFlag);
             return stringBuilder.ToString();

@@ -21,6 +21,8 @@ namespace Draw.src.Helpers
 
         private delegate bool MapStandartBoolPropertyDelegate(string[] parameters);
 
+        private delegate int MapStandartIntPropertyDelegate(string[] parameters);
+
         public PropertyMapper()
         {
             Init();
@@ -38,7 +40,7 @@ namespace Draw.src.Helpers
             this.PropertyDictionary.Add("point", new MapStandartPointFPropertyDelegate(MapStandartPointFPropertyFunc));
             this.PropertyDictionary.Add("dashstyle", new MapStandartDashStylePropertyDelegate(MapStandartDashStylePropertyFunc));
             this.PropertyDictionary.Add("temporaryflag", new MapStandartBoolPropertyDelegate(MapStandartBoolPropertyFunc));
-
+            this.PropertyDictionary.Add("transparency", new MapStandartIntPropertyDelegate(MapStandartIntPropertyFunc));
         }
 
         public object[] MapObjectProperties(string shapeAsString)
@@ -70,7 +72,7 @@ namespace Draw.src.Helpers
 
         private Color MapStandartColorPropertyFunc(string[] parameters)
         {
-            return Color.FromName(parameters[1].Trim());
+            return ColorTranslator.FromHtml(parameters[1].Trim());
         }
 
         private PointF MapStandartPointFPropertyFunc(string[] parameters)
@@ -86,6 +88,11 @@ namespace Draw.src.Helpers
         private bool MapStandartBoolPropertyFunc(string[] parameters)
         {
             return bool.Parse(parameters[1].Trim());
+        }
+
+        private int MapStandartIntPropertyFunc(string[] parameters)
+        {
+            return int.Parse(parameters[1].Trim());
         }
     }
 }

@@ -55,6 +55,10 @@ namespace Draw
                 dialogProcessor.IsDragging = true;
                 dialogProcessor.LastLocation = e.Location;
             }
+            if (ButtonMultiSelect.Checked)
+            {
+                dialogProcessor.MultiSelectFlag = true;
+            }
 
             dialogProcessor.OnMouseDownPoint = e.Location;
             dialogProcessor.Selection = dialogProcessor.ContainsPoint(e.Location);
@@ -96,8 +100,11 @@ namespace Draw
             {
                 dialogProcessor.DrowTemporaryCopyShape = true;
                 dialogProcessor.LastLocation = e.Location;
-                var settings = JSONSaveBehaviourWorker.GetJSONSettings();
-                var copyOfSelection = JsonConvert.DeserializeObject<Shape>(JsonConvert.SerializeObject(dialogProcessor.Selection, settings), settings);
+                //var settings = JSONSaveBehaviourWorker.GetJSONSettings();
+                //var copyOfSelection = JsonConvert.DeserializeObject<Shape>(JsonConvert.SerializeObject(dialogProcessor.Selection, settings), settings);
+                var selectionAsString = dialogProcessor.Selection.ToString();
+                var copyOfSelection = CustomLoadFile(selectionAsString.ToString()).FirstOrDefault();
+
                 copyOfSelection.TemporaryFlag = true;
                 copyOfSelection.UniqueIdentifier = Guid.NewGuid();
                 dialogProcessor.SelectionCopy = copyOfSelection;
@@ -105,7 +112,6 @@ namespace Draw
             }
             if (ButtonPlus.Checked && dialogProcessor.Selection != null)
             {
-                var selectionGuid =  dialogProcessor.Selection.UniqueIdentifier;
                 dialogProcessor.Selection.Enlarge();
             }
             if (ButtonMinus.Checked && dialogProcessor.Selection != null)
@@ -126,14 +132,22 @@ namespace Draw
             }
             if (ButtonMultiMove.Checked && dialogProcessor.IsDragging && dialogProcessor.MultiSelection != null)
             {
-
                 dialogProcessor.MultiMoveTo(dialogProcessor.LastLocation, e.Location);
                 dialogProcessor.LastLocation = e.Location;
-
             }
+
             var startPoint = dialogProcessor.OnMouseDownPoint;
             var endPoint = e.Location;
             var shapeParams = DimentionCalculator.GetShapesParamsByTwoPoints(startPoint, endPoint);
+
+            if (ButtonMultiSelect.Checked && dialogProcessor.MultiSelectFlag)
+            {
+                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
+                dialogProcessor.AddRectangle(
+                    shapeParams.Item1, shapeParams.Item2, shapeParams.Item5, shapeParams.Item6, DashStyle.Dot, true, 0);
+
+            }
+
             if (ButtonDrowRectangle.Checked && dialogProcessor.DrowTemporaryRectangle)
             {
                 dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
@@ -172,6 +186,8 @@ namespace Draw
             if (ButtonMultiSelect.Checked)
             {
                 ButtonMultiSelect.Checked = false;
+                dialogProcessor.MultiSelectFlag = false;
+                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
                 var setOfShapesThatHasToBeRotated = TraverseOverSelectedMatrix(false);
                 ChageBorderOfSetOfShapes(this.dialogProcessor.ShapeList, GlobalConstants.DefaultDashStyle);
                 ChageBorderOfSetOfShapes(setOfShapesThatHasToBeRotated, DashStyle.Dot);
@@ -179,7 +195,6 @@ namespace Draw
 
             var shapeParams = DimentionCalculator.GetShapesParamsByTwoPoints(
                 dialogProcessor.OnMouseDownPoint, dialogProcessor.OnMouseUpPoint);
-
 
             if (ButtonDrowEllipse.Checked)
             {
@@ -620,19 +635,21 @@ namespace Draw
                     }
                     else
                     {
-                        CustomLoadFile(stringBuilder.ToString());
+                        dialogProcessor.ShapeList.AddRange(CustomLoadFile(stringBuilder.ToString()));
                     }
                 }
             }
         }
 
-        private void CustomLoadFile(string shapesAsText)
+        private IList<Shape> CustomLoadFile(string shapesAsText)
         {
             var arrayOfShapes = shapesAsText.ToString().Split(
                        GlobalConstants.DefaultSeparator.ToCharArray(),
                        StringSplitOptions.RemoveEmptyEntries);
 
             var propertyMapper = new PropertyMapper();
+
+            var resultList = new List<Shape>();
 
             foreach (var shapeAsString in arrayOfShapes)
             {
@@ -653,8 +670,9 @@ namespace Draw
 
                 var instance = (Shape)Activator.CreateInstance(type, parameters);
 
-                dialogProcessor.ShapeList.Add(instance);
+                resultList.Add(instance);
             }
+            return resultList;
         }
 
         #endregion
@@ -668,6 +686,19 @@ namespace Draw
                       .FirstOrDefault();
         }
 
+        private void ViewPort_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Add && dialogProcessor.Selection != null)
+            {
+                dialogProcessor.Selection.Enlarge();
+            }
+            if (e.KeyCode == Keys.Subtract && dialogProcessor.Selection != null)
+            {
+                dialogProcessor.Selection.Shrink();
+            }
 
+            RerenderMainCanvas();
+
+        }
     }
 }

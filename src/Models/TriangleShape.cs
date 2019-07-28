@@ -21,7 +21,7 @@ namespace Draw.src.Model
             this.Point2 = point2;
             this.Point3 = point3;
             base.BorderColor = borderColor;
-            base.FillColor = fillColor;
+            base.FillColor =  fillColor;
             base.TemporaryFlag = temporaryFlag;
             base.DashStyle = dashStyle;
             base.UniqueIdentifier = Guid.NewGuid();
@@ -106,7 +106,7 @@ namespace Draw.src.Model
             stringBuilder.AppendLine("Point : X : " + Point2.X + " : Y : " + Point2.Y);
             stringBuilder.AppendLine("Point : X : " + Point3.X + " : Y : " + Point3.Y);
             stringBuilder.AppendLine("BorderColor : " + base.BorderColor.Name);
-            stringBuilder.AppendLine("FillColor : " + base.FillColor.Name);
+            stringBuilder.AppendLine("FillColor : " + ColorTranslator.ToHtml(base.FillColor));
             stringBuilder.AppendLine("DashStyle : " + base.DashStyle);
             stringBuilder.AppendLine("TemporaryFlag : " + base.TemporaryFlag);
             return stringBuilder.ToString();

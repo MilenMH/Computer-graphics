@@ -42,27 +42,23 @@ namespace Draw
 
         public bool DrowTemporaryCopyShape { get; set; }
 
-        public void AddRectangle(float x, float y, float width, float height, DashStyle dashStyle, bool temporary = false)
-        {
-            Shape rectangle = new RectangleShape(x, y, width, height, Color.Black, Color.White, dashStyle , temporary);
-            rectangle.FillColor = Color.White;
+        public bool MultiSelectFlag { get; set; }
 
+        public void AddRectangle(float x, float y, float width, float height, DashStyle dashStyle, bool temporary = false, int transparency = 255)
+        {
+            Shape rectangle = new RectangleShape(x, y, width, height, Color.Black, Color.FromArgb(transparency, Color.White), dashStyle , temporary);
             ShapeList.Add(rectangle);
         }
 
-        public void AddTriangle(PointF p1, PointF p2, PointF p3, DashStyle dashStyle, bool temporary = false)
+        public void AddTriangle(PointF p1, PointF p2, PointF p3, DashStyle dashStyle, bool temporary = false, int transparency = 255)
         {
-            Shape triangle = new TriangleShape(p1, p2, p3, Color.Black, Color.White, dashStyle, temporary);
-            triangle.FillColor = Color.White;
-
+            Shape triangle = new TriangleShape(p1, p2, p3, Color.Black, Color.FromArgb(transparency, Color.White), dashStyle, temporary);
             ShapeList.Add(triangle);
         }
 
-        public void AddEllipse(float x, float y, float width, float height, DashStyle dashStyle, bool temporary = false)
+        public void AddEllipse(float x, float y, float width, float height, DashStyle dashStyle, bool temporary = false, int transparency = 255)
         {
-            Shape ellipse = new EllipseShape(x, y, width, height, Color.Black, Color.White, dashStyle, temporary);
-            ellipse.FillColor = Color.White;
-
+            Shape ellipse = new EllipseShape(x, y, width, height, Color.Black, Color.FromArgb(transparency, Color.White), dashStyle, temporary);
             ShapeList.Add(ellipse);
         }
 

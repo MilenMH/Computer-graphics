@@ -61,8 +61,8 @@
             this.ButtonBorderColor = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.ButtonPlus = new System.Windows.Forms.ToolStripButton();
-            this.viewPort = new Draw.DoubleBufferedPanel();
             this.ButtonMinus = new System.Windows.Forms.ToolStripButton();
+            this.viewPort = new Draw.DoubleBufferedPanel();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.speedMenu.SuspendLayout();
@@ -158,6 +158,8 @@
             this.ButtonMainNavigator,
             this.ButtonCopy,
             this.ButtonDelete,
+            this.ButtonPlus,
+            this.ButtonMinus,
             this.toolStripSeparator3,
             this.ButtonDrowRectangle,
             this.ButtonDrowTriangle,
@@ -174,9 +176,7 @@
             this.ButtonFillColorSilver,
             this.ButtonFillColor,
             this.ButtonBorderColor,
-            this.toolStripSeparator4,
-            this.ButtonPlus,
-            this.ButtonMinus});
+            this.toolStripSeparator4});
             this.speedMenu.Location = new System.Drawing.Point(0, 28);
             this.speedMenu.Name = "speedMenu";
             this.speedMenu.Size = new System.Drawing.Size(924, 27);
@@ -392,19 +392,6 @@
             this.ButtonPlus.ToolTipText = "ButtonPlus";
             this.ButtonPlus.Click += new System.EventHandler(this.Plus_Click);
             // 
-            // viewPort
-            // 
-            this.viewPort.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.viewPort.Location = new System.Drawing.Point(0, 55);
-            this.viewPort.Margin = new System.Windows.Forms.Padding(5);
-            this.viewPort.Name = "viewPort";
-            this.viewPort.Size = new System.Drawing.Size(924, 444);
-            this.viewPort.TabIndex = 4;
-            this.viewPort.Paint += new System.Windows.Forms.PaintEventHandler(this.ViewPortPaint);
-            this.viewPort.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseDown);
-            this.viewPort.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseMove);
-            this.viewPort.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseUp);
-            // 
             // ButtonMinus
             // 
             this.ButtonMinus.CheckOnClick = true;
@@ -416,6 +403,20 @@
             this.ButtonMinus.Text = "ButtonMinus";
             this.ButtonMinus.ToolTipText = "ButtonMinus";
             this.ButtonMinus.Click += new System.EventHandler(this.Minus_Click);
+            // 
+            // viewPort
+            // 
+            this.viewPort.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.viewPort.Location = new System.Drawing.Point(0, 55);
+            this.viewPort.Margin = new System.Windows.Forms.Padding(5);
+            this.viewPort.Name = "viewPort";
+            this.viewPort.Size = new System.Drawing.Size(924, 444);
+            this.viewPort.TabIndex = 4;
+            this.viewPort.Paint += new System.Windows.Forms.PaintEventHandler(this.ViewPortPaint);
+            this.viewPort.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ViewPort_KeyDown);
+            this.viewPort.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseDown);
+            this.viewPort.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseMove);
+            this.viewPort.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseUp);
             // 
             // MainForm
             // 
