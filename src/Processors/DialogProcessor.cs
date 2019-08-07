@@ -46,7 +46,8 @@ namespace Draw
 
         public void AddRectangle(float x, float y, float width, float height, DashStyle dashStyle, bool temporary = false, int transparency = 255)
         {
-            Shape rectangle = new RectangleShape(x, y, width, height, Color.Black, Color.FromArgb(transparency, Color.White), dashStyle , temporary);
+            Shape rectangle = new RectangleShape(new PointF(x, y + height), new PointF(x, y),
+                new PointF(x + width, y), new PointF(x + width, y + height), Color.Black, Color.FromArgb(transparency, Color.White), dashStyle, temporary);
             ShapeList.Add(rectangle);
         }
 
@@ -58,7 +59,8 @@ namespace Draw
 
         public void AddEllipse(float x, float y, float width, float height, DashStyle dashStyle, bool temporary = false, int transparency = 255)
         {
-            Shape ellipse = new EllipseShape(x, y, width, height, Color.Black, Color.FromArgb(transparency, Color.White), dashStyle, temporary);
+            Shape ellipse = new EllipseShape(new PointF(x, y + height), new PointF(x, y),
+                new PointF(x + width, y), new PointF(x + width, y + height), Color.Black, Color.FromArgb(transparency, Color.White), dashStyle, temporary);
             ShapeList.Add(ellipse);
         }
 

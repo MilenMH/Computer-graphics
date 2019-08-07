@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows;
 
 namespace Draw.src.Helpers
@@ -26,21 +27,21 @@ namespace Draw.src.Helpers
         }
 
 
-        public static List<PointF> RotatePolygon(List<PointF> polygon, PointF centroid, double angle)
+        public static List<PointF> RotatePolygon(List<PointF> polygon, PointF centroid, double radians)
         {
             for (int i = 0; i < polygon.Count; i++)
             {
-                polygon[i] = RotatePoint(polygon[i], centroid, angle);
+                polygon[i] = RotatePoint(polygon[i], centroid, radians);
             }
 
             return polygon;
         }
 
-        public static PointF RotatePoint(PointF point, PointF centroid, double angle)
+        public static PointF RotatePoint(PointF point, PointF centroid, double radians)
         {
-            float x = (float)(centroid.X + ((point.X - centroid.X) * Math.Cos(angle) - (point.Y - centroid.Y) * Math.Sin(angle)));
+            float x = (float)(centroid.X + ((point.X - centroid.X) * Math.Cos(radians) - (point.Y - centroid.Y) * Math.Sin(radians)));
 
-            float y = (float)(centroid.Y + ((point.X - centroid.X) * Math.Sin(angle) + (point.Y - centroid.Y) * Math.Cos(angle)));
+            float y = (float)(centroid.Y + ((point.X - centroid.X) * Math.Sin(radians) + (point.Y - centroid.Y) * Math.Cos(radians)));
 
             return new PointF(x, y);
         }
@@ -153,6 +154,24 @@ namespace Draw.src.Helpers
 
             close_p1 = new PointF(p1.X + dx12 * t1, p1.Y + dy12 * t1);
             close_p2 = new PointF(p3.X + dx34 * t2, p3.Y + dy34 * t2);
+        }
+
+        public static bool IsInPolygon(PointF[] polygon, PointF testPoint)
+        {
+            bool result = false;
+            int j = polygon.Count() - 1;
+            for (int i = 0; i < polygon.Count(); i++)
+            {
+                if (polygon[i].Y < testPoint.Y && polygon[j].Y >= testPoint.Y || polygon[j].Y < testPoint.Y && polygon[i].Y >= testPoint.Y)
+                {
+                    if (polygon[i].X + (testPoint.Y - polygon[i].Y) / (polygon[j].Y - polygon[i].Y) * (polygon[j].X - polygon[i].X) < testPoint.X)
+                    {
+                        result = !result;
+                    }
+                }
+                j = i;
+            }
+            return result;
         }
     }
 }

@@ -100,8 +100,6 @@ namespace Draw
             {
                 dialogProcessor.DrowTemporaryCopyShape = true;
                 dialogProcessor.LastLocation = e.Location;
-                //var settings = JSONSaveBehaviourWorker.GetJSONSettings();
-                //var copyOfSelection = JsonConvert.DeserializeObject<Shape>(JsonConvert.SerializeObject(dialogProcessor.Selection, settings), settings);
                 var selectionAsString = dialogProcessor.Selection.ToString();
                 var copyOfSelection = CustomLoadFile(selectionAsString.ToString()).FirstOrDefault();
 
@@ -479,8 +477,18 @@ namespace Draw
         private void RotateRight(object sender, EventArgs e)
         {
             //Active buttons
-            ButtonMainNavigator.Checked = false;
+            ButtonDrowTriangle.Checked = false;
             ButtonMultiSelect.Checked = false;
+            ButtonMainNavigator.Checked = false;
+            ButtonDrowEllipse.Checked = false;
+            ButtonDrowRectangle.Checked = false;
+            ButtonFillColor.Checked = false;
+            ButtonDelete.Checked = false;
+            ButtonCopy.Checked = false;
+            ButtonBorderColor.Checked = false;
+            ButtonMultiMove.Checked = false;
+            ButtonPlus.Checked = false;
+            ButtonMinus.Checked = false;
 
             if (dialogProcessor.ShapeList != null)
             {
@@ -493,7 +501,34 @@ namespace Draw
             }
         }
 
-        private HashSet<Shape> TraverseOverSelectedMatrix(bool rotate)
+        private void RotateLeft(object sender, EventArgs e)
+        {
+            ButtonDrowTriangle.Checked = false;
+            ButtonMultiSelect.Checked = false;
+            ButtonMainNavigator.Checked = false;
+            ButtonDrowEllipse.Checked = false;
+            ButtonDrowRectangle.Checked = false;
+            ButtonFillColor.Checked = false;
+            ButtonDelete.Checked = false;
+            ButtonCopy.Checked = false;
+            ButtonBorderColor.Checked = false;
+            ButtonMultiMove.Checked = false;
+            ButtonPlus.Checked = false;
+            ButtonMinus.Checked = false;
+
+            if (dialogProcessor.ShapeList != null)
+            {
+                TraverseOverSelectedMatrix(true, GlobalConstants.RadiansRepresentationOfThreeHundredAndThirtyDegrees);
+                var setOfShapes = TraverseOverSelectedMatrix(false);
+                ResetRotationProcess(GlobalConstants.DefaultDashStyle, true, false);
+                ChageBorderOfSetOfShapes(setOfShapes, DashStyle.Dot);
+                RerenderMainCanvas();
+
+            }
+
+        }
+
+        private HashSet<Shape> TraverseOverSelectedMatrix(bool rotate, float radians = GlobalConstants.RadiansRepresentationOfThirtyDegrees)
         {
             var minXCordinate = Convert.ToInt32(Math.Min(dialogProcessor.OnMouseDownPoint.X, dialogProcessor.OnMouseUpPoint.X));
             var maxXCordinate = Convert.ToInt32(Math.Max(dialogProcessor.OnMouseDownPoint.X, dialogProcessor.OnMouseUpPoint.X));
@@ -516,7 +551,7 @@ namespace Draw
                             setOfShapesWhichNeedsToBeRotated.Add(shape);
                             if (rotate)
                             {
-                                var rotated = shape.NewShapeRotatedToRigth();
+                                var rotated = shape.NewShapeRotatedToRigth(radians);
                                 setOfShapesWhichNeedsToBeRotated.Add(rotated);
                                 dialogProcessor.ShapeList.Remove(shape);
                                 dialogProcessor.ShapeList.Add(rotated);
@@ -700,5 +735,6 @@ namespace Draw
             RerenderMainCanvas();
 
         }
+
     }
 }

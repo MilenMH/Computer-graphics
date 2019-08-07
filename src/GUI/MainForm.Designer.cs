@@ -43,12 +43,15 @@
             this.ButtonMainNavigator = new System.Windows.Forms.ToolStripButton();
             this.ButtonCopy = new System.Windows.Forms.ToolStripButton();
             this.ButtonDelete = new System.Windows.Forms.ToolStripButton();
+            this.ButtonPlus = new System.Windows.Forms.ToolStripButton();
+            this.ButtonMinus = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.ButtonDrowRectangle = new System.Windows.Forms.ToolStripButton();
             this.ButtonDrowTriangle = new System.Windows.Forms.ToolStripButton();
             this.ButtonDrowEllipse = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ButtonMultiSelect = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.ButtonRotateRight = new System.Windows.Forms.ToolStripButton();
             this.ButtonMultiMove = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -60,8 +63,6 @@
             this.ButtonFillColor = new System.Windows.Forms.ToolStripButton();
             this.ButtonBorderColor = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.ButtonPlus = new System.Windows.Forms.ToolStripButton();
-            this.ButtonMinus = new System.Windows.Forms.ToolStripButton();
             this.viewPort = new Draw.DoubleBufferedPanel();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
@@ -166,6 +167,7 @@
             this.ButtonDrowEllipse,
             this.toolStripSeparator1,
             this.ButtonMultiSelect,
+            this.toolStripButton1,
             this.ButtonRotateRight,
             this.ButtonMultiMove,
             this.toolStripSeparator2,
@@ -216,6 +218,30 @@
             this.ButtonDelete.Size = new System.Drawing.Size(24, 24);
             this.ButtonDelete.Text = "ButtonDelete";
             this.ButtonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
+            // 
+            // ButtonPlus
+            // 
+            this.ButtonPlus.CheckOnClick = true;
+            this.ButtonPlus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ButtonPlus.Image = ((System.Drawing.Image)(resources.GetObject("ButtonPlus.Image")));
+            this.ButtonPlus.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonPlus.Name = "ButtonPlus";
+            this.ButtonPlus.Size = new System.Drawing.Size(24, 24);
+            this.ButtonPlus.Text = "ButtonPlus";
+            this.ButtonPlus.ToolTipText = "ButtonPlus";
+            this.ButtonPlus.Click += new System.EventHandler(this.Plus_Click);
+            // 
+            // ButtonMinus
+            // 
+            this.ButtonMinus.CheckOnClick = true;
+            this.ButtonMinus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ButtonMinus.Image = ((System.Drawing.Image)(resources.GetObject("ButtonMinus.Image")));
+            this.ButtonMinus.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonMinus.Name = "ButtonMinus";
+            this.ButtonMinus.Size = new System.Drawing.Size(24, 24);
+            this.ButtonMinus.Text = "ButtonMinus";
+            this.ButtonMinus.ToolTipText = "ButtonMinus";
+            this.ButtonMinus.Click += new System.EventHandler(this.Minus_Click);
             // 
             // toolStripSeparator3
             // 
@@ -271,6 +297,16 @@
             this.ButtonMultiSelect.Text = "ButtonMultiSelect";
             this.ButtonMultiSelect.ToolTipText = "ButtonMultiSelect";
             this.ButtonMultiSelect.Click += new System.EventHandler(this.OnMultiSelect_Click);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButton1.Text = "toolStripButton1";
+            this.toolStripButton1.Click += new System.EventHandler(this.RotateLeft);
             // 
             // ButtonRotateRight
             // 
@@ -380,30 +416,6 @@
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 27);
             // 
-            // ButtonPlus
-            // 
-            this.ButtonPlus.CheckOnClick = true;
-            this.ButtonPlus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ButtonPlus.Image = ((System.Drawing.Image)(resources.GetObject("ButtonPlus.Image")));
-            this.ButtonPlus.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ButtonPlus.Name = "ButtonPlus";
-            this.ButtonPlus.Size = new System.Drawing.Size(24, 24);
-            this.ButtonPlus.Text = "ButtonPlus";
-            this.ButtonPlus.ToolTipText = "ButtonPlus";
-            this.ButtonPlus.Click += new System.EventHandler(this.Plus_Click);
-            // 
-            // ButtonMinus
-            // 
-            this.ButtonMinus.CheckOnClick = true;
-            this.ButtonMinus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ButtonMinus.Image = ((System.Drawing.Image)(resources.GetObject("ButtonMinus.Image")));
-            this.ButtonMinus.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ButtonMinus.Name = "ButtonMinus";
-            this.ButtonMinus.Size = new System.Drawing.Size(24, 24);
-            this.ButtonMinus.Text = "ButtonMinus";
-            this.ButtonMinus.ToolTipText = "ButtonMinus";
-            this.ButtonMinus.Click += new System.EventHandler(this.Minus_Click);
-            // 
             // viewPort
             // 
             this.viewPort.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -478,5 +490,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton ButtonPlus;
         private System.Windows.Forms.ToolStripButton ButtonMinus;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }

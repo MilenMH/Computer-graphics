@@ -19,10 +19,6 @@ namespace Draw
 		
 		#region Properties
 		
-		/// <summary>
-		/// Списък с всички елементи формиращи изображението.
-		/// </summary>
-		private List<Shape> shapeList = new List<Shape>();		
 		public List<Shape> ShapeList { get; set; }
 		
 		#endregion

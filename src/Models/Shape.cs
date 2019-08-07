@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Draw.src.Helpers;
+using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
@@ -47,7 +48,7 @@ namespace Draw
 
         public abstract void MoveToNextDestination(PointF next, PointF last);
 
-        public abstract Shape NewShapeRotatedToRigth();
+        public abstract Shape NewShapeRotatedToRigth(float radians = GlobalConstants.RadiansRepresentationOfThirtyDegrees);
 
         public abstract void Enlarge();
 

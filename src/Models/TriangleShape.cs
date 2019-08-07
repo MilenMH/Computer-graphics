@@ -34,7 +34,7 @@ namespace Draw.src.Model
         public PointF Point3 { get; set; }
 
 
-        float Sign(PointF p1, PointF p2, PointF p3)
+        private float Sign(PointF p1, PointF p2, PointF p3)
         {
             return (p1.X - p3.X) * (p2.Y - p3.Y) - (p2.X - p3.X) * (p1.Y - p3.Y);
         }
@@ -74,11 +74,11 @@ namespace Draw.src.Model
             this.Point3 = new PointF(Point3.X + next.X - last.X, Point3.Y + next.Y - last.Y);
         }
 
-        public override Shape NewShapeRotatedToRigth()
+        public override Shape NewShapeRotatedToRigth(float radians = GlobalConstants.RadiansRepresentationOfThirtyDegrees)
         {
             var listOfPoints = new List<PointF>() { this.Point1, this.Point2, this.Point3 };
             var center = PolygonHlp.GetCentroidGeneric(new List<PointF>() { this.Point1, this.Point2, this.Point3 });
-            var rotatedPoints = PolygonHlp.RotatePolygon(listOfPoints, center, GlobalConstants.RadiansRepresentationOfNinetyDegrees);
+            var rotatedPoints = PolygonHlp.RotatePolygon(listOfPoints, center, radians);
             return new TriangleShape(rotatedPoints[0], rotatedPoints[1], rotatedPoints[2], this.BorderColor, base.FillColor);
         }
 

@@ -29,5 +29,6 @@ namespace Draw.src.Helpers
             float height = maxY - minY;
             return new Sextuple<float, float, float, float, float, float>(minX, minY, maxX, maxY, width, height);
         }
+
     }
 }

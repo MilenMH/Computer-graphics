@@ -23,6 +23,8 @@ namespace Draw.src.Helpers
 
         private delegate int MapStandartIntPropertyDelegate(string[] parameters);
 
+        private delegate double MapStandartDoublePropertyDelegate(string[] parameters);
+
         public PropertyMapper()
         {
             Init();
@@ -41,6 +43,8 @@ namespace Draw.src.Helpers
             this.PropertyDictionary.Add("dashstyle", new MapStandartDashStylePropertyDelegate(MapStandartDashStylePropertyFunc));
             this.PropertyDictionary.Add("temporaryflag", new MapStandartBoolPropertyDelegate(MapStandartBoolPropertyFunc));
             this.PropertyDictionary.Add("transparency", new MapStandartIntPropertyDelegate(MapStandartIntPropertyFunc));
+            this.PropertyDictionary.Add("rotationangleindegrees", new MapStandartFloatPropertyDelegate(MapStandartFloatPropertyFunc));
+            this.PropertyDictionary.Add("rotationangleinradians", new MapStandartDoublePropertyDelegate(MapStandartDoublePropertyFunc));
         }
 
         public object[] MapObjectProperties(string shapeAsString)
@@ -93,6 +97,11 @@ namespace Draw.src.Helpers
         private int MapStandartIntPropertyFunc(string[] parameters)
         {
             return int.Parse(parameters[1].Trim());
+        }
+
+        private double MapStandartDoublePropertyFunc(string[] parameters)
+        {
+            return double.Parse(parameters[1].Trim());
         }
     }
 }
