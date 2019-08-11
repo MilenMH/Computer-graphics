@@ -63,7 +63,7 @@ namespace Draw.src.Model
             var points = new PointF[] { this.Point1, this.Point2, this.Point3 };
             grfx.FillPolygon(new SolidBrush(FillColor), points);
             var border = new Pen(BorderColor);
-            border.DashStyle = DashStyle;
+            border.DashStyle = base.DashStyle;
             grfx.DrawPolygon(border, points);
         }
 

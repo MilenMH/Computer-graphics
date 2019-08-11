@@ -34,13 +34,15 @@ namespace Draw
 
         public PointF OnMouseUpPoint { get; set; }
 
-        public bool DrowTemporaryRectangle { get; set; }
+        public bool DrawTemporaryRectangle { get; set; }
 
-        public bool DrowTemporaryTriangle { get; set; }
+        public bool DrawTemporaryTriangle { get; set; }
 
-        public bool DrowTemporaryEllipse { get; set; }
+        public bool DrawTemporaryEllipse { get; set; }
 
-        public bool DrowTemporaryCopyShape { get; set; }
+        public bool DrawTemporaryLine { get; set; }
+
+        public bool DrawTemporaryCopyShape { get; set; }
 
         public bool MultiSelectFlag { get; set; }
 
@@ -62,6 +64,12 @@ namespace Draw
             Shape ellipse = new EllipseShape(new PointF(x, y + height), new PointF(x, y),
                 new PointF(x + width, y), new PointF(x + width, y + height), Color.Black, Color.FromArgb(transparency, Color.White), dashStyle, temporary);
             ShapeList.Add(ellipse);
+        }
+
+        public void AddLine(PointF p1, PointF p2, DashStyle dashStyle, bool temporary = false, int transparency = 255)
+        {
+            Shape triangle = new LineShape(p1, p2, Color.Black, Color.FromArgb(transparency, Color.White), dashStyle, temporary);
+            ShapeList.Add(triangle);
         }
 
         public Shape ContainsPoint(PointF point)

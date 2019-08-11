@@ -46,9 +46,9 @@
             this.ButtonPlus = new System.Windows.Forms.ToolStripButton();
             this.ButtonMinus = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.ButtonDrowRectangle = new System.Windows.Forms.ToolStripButton();
+            this.ButtonDrawRectangle = new System.Windows.Forms.ToolStripButton();
             this.ButtonDrowTriangle = new System.Windows.Forms.ToolStripButton();
-            this.ButtonDrowEllipse = new System.Windows.Forms.ToolStripButton();
+            this.ButtonDrawEllipse = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ButtonMultiSelect = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
@@ -64,6 +64,8 @@
             this.ButtonBorderColor = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.viewPort = new Draw.DoubleBufferedPanel();
+            this.ButtonDrawRelauxTriang = new System.Windows.Forms.ToolStripButton();
+            this.ButtonDrawLine = new System.Windows.Forms.ToolStripButton();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.speedMenu.SuspendLayout();
@@ -162,9 +164,11 @@
             this.ButtonPlus,
             this.ButtonMinus,
             this.toolStripSeparator3,
-            this.ButtonDrowRectangle,
+            this.ButtonDrawRectangle,
             this.ButtonDrowTriangle,
-            this.ButtonDrowEllipse,
+            this.ButtonDrawEllipse,
+            this.ButtonDrawRelauxTriang,
+            this.ButtonDrawLine,
             this.toolStripSeparator1,
             this.ButtonMultiSelect,
             this.toolStripButton1,
@@ -250,14 +254,14 @@
             // 
             // ButtonDrowRectangle
             // 
-            this.ButtonDrowRectangle.CheckOnClick = true;
-            this.ButtonDrowRectangle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ButtonDrowRectangle.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDrowRectangle.Image")));
-            this.ButtonDrowRectangle.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ButtonDrowRectangle.Name = "ButtonDrowRectangle";
-            this.ButtonDrowRectangle.Size = new System.Drawing.Size(24, 24);
-            this.ButtonDrowRectangle.Text = "ButtonDrowRectangle";
-            this.ButtonDrowRectangle.Click += new System.EventHandler(this.DrawRectangleSpeedButton_Click);
+            this.ButtonDrawRectangle.CheckOnClick = true;
+            this.ButtonDrawRectangle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ButtonDrawRectangle.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDrowRectangle.Image")));
+            this.ButtonDrawRectangle.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonDrawRectangle.Name = "ButtonDrowRectangle";
+            this.ButtonDrawRectangle.Size = new System.Drawing.Size(24, 24);
+            this.ButtonDrawRectangle.Text = "ButtonDrowRectangle";
+            this.ButtonDrawRectangle.Click += new System.EventHandler(this.DrawRectangleSpeedButton_Click);
             // 
             // ButtonDrowTriangle
             // 
@@ -272,14 +276,14 @@
             // 
             // ButtonDrowEllipse
             // 
-            this.ButtonDrowEllipse.CheckOnClick = true;
-            this.ButtonDrowEllipse.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ButtonDrowEllipse.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDrowEllipse.Image")));
-            this.ButtonDrowEllipse.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ButtonDrowEllipse.Name = "ButtonDrowEllipse";
-            this.ButtonDrowEllipse.Size = new System.Drawing.Size(24, 24);
-            this.ButtonDrowEllipse.Text = "ButtonDrowElipse";
-            this.ButtonDrowEllipse.Click += new System.EventHandler(this.DrawEllipseSpeedButton_Click);
+            this.ButtonDrawEllipse.CheckOnClick = true;
+            this.ButtonDrawEllipse.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ButtonDrawEllipse.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDrowEllipse.Image")));
+            this.ButtonDrawEllipse.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonDrawEllipse.Name = "ButtonDrowEllipse";
+            this.ButtonDrawEllipse.Size = new System.Drawing.Size(24, 24);
+            this.ButtonDrawEllipse.Text = "ButtonDrowElipse";
+            this.ButtonDrawEllipse.Click += new System.EventHandler(this.DrawEllipseSpeedButton_Click);
             // 
             // toolStripSeparator1
             // 
@@ -430,6 +434,30 @@
             this.viewPort.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseMove);
             this.viewPort.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseUp);
             // 
+            // ButtonDrawRelauxTriang
+            // 
+            this.ButtonDrawRelauxTriang.CheckOnClick = true;
+            this.ButtonDrawRelauxTriang.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ButtonDrawRelauxTriang.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDrawRelauxTriang.Image")));
+            this.ButtonDrawRelauxTriang.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonDrawRelauxTriang.Name = "ButtonDrawRelauxTriang";
+            this.ButtonDrawRelauxTriang.Size = new System.Drawing.Size(24, 24);
+            this.ButtonDrawRelauxTriang.Text = "ButtonDrawRelauxTriang";
+            this.ButtonDrawRelauxTriang.ToolTipText = "ButtonDrawRelauxTriang";
+            this.ButtonDrawRelauxTriang.Click += new System.EventHandler(this.DrawRelauxTriangleSpeedButton_Click);
+            // 
+            // ButtonDrowLine
+            // 
+            this.ButtonDrawLine.CheckOnClick = true;
+            this.ButtonDrawLine.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ButtonDrawLine.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDrowLine.Image")));
+            this.ButtonDrawLine.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonDrawLine.Name = "ButtonDrowLine";
+            this.ButtonDrawLine.Size = new System.Drawing.Size(24, 24);
+            this.ButtonDrawLine.Text = "ButtonDrowLine";
+            this.ButtonDrawLine.ToolTipText = "ButtonDrowLine";
+            this.ButtonDrawLine.Click += new System.EventHandler(this.DrawLineSpeedButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -459,7 +487,7 @@
 		private System.Windows.Forms.ToolStripStatusLabel currentStatusLabel;
 		private Draw.DoubleBufferedPanel viewPort;
 		private System.Windows.Forms.ToolStripButton ButtonMainNavigator;
-		private System.Windows.Forms.ToolStripButton ButtonDrowRectangle;
+		private System.Windows.Forms.ToolStripButton ButtonDrawRectangle;
 		private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem ExitToolStripMenuItem;
@@ -468,7 +496,7 @@
 		private System.Windows.Forms.StatusStrip statusBar;
 		private System.Windows.Forms.MenuStrip mainMenu;
         private System.Windows.Forms.ToolStripButton ButtonDrowTriangle;
-        private System.Windows.Forms.ToolStripButton ButtonDrowEllipse;
+        private System.Windows.Forms.ToolStripButton ButtonDrawEllipse;
         private System.Windows.Forms.ToolStripButton ButtonFillColorBlack;
         private System.Windows.Forms.ToolStripButton ButtonFillColorHotPink;
         private System.Windows.Forms.ToolStripButton ButtonFillColorYellow;
@@ -491,5 +519,7 @@
         private System.Windows.Forms.ToolStripButton ButtonPlus;
         private System.Windows.Forms.ToolStripButton ButtonMinus;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton ButtonDrawRelauxTriang;
+        private System.Windows.Forms.ToolStripButton ButtonDrawLine;
     }
 }
