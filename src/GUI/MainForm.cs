@@ -205,35 +205,6 @@ namespace Draw
             var shapeParams = DimentionCalculator.GetShapesParamsByTwoPoints(
                 dialogProcessor.OnMouseDownPoint, dialogProcessor.OnMouseUpPoint);
 
-            if (ButtonDrawEllipse.Checked)
-            {
-                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
-                dialogProcessor.AddEllipse(
-                    shapeParams.Item1, shapeParams.Item2, shapeParams.Item5, shapeParams.Item6,
-                    DashStyle.Solid, false);
-            }
-            if (ButtonDrawRectangle.Checked)
-            {
-                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
-                dialogProcessor.AddRectangle(
-                    shapeParams.Item1, shapeParams.Item2, shapeParams.Item5, shapeParams.Item6,
-                    DashStyle.Solid, false);
-            }
-            if (ButtonDrowTriangle.Checked)
-            {
-                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
-                dialogProcessor.AddTriangle(
-                    new PointF(shapeParams.Item1, shapeParams.Item4),
-                    new PointF(shapeParams.Item1, shapeParams.Item2),
-                    new PointF(shapeParams.Item3, shapeParams.Item2),
-                    DashStyle.Solid, false);
-            }
-
-            if (ButtonDrawLine.Checked)
-            {
-                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
-                dialogProcessor.AddLine(dialogProcessor.OnMouseDownPoint, dialogProcessor.OnMouseUpPoint, DashStyle.Solid, false);
-            }
 
             if (ButtonFillColor.Checked)
             {
@@ -253,27 +224,39 @@ namespace Draw
             }
             if (ButtonDrawRectangle.Checked && dialogProcessor.DrawTemporaryRectangle)
             {
+                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
+                dialogProcessor.AddRectangle(
+                    shapeParams.Item1, shapeParams.Item2, shapeParams.Item5, shapeParams.Item6,
+                    DashStyle.Solid, false);
                 ButtonDrawRectangle.Checked = false;
                 dialogProcessor.DrawTemporaryRectangle = false;
-                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
             }
             if (ButtonDrowTriangle.Checked && dialogProcessor.DrawTemporaryTriangle)
             {
+                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
+                dialogProcessor.AddTriangle(
+                    new PointF(shapeParams.Item1, shapeParams.Item4),
+                    new PointF(shapeParams.Item1, shapeParams.Item2),
+                    new PointF(shapeParams.Item3, shapeParams.Item2),
+                    DashStyle.Solid, false);
                 ButtonDrowTriangle.Checked = false;
                 dialogProcessor.DrawTemporaryTriangle = false;
-                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
             }
             if (ButtonDrawEllipse.Checked && dialogProcessor.DrawTemporaryEllipse)
             {
+                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
+                dialogProcessor.AddEllipse(
+                    shapeParams.Item1, shapeParams.Item2, shapeParams.Item5, shapeParams.Item6,
+                    DashStyle.Solid, false);
                 ButtonDrawEllipse.Checked = false;
                 dialogProcessor.DrawTemporaryEllipse = false;
-                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
             }
             if (ButtonDrawLine.Checked && dialogProcessor.DrawTemporaryLine)
             {
+                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
+                dialogProcessor.AddLine(dialogProcessor.OnMouseDownPoint, dialogProcessor.OnMouseUpPoint, DashStyle.Solid, false);
                 ButtonDrawLine.Checked = false;
                 dialogProcessor.DrawTemporaryLine = false;
-                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
             }
             if (ButtonCopy.Checked && dialogProcessor.DrawTemporaryCopyShape)
             {

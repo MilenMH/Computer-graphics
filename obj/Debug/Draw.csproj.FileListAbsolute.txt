@@ -10,3 +10,4 @@ E:\Users\Milen\Desktop\C#\Computer-graphics repo\Computer-graphics\obj\Debug\Dra
 E:\Users\Milen\Desktop\C#\Computer-graphics repo\Computer-graphics\obj\Debug\Draw.csproj.CoreCompileInputs.cache
 E:\Users\Milen\Desktop\C#\Computer-graphics repo\Computer-graphics\obj\Debug\Draw.exe
 E:\Users\Milen\Desktop\C#\Computer-graphics repo\Computer-graphics\obj\Debug\Draw.pdb
+E:\Users\Milen\Desktop\C#\Computer-graphics repo\Computer-graphics\obj\Debug\Draw.csprojResolveAssemblyReference.cache
