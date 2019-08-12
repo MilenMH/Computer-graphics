@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using Draw.src.Interfaces;
+using Draw.src.Models;
 using Newtonsoft.Json;
 
 namespace Draw.src.Workers

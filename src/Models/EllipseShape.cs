@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Text;
 
-namespace Draw.src.Model
+namespace Draw.src.Models
 {
     public class EllipseShape : Shape
     {

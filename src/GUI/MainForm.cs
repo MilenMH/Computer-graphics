@@ -1,6 +1,7 @@
 ﻿using Draw.src.Attributes;
 using Draw.src.Helpers;
 using Draw.src.Interfaces;
+using Draw.src.Models;
 using Draw.src.Workers;
 using Newtonsoft.Json;
 using System;
@@ -778,7 +779,7 @@ namespace Draw
                     Environment.NewLine.ToCharArray(),
                     StringSplitOptions.RemoveEmptyEntries);
 
-                var type = GetType(Assembly.GetExecutingAssembly(), "Draw.src.Model", shapeParts[0]);
+                var type = GetType(Assembly.GetExecutingAssembly(), "Draw.src.Models", shapeParts[0]);
                 var constructor = type.GetConstructors().Where(c =>
                     c.GetCustomAttributes(false).Where(a
                         => a.GetType() == typeof(Importable)).FirstOrDefault() != null)

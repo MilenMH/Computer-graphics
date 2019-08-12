@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Draw.src.Models;
+using System.Collections.Generic;
 
 namespace Draw.src.Interfaces
 {

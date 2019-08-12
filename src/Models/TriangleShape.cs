@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 
 
-namespace Draw.src.Model
+namespace Draw.src.Models
 {
     public class TriangleShape : Shape
     {
