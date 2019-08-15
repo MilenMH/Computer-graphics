@@ -60,11 +60,14 @@ namespace Draw.src.Models
 
         public override void DrawSelf(Graphics grfx)
         {
-            var points = new PointF[] { this.Point1, this.Point2, this.Point3 };
-            grfx.FillPolygon(new SolidBrush(FillColor), points);
-            var border = new Pen(BorderColor);
-            border.DashStyle = base.DashStyle;
-            grfx.DrawPolygon(border, points);
+            using (var brush = new SolidBrush(FillColor))
+            using (var border = new Pen(BorderColor))
+            {
+                var points = new PointF[] { this.Point1, this.Point2, this.Point3 };
+                grfx.FillPolygon(brush, points);
+                border.DashStyle = base.DashStyle;
+                grfx.DrawPolygon(border, points);
+            }
         }
 
         public override void MoveToNextDestination(PointF next, PointF last)

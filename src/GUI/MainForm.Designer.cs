@@ -49,7 +49,7 @@
             this.ButtonDrawRectangle = new System.Windows.Forms.ToolStripButton();
             this.ButtonDrowTriangle = new System.Windows.Forms.ToolStripButton();
             this.ButtonDrawEllipse = new System.Windows.Forms.ToolStripButton();
-            this.ButtonDrawRelauxTriang = new System.Windows.Forms.ToolStripButton();
+            this.ButtonDrawReuleauxTriangle = new System.Windows.Forms.ToolStripButton();
             this.ButtonDrawLine = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ButtonMultiSelect = new System.Windows.Forms.ToolStripButton();
@@ -58,19 +58,20 @@
             this.ButtonMultiMove = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.ButtonFillColorRed = new System.Windows.Forms.ToolStripButton();
+            this.ButtonFillColorDarkOrange = new System.Windows.Forms.ToolStripButton();
             this.ButtonFillColorYellow = new System.Windows.Forms.ToolStripButton();
             this.ButtonFillColorHotPink = new System.Windows.Forms.ToolStripButton();
+            this.ButtonFillColorDarkViolet = new System.Windows.Forms.ToolStripButton();
+            this.ButtonFillColorLightSkyBlue = new System.Windows.Forms.ToolStripButton();
+            this.ButtonFillColorSpringGreen = new System.Windows.Forms.ToolStripButton();
             this.ButtonFillColorBlack = new System.Windows.Forms.ToolStripButton();
+            this.ButtonFillColorSaddleBrown = new System.Windows.Forms.ToolStripButton();
             this.ButtonFillColorSilver = new System.Windows.Forms.ToolStripButton();
             this.ButtonFillColor = new System.Windows.Forms.ToolStripButton();
             this.ButtonBorderColor = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.viewPort = new Draw.DoubleBufferedPanel();
-            this.ButtonFillColorDarkViolet = new System.Windows.Forms.ToolStripButton();
-            this.ButtonFillColorLightSkyBlue = new System.Windows.Forms.ToolStripButton();
-            this.ButtonFillColorSpringGreen = new System.Windows.Forms.ToolStripButton();
-            this.ButtonFillColorDarkOrange = new System.Windows.Forms.ToolStripButton();
-            this.ButtonFillColorSaddleBrown = new System.Windows.Forms.ToolStripButton();
+            this.ButtonFillColorWhite = new System.Windows.Forms.ToolStripButton();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.speedMenu.SuspendLayout();
@@ -172,7 +173,7 @@
             this.ButtonDrawRectangle,
             this.ButtonDrowTriangle,
             this.ButtonDrawEllipse,
-            this.ButtonDrawRelauxTriang,
+            this.ButtonDrawReuleauxTriangle,
             this.ButtonDrawLine,
             this.toolStripSeparator1,
             this.ButtonMultiSelect,
@@ -190,6 +191,7 @@
             this.ButtonFillColorBlack,
             this.ButtonFillColorSaddleBrown,
             this.ButtonFillColorSilver,
+            this.ButtonFillColorWhite,
             this.ButtonFillColor,
             this.ButtonBorderColor,
             this.toolStripSeparator4});
@@ -295,17 +297,17 @@
             this.ButtonDrawEllipse.Text = "ButtonDrowElipse";
             this.ButtonDrawEllipse.Click += new System.EventHandler(this.DrawEllipseSpeedButton_Click);
             // 
-            // ButtonDrawRelauxTriang
+            // ButtonDrawReuleauxTriangle
             // 
-            this.ButtonDrawRelauxTriang.CheckOnClick = true;
-            this.ButtonDrawRelauxTriang.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ButtonDrawRelauxTriang.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDrawRelauxTriang.Image")));
-            this.ButtonDrawRelauxTriang.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ButtonDrawRelauxTriang.Name = "ButtonDrawRelauxTriang";
-            this.ButtonDrawRelauxTriang.Size = new System.Drawing.Size(24, 24);
-            this.ButtonDrawRelauxTriang.Text = "ButtonDrawRelauxTriang";
-            this.ButtonDrawRelauxTriang.ToolTipText = "ButtonDrawRelauxTriang";
-            this.ButtonDrawRelauxTriang.Click += new System.EventHandler(this.DrawRelauxTriangleSpeedButton_Click);
+            this.ButtonDrawReuleauxTriangle.CheckOnClick = true;
+            this.ButtonDrawReuleauxTriangle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ButtonDrawReuleauxTriangle.Image = ((System.Drawing.Image)(resources.GetObject("ButtonDrawReuleauxTriangle.Image")));
+            this.ButtonDrawReuleauxTriangle.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonDrawReuleauxTriangle.Name = "ButtonDrawReuleauxTriangle";
+            this.ButtonDrawReuleauxTriangle.Size = new System.Drawing.Size(24, 24);
+            this.ButtonDrawReuleauxTriangle.Text = "ButtonDrawReuleauxTriangle";
+            this.ButtonDrawReuleauxTriangle.ToolTipText = "ButtonDrawReuleauxTriangle";
+            this.ButtonDrawReuleauxTriangle.Click += new System.EventHandler(this.DrawRelauxTriangleSpeedButton_Click);
             // 
             // ButtonDrawLine
             // 
@@ -383,6 +385,17 @@
             this.ButtonFillColorRed.Text = "ButtonFillColorRed";
             this.ButtonFillColorRed.Click += new System.EventHandler(this.SetFillColor);
             // 
+            // ButtonFillColorDarkOrange
+            // 
+            this.ButtonFillColorDarkOrange.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ButtonFillColorDarkOrange.Image = ((System.Drawing.Image)(resources.GetObject("ButtonFillColorDarkOrange.Image")));
+            this.ButtonFillColorDarkOrange.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonFillColorDarkOrange.Name = "ButtonFillColorDarkOrange";
+            this.ButtonFillColorDarkOrange.Size = new System.Drawing.Size(24, 24);
+            this.ButtonFillColorDarkOrange.Text = "ButtonFillColorDarkOrange";
+            this.ButtonFillColorDarkOrange.ToolTipText = "ButtonFillColorDarkOrange";
+            this.ButtonFillColorDarkOrange.Click += new System.EventHandler(this.SetFillColor);
+            // 
             // ButtonFillColorYellow
             // 
             this.ButtonFillColorYellow.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -404,6 +417,38 @@
             this.ButtonFillColorHotPink.ToolTipText = "ButtonFillColorHotPink";
             this.ButtonFillColorHotPink.Click += new System.EventHandler(this.SetFillColor);
             // 
+            // ButtonFillColorDarkViolet
+            // 
+            this.ButtonFillColorDarkViolet.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ButtonFillColorDarkViolet.Image = ((System.Drawing.Image)(resources.GetObject("ButtonFillColorDarkViolet.Image")));
+            this.ButtonFillColorDarkViolet.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonFillColorDarkViolet.Name = "ButtonFillColorDarkViolet";
+            this.ButtonFillColorDarkViolet.Size = new System.Drawing.Size(24, 24);
+            this.ButtonFillColorDarkViolet.Text = "ButtonFillColorDarkViolet";
+            this.ButtonFillColorDarkViolet.Click += new System.EventHandler(this.SetFillColor);
+            // 
+            // ButtonFillColorLightSkyBlue
+            // 
+            this.ButtonFillColorLightSkyBlue.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ButtonFillColorLightSkyBlue.Image = ((System.Drawing.Image)(resources.GetObject("ButtonFillColorLightSkyBlue.Image")));
+            this.ButtonFillColorLightSkyBlue.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonFillColorLightSkyBlue.Name = "ButtonFillColorLightSkyBlue";
+            this.ButtonFillColorLightSkyBlue.Size = new System.Drawing.Size(24, 24);
+            this.ButtonFillColorLightSkyBlue.Text = "ButtonFillColorLightSkyBlue";
+            this.ButtonFillColorLightSkyBlue.ToolTipText = "ButtonFillColorLightSkyBlue";
+            this.ButtonFillColorLightSkyBlue.Click += new System.EventHandler(this.SetFillColor);
+            // 
+            // ButtonFillColorSpringGreen
+            // 
+            this.ButtonFillColorSpringGreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ButtonFillColorSpringGreen.Image = ((System.Drawing.Image)(resources.GetObject("ButtonFillColorSpringGreen.Image")));
+            this.ButtonFillColorSpringGreen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonFillColorSpringGreen.Name = "ButtonFillColorSpringGreen";
+            this.ButtonFillColorSpringGreen.Size = new System.Drawing.Size(24, 24);
+            this.ButtonFillColorSpringGreen.Text = "ButtonFillColorSpringGreen";
+            this.ButtonFillColorSpringGreen.ToolTipText = "ButtonFillColorSpringGreen";
+            this.ButtonFillColorSpringGreen.Click += new System.EventHandler(this.SetFillColor);
+            // 
             // ButtonFillColorBlack
             // 
             this.ButtonFillColorBlack.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -413,6 +458,17 @@
             this.ButtonFillColorBlack.Size = new System.Drawing.Size(24, 24);
             this.ButtonFillColorBlack.Text = "ButtonFillColorBlack";
             this.ButtonFillColorBlack.Click += new System.EventHandler(this.SetFillColor);
+            // 
+            // ButtonFillColorSaddleBrown
+            // 
+            this.ButtonFillColorSaddleBrown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ButtonFillColorSaddleBrown.Image = ((System.Drawing.Image)(resources.GetObject("ButtonFillColorSaddleBrown.Image")));
+            this.ButtonFillColorSaddleBrown.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonFillColorSaddleBrown.Name = "ButtonFillColorSaddleBrown";
+            this.ButtonFillColorSaddleBrown.Size = new System.Drawing.Size(24, 24);
+            this.ButtonFillColorSaddleBrown.Text = "ButtonFillColorSaddleBrown";
+            this.ButtonFillColorSaddleBrown.ToolTipText = "ButtonFillColorSaddleBrown";
+            this.ButtonFillColorSaddleBrown.Click += new System.EventHandler(this.SetFillColor);
             // 
             // ButtonFillColorSilver
             // 
@@ -468,59 +524,16 @@
             this.viewPort.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseMove);
             this.viewPort.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseUp);
             // 
-            // ButtonFillColorDarkViolet
+            // ButtonFillColorWhite
             // 
-            this.ButtonFillColorDarkViolet.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ButtonFillColorDarkViolet.Image = ((System.Drawing.Image)(resources.GetObject("ButtonFillColorDarkViolet.Image")));
-            this.ButtonFillColorDarkViolet.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ButtonFillColorDarkViolet.Name = "ButtonFillColorDarkViolet";
-            this.ButtonFillColorDarkViolet.Size = new System.Drawing.Size(24, 24);
-            this.ButtonFillColorDarkViolet.Text = "ButtonFillColorDarkViolet";
-            this.ButtonFillColorDarkViolet.Click += new System.EventHandler(this.SetFillColor);
-            // 
-            // ButtonFillColorLightSkyBlue
-            // 
-            this.ButtonFillColorLightSkyBlue.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ButtonFillColorLightSkyBlue.Image = ((System.Drawing.Image)(resources.GetObject("ButtonFillColorLightSkyBlue.Image")));
-            this.ButtonFillColorLightSkyBlue.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ButtonFillColorLightSkyBlue.Name = "ButtonFillColorLightSkyBlue";
-            this.ButtonFillColorLightSkyBlue.Size = new System.Drawing.Size(24, 24);
-            this.ButtonFillColorLightSkyBlue.Text = "ButtonFillColorLightSkyBlue";
-            this.ButtonFillColorLightSkyBlue.ToolTipText = "ButtonFillColorLightSkyBlue";
-            this.ButtonFillColorLightSkyBlue.Click += new System.EventHandler(this.SetFillColor);
-            // 
-            // ButtonFillColorSpringGreen
-            // 
-            this.ButtonFillColorSpringGreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ButtonFillColorSpringGreen.Image = ((System.Drawing.Image)(resources.GetObject("ButtonFillColorSpringGreen.Image")));
-            this.ButtonFillColorSpringGreen.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ButtonFillColorSpringGreen.Name = "ButtonFillColorSpringGreen";
-            this.ButtonFillColorSpringGreen.Size = new System.Drawing.Size(24, 24);
-            this.ButtonFillColorSpringGreen.Text = "ButtonFillColorSpringGreen";
-            this.ButtonFillColorSpringGreen.ToolTipText = "ButtonFillColorSpringGreen";
-            this.ButtonFillColorSpringGreen.Click += new System.EventHandler(this.SetFillColor);
-            // 
-            // ButtonFillColorDarkOrange
-            // 
-            this.ButtonFillColorDarkOrange.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ButtonFillColorDarkOrange.Image = ((System.Drawing.Image)(resources.GetObject("ButtonFillColorDarkOrange.Image")));
-            this.ButtonFillColorDarkOrange.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ButtonFillColorDarkOrange.Name = "ButtonFillColorDarkOrange";
-            this.ButtonFillColorDarkOrange.Size = new System.Drawing.Size(24, 24);
-            this.ButtonFillColorDarkOrange.Text = "ButtonFillColorDarkOrange";
-            this.ButtonFillColorDarkOrange.ToolTipText = "ButtonFillColorDarkOrange";
-            this.ButtonFillColorDarkOrange.Click += new System.EventHandler(this.SetFillColor);
-            // 
-            // ButtonFillColorSaddleBrown
-            // 
-            this.ButtonFillColorSaddleBrown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ButtonFillColorSaddleBrown.Image = ((System.Drawing.Image)(resources.GetObject("ButtonFillColorSaddleBrown.Image")));
-            this.ButtonFillColorSaddleBrown.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ButtonFillColorSaddleBrown.Name = "ButtonFillColorSaddleBrown";
-            this.ButtonFillColorSaddleBrown.Size = new System.Drawing.Size(24, 24);
-            this.ButtonFillColorSaddleBrown.Text = "ButtonFillColorSaddleBrown";
-            this.ButtonFillColorSaddleBrown.ToolTipText = "ButtonFillColorSaddleBrown";
-            this.ButtonFillColorSaddleBrown.Click += new System.EventHandler(this.SetFillColor);
+            this.ButtonFillColorWhite.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ButtonFillColorWhite.Image = ((System.Drawing.Image)(resources.GetObject("ButtonFillColorWhite.Image")));
+            this.ButtonFillColorWhite.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonFillColorWhite.Name = "ButtonFillColorWhite";
+            this.ButtonFillColorWhite.Size = new System.Drawing.Size(24, 24);
+            this.ButtonFillColorWhite.Text = "ButtonFillColorWhite";
+            this.ButtonFillColorWhite.ToolTipText = "ButtonFillColorWhite";
+            this.ButtonFillColorWhite.Click += new System.EventHandler(this.SetFillColor);
             // 
             // MainForm
             // 
@@ -583,12 +596,13 @@
         private System.Windows.Forms.ToolStripButton ButtonPlus;
         private System.Windows.Forms.ToolStripButton ButtonMinus;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton ButtonDrawRelauxTriang;
+        private System.Windows.Forms.ToolStripButton ButtonDrawReuleauxTriangle;
         private System.Windows.Forms.ToolStripButton ButtonDrawLine;
         private System.Windows.Forms.ToolStripButton ButtonFillColorDarkViolet;
         private System.Windows.Forms.ToolStripButton ButtonFillColorLightSkyBlue;
         private System.Windows.Forms.ToolStripButton ButtonFillColorSpringGreen;
         private System.Windows.Forms.ToolStripButton ButtonFillColorDarkOrange;
         private System.Windows.Forms.ToolStripButton ButtonFillColorSaddleBrown;
+        private System.Windows.Forms.ToolStripButton ButtonFillColorWhite;
     }
 }

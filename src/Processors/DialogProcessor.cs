@@ -44,6 +44,8 @@ namespace Draw
 
         public bool DrawTemporaryCopyShape { get; set; }
 
+        public bool DrawTemporaryReuleauxTriangle { get; set; }
+
         public bool MultiSelectFlag { get; set; }
 
         public void AddRectangle(float x, float y, float width, float height, DashStyle dashStyle, bool temporary = false, int transparency = 255)
@@ -69,6 +71,12 @@ namespace Draw
         public void AddLine(PointF p1, PointF p2, DashStyle dashStyle, bool temporary = false, int transparency = 255)
         {
             Shape triangle = new LineShape(p1, p2, Color.Black, Color.FromArgb(transparency, Color.White), dashStyle, temporary);
+            ShapeList.Add(triangle);
+        }
+
+        public void AddReuleauxTriangle(PointF p1, PointF p2, DashStyle dashStyle, bool temporary = false, int transparency = 255)
+        {
+            Shape triangle = new ReuleauxTriangleShape(p1, p2, Color.Black, Color.FromArgb(transparency, Color.White), dashStyle, temporary);
             ShapeList.Add(triangle);
         }
 

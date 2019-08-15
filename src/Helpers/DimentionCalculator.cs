@@ -30,5 +30,10 @@ namespace Draw.src.Helpers
             return new Sextuple<float, float, float, float, float, float>(minX, minY, maxX, maxY, width, height);
         }
 
+        public static double DistanceBetweenTwoPoints(float x1, float y1, float x2, float y2)
+        {
+            return Math.Sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+        }
+
     }
 }

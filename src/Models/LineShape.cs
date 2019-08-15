@@ -42,9 +42,11 @@ namespace Draw.src.Models
 
         public override void DrawSelf(Graphics grfx)
         {
-            var pen = new Pen(new SolidBrush(BorderColor));
-            pen.DashStyle = base.DashStyle;
-            grfx.DrawLine(pen, this.Point1, this.Point2);
+            using (var pen = new Pen(new SolidBrush(BorderColor)))
+            {
+                pen.DashStyle = base.DashStyle;
+                grfx.DrawLine(pen, this.Point1, this.Point2);
+            }
         }
 
         public override void MoveToNextDestination(PointF next, PointF last)

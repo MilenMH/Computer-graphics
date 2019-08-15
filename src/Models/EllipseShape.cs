@@ -42,7 +42,6 @@ namespace Draw.src.Models
 
         public override bool Contains(PointF point)
         {
-
             var semiAAxis = (Point4.X - Point2.X) / 2D;
             var semiBAxis = (Point4.Y - Point2.Y) / 2D;
             var xCenter = Point2.X + semiAAxis;
@@ -58,12 +57,13 @@ namespace Draw.src.Models
             var center = new PointF((Point2.X + Point4.X) / 2, (Point2.Y + Point4.Y) / 2);
 
             using (Pen pen = new Pen(base.BorderColor))
+            using (SolidBrush brush = new SolidBrush(FillColor))
             {
                 grfx.TranslateTransform(center.X, center.Y);
                 grfx.RotateTransform(this.RotationAngleInDegrees);
                 grfx.TranslateTransform(-center.X, -center.Y);
                 grfx.DrawEllipse(pen, rect);
-                grfx.FillEllipse(new SolidBrush(FillColor), rect); ;
+                grfx.FillEllipse(brush, rect); ;
                 grfx.ResetTransform();
             }
         }
@@ -98,8 +98,6 @@ namespace Draw.src.Models
             var ellipse = new EllipseShape(this.Point1, this.Point2, this.Point3, this.Point4,
                 this.BorderColor, this.FillColor, base.DashStyle, base.TemporaryFlag, 
                 this.RotationAngleInDegrees, this.RotationAngleInRadians);
-            ellipse.RotationAngleInDegrees = this.RotationAngleInDegrees;
-            ellipse.RotationAngleInRadians = this.RotationAngleInRadians;
             return ellipse;
         }
 
