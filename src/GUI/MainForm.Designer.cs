@@ -53,7 +53,7 @@
             this.ButtonDrawLine = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ButtonMultiSelect = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.ButtonRotateLeft = new System.Windows.Forms.ToolStripButton();
             this.ButtonRotateRight = new System.Windows.Forms.ToolStripButton();
             this.ButtonMultiMove = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -177,7 +177,7 @@
             this.ButtonDrawLine,
             this.toolStripSeparator1,
             this.ButtonMultiSelect,
-            this.toolStripButton1,
+            this.ButtonRotateLeft,
             this.ButtonRotateRight,
             this.ButtonMultiMove,
             this.toolStripSeparator2,
@@ -338,15 +338,15 @@
             this.ButtonMultiSelect.ToolTipText = "ButtonMultiSelect";
             this.ButtonMultiSelect.Click += new System.EventHandler(this.OnMultiSelect_Click);
             // 
-            // toolStripButton1
+            // ButtonRotateLeft
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButton1.Text = "ButtonRotateLeft";
-            this.toolStripButton1.Click += new System.EventHandler(this.RotateLeft);
+            this.ButtonRotateLeft.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ButtonRotateLeft.Image = ((System.Drawing.Image)(resources.GetObject("ButtonRotateLeft.Image")));
+            this.ButtonRotateLeft.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonRotateLeft.Name = "ButtonRotateLeft";
+            this.ButtonRotateLeft.Size = new System.Drawing.Size(24, 24);
+            this.ButtonRotateLeft.Text = "ButtonRotateLeft";
+            this.ButtonRotateLeft.Click += new System.EventHandler(this.RotateLeft);
             // 
             // ButtonRotateRight
             // 
@@ -595,7 +595,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton ButtonPlus;
         private System.Windows.Forms.ToolStripButton ButtonMinus;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton ButtonRotateLeft;
         private System.Windows.Forms.ToolStripButton ButtonDrawReuleauxTriangle;
         private System.Windows.Forms.ToolStripButton ButtonDrawLine;
         private System.Windows.Forms.ToolStripButton ButtonFillColorDarkViolet;
