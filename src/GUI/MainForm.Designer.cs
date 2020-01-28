@@ -67,11 +67,11 @@
             this.ButtonFillColorBlack = new System.Windows.Forms.ToolStripButton();
             this.ButtonFillColorSaddleBrown = new System.Windows.Forms.ToolStripButton();
             this.ButtonFillColorSilver = new System.Windows.Forms.ToolStripButton();
+            this.ButtonFillColorWhite = new System.Windows.Forms.ToolStripButton();
             this.ButtonFillColor = new System.Windows.Forms.ToolStripButton();
             this.ButtonBorderColor = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.viewPort = new Draw.DoubleBufferedPanel();
-            this.ButtonFillColorWhite = new System.Windows.Forms.ToolStripButton();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.speedMenu.SuspendLayout();
@@ -199,7 +199,7 @@
             this.speedMenu.Name = "speedMenu";
             this.speedMenu.Size = new System.Drawing.Size(924, 27);
             this.speedMenu.TabIndex = 3;
-            this.speedMenu.Text = "toolStrip1";
+            this.speedMenu.Text = "MainContainer";
             // 
             // ButtonMainNavigator
             // 
@@ -345,7 +345,7 @@
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButton1.Text = "toolStripButton1";
+            this.toolStripButton1.Text = "ButtonRotateLeft";
             this.toolStripButton1.Click += new System.EventHandler(this.RotateLeft);
             // 
             // ButtonRotateRight
@@ -481,6 +481,17 @@
             this.ButtonFillColorSilver.ToolTipText = "ButtonFillColorSilver";
             this.ButtonFillColorSilver.Click += new System.EventHandler(this.SetFillColor);
             // 
+            // ButtonFillColorWhite
+            // 
+            this.ButtonFillColorWhite.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ButtonFillColorWhite.Image = ((System.Drawing.Image)(resources.GetObject("ButtonFillColorWhite.Image")));
+            this.ButtonFillColorWhite.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ButtonFillColorWhite.Name = "ButtonFillColorWhite";
+            this.ButtonFillColorWhite.Size = new System.Drawing.Size(24, 24);
+            this.ButtonFillColorWhite.Text = "ButtonFillColorWhite";
+            this.ButtonFillColorWhite.ToolTipText = "ButtonFillColorWhite";
+            this.ButtonFillColorWhite.Click += new System.EventHandler(this.SetFillColor);
+            // 
             // ButtonFillColor
             // 
             this.ButtonFillColor.CheckOnClick = true;
@@ -523,17 +534,6 @@
             this.viewPort.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseDown);
             this.viewPort.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseMove);
             this.viewPort.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ViewPortMouseUp);
-            // 
-            // ButtonFillColorWhite
-            // 
-            this.ButtonFillColorWhite.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ButtonFillColorWhite.Image = ((System.Drawing.Image)(resources.GetObject("ButtonFillColorWhite.Image")));
-            this.ButtonFillColorWhite.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ButtonFillColorWhite.Name = "ButtonFillColorWhite";
-            this.ButtonFillColorWhite.Size = new System.Drawing.Size(24, 24);
-            this.ButtonFillColorWhite.Text = "ButtonFillColorWhite";
-            this.ButtonFillColorWhite.ToolTipText = "ButtonFillColorWhite";
-            this.ButtonFillColorWhite.Click += new System.EventHandler(this.SetFillColor);
             // 
             // MainForm
             // 
