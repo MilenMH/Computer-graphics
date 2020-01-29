@@ -2,10 +2,12 @@
 {
 	partial class MainForm
 	{
-		/// <summary>
-		/// Designer variable used to keep track of non-visual components.
-		/// </summary>
-		private System.ComponentModel.IContainer components = null;
+        private System.ComponentModel.ComponentResourceManager resources;
+
+        /// <summary>
+        /// Designer variable used to keep track of non-visual components.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -71,10 +73,16 @@
             this.ButtonFillColor = new System.Windows.Forms.ToolStripButton();
             this.ButtonBorderColor = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.TabContainer = new System.Windows.Forms.ToolStrip();
+            this.Tab1 = new System.Windows.Forms.ToolStripButton();
+            this.CloseTab1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.AddNewTab = new System.Windows.Forms.ToolStripButton();
             this.viewPort = new Draw.DoubleBufferedPanel();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
             this.speedMenu.SuspendLayout();
+            this.TabContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainMenu
@@ -145,20 +153,21 @@
             // 
             // statusBar
             // 
+            this.statusBar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.statusBar.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.currentStatusLabel});
-            this.statusBar.Location = new System.Drawing.Point(0, 499);
+            this.statusBar.Location = new System.Drawing.Point(0, 28);
             this.statusBar.Name = "statusBar";
             this.statusBar.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
-            this.statusBar.Size = new System.Drawing.Size(924, 22);
+            this.statusBar.Size = new System.Drawing.Size(924, 493);
             this.statusBar.TabIndex = 2;
             this.statusBar.Text = "statusStrip1";
             // 
             // currentStatusLabel
             // 
             this.currentStatusLabel.Name = "currentStatusLabel";
-            this.currentStatusLabel.Size = new System.Drawing.Size(0, 17);
+            this.currentStatusLabel.Size = new System.Drawing.Size(0, 488);
             // 
             // speedMenu
             // 
@@ -521,13 +530,65 @@
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 27);
             // 
+            // TabContainer
+            // 
+            this.TabContainer.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.TabContainer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Tab1,
+            this.CloseTab1,
+            this.toolStripSeparator5,
+            this.AddNewTab});
+            this.TabContainer.Location = new System.Drawing.Point(0, 55);
+            this.TabContainer.Name = "TabContainer";
+            this.TabContainer.Size = new System.Drawing.Size(924, 27);
+            this.TabContainer.TabIndex = 5;
+            this.TabContainer.Text = "TabContainer";
+            // 
+            // Tab1
+            // 
+            this.Tab1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.Tab1.Image = ((System.Drawing.Image)(resources.GetObject("Tab1.Image")));
+            this.Tab1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Tab1.Name = "Tab1";
+            this.Tab1.Size = new System.Drawing.Size(44, 24);
+            this.Tab1.Text = "Tab1";
+            // 
+            // CloseTab1
+            // 
+            this.CloseTab1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.CloseTab1.Image = ((System.Drawing.Image)(resources.GetObject("CloseTab1.Image")));
+            this.CloseTab1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.CloseTab1.Name = "CloseTab1";
+            this.CloseTab1.Size = new System.Drawing.Size(23, 24);
+            this.CloseTab1.Text = "X";
+            this.CloseTab1.ToolTipText = "Close Tab 1";
+            this.CloseTab1.Click += new System.EventHandler(this.CloseTab_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator001";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 27);
+            // 
+            // AddNewTab
+            // 
+            this.AddNewTab.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.AddNewTab.Image = ((System.Drawing.Image)(resources.GetObject("AddNewTab.Image")));
+            this.AddNewTab.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.AddNewTab.Name = "AddNewTab";
+            this.AddNewTab.Size = new System.Drawing.Size(23, 24);
+            this.AddNewTab.Text = "+";
+            this.AddNewTab.Click += new System.EventHandler(this.AddNewTab_Click);
+            // 
             // viewPort
             // 
-            this.viewPort.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.viewPort.Location = new System.Drawing.Point(0, 55);
+            this.viewPort.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.viewPort.AutoSize = true;
+            this.viewPort.Location = new System.Drawing.Point(0, 82);
             this.viewPort.Margin = new System.Windows.Forms.Padding(5);
             this.viewPort.Name = "viewPort";
-            this.viewPort.Size = new System.Drawing.Size(924, 444);
+            this.viewPort.Size = new System.Drawing.Size(924, 439);
             this.viewPort.TabIndex = 4;
             this.viewPort.Paint += new System.Windows.Forms.PaintEventHandler(this.ViewPortPaint);
             this.viewPort.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ViewPort_KeyDown);
@@ -540,6 +601,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(924, 521);
+            this.Controls.Add(this.TabContainer);
             this.Controls.Add(this.viewPort);
             this.Controls.Add(this.speedMenu);
             this.Controls.Add(this.statusBar);
@@ -556,6 +618,8 @@
             this.statusBar.PerformLayout();
             this.speedMenu.ResumeLayout(false);
             this.speedMenu.PerformLayout();
+            this.TabContainer.ResumeLayout(false);
+            this.TabContainer.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -604,5 +668,10 @@
         private System.Windows.Forms.ToolStripButton ButtonFillColorDarkOrange;
         private System.Windows.Forms.ToolStripButton ButtonFillColorSaddleBrown;
         private System.Windows.Forms.ToolStripButton ButtonFillColorWhite;
+        private System.Windows.Forms.ToolStrip TabContainer;
+        private System.Windows.Forms.ToolStripButton Tab1;
+        private System.Windows.Forms.ToolStripButton AddNewTab;
+        private System.Windows.Forms.ToolStripButton CloseTab1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
     }
 }

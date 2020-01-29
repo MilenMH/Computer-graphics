@@ -12,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Draw
@@ -821,5 +822,94 @@ namespace Draw
 
         }
 
+        private void AddNewTab_Click(object sender, EventArgs e)
+        {
+            Regex regex = new Regex(@"\d+");
+            var newTabIndex = 0;
+
+            foreach (var item in this.TabContainer.Items)
+            {
+                if (item is ToolStripButton)
+                {
+                    var castedItem = (ToolStripButton)item;
+                    Match match = regex.Match(castedItem.Name);
+                    if (match.Success)
+                    {
+                        var possibleNewIndex = int.Parse(match.Value);
+                        if (possibleNewIndex > newTabIndex)
+                        {
+                            newTabIndex = possibleNewIndex;
+                        }
+                    }
+                }
+            }
+
+            newTabIndex++;
+
+            if (this.resources == null)
+            {
+                resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            }
+
+            var newTabButton = new ToolStripButton();
+            newTabButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            newTabButton.Image = ((System.Drawing.Image)(resources.GetObject("Tab" + newTabIndex + ".Image")));
+            newTabButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            newTabButton.Image = ((System.Drawing.Image)(resources.GetObject("Tab" + newTabIndex + ".Image")));
+            newTabButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            newTabButton.Name = ("Tab" + newTabIndex);
+            newTabButton.Size = new System.Drawing.Size(44, 24);
+            newTabButton.Text = ("Tab" + newTabIndex);
+
+            var newTabButtonX = new ToolStripButton();
+            newTabButtonX.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            newTabButtonX.Image = ((System.Drawing.Image)(resources.GetObject("CloseTab" + newTabIndex + ".Image")));
+            newTabButtonX.ImageTransparentColor = System.Drawing.Color.Magenta;
+            newTabButtonX.Name = ("CloseTab" + newTabIndex);
+            newTabButtonX.Size = new System.Drawing.Size(23, 24);
+            newTabButtonX.Text = "X";
+            newTabButtonX.ToolTipText = ("Close Tab " + newTabIndex);
+            newTabButtonX.Click += new System.EventHandler(this.CloseTab_Click);
+
+            var separator = new ToolStripSeparator();
+            separator.Name = "toolStripSeparator00" + newTabIndex;
+            separator.Size = new System.Drawing.Size(6, 27);
+
+            var itemsCount = this.TabContainer.Items.Count;
+
+            this.TabContainer.Items.Insert(itemsCount - 1, separator);
+            this.TabContainer.Items.Insert(itemsCount - 1, newTabButtonX);
+            this.TabContainer.Items.Insert(itemsCount - 1, newTabButton);
+
+        }
+
+        private void CloseTab_Click(object sender, EventArgs e)
+        {
+            Regex regex = new Regex(@"\d+");
+            Match match = regex.Match(((ToolStripButton)sender).Name);
+            List<int> indexes = new List<int>();
+            var index = 0;
+            if (match.Success)
+            {
+                var buttonIndex = match.Value;
+                foreach (var item in this.TabContainer.Items)
+                {
+
+                    if (((item is ToolStripButton && ((ToolStripButton)item).Name.StartsWith("Tab") && ((ToolStripButton)item).Name.Remove(0, 3).Equals(match.Value))
+                        || (item is ToolStripButton && ((ToolStripButton)item).Name.StartsWith("CloseTab") && ((ToolStripButton)item).Name.Remove(0, 8).Equals(match.Value)))
+                        || (item is ToolStripSeparator && ((ToolStripSeparator)item).Name.StartsWith("toolStripSeparator00") && ((ToolStripSeparator)item).Name.Remove(0, 20).Equals(match.Value)))
+                    {
+                        indexes.Add(index);
+                    }
+
+                    index++;
+                }
+            }
+            indexes.Reverse();
+            foreach (var inner in indexes)
+            {
+                this.TabContainer.Items.RemoveAt(inner);
+            }
+        }
     }
 }
