@@ -887,6 +887,23 @@ namespace Draw
 
         private void CloseTab_Click(object sender, EventArgs e)
         {
+            List<int> indexes = FoundButtonsRelatedToClosingButton(sender);
+            RemoveButtonsRelatedToClosingTab(indexes);
+            FindAndClickExistingTab();
+        }
+
+        #region ClosingTab
+        private void RemoveButtonsRelatedToClosingTab(List<int> indexes)
+        {
+            indexes.Reverse();
+            foreach (var inner in indexes)
+            {
+                this.TabContainer.Items.RemoveAt(inner);
+            }
+        }
+
+        private List<int> FoundButtonsRelatedToClosingButton(object sender)
+        {
             Regex regex = new Regex(@"\d+");
             Match match = regex.Match(((ToolStripButton)sender).Name);
             List<int> indexes = new List<int>();
@@ -908,34 +925,38 @@ namespace Draw
                 }
                 var matchAsInt = int.Parse(match.Value);
                 this.dialogProcessor.ShapeList.Remove(matchAsInt);
-                if (this.TabContainer.Items.Count > 1)
-                {
-                    var indexForNewItem = 0;
-                    foreach (var item in this.TabContainer.Items)
-                    {
-                        if (item is ToolStripButton)
-                        {
-                            var castedItem = (ToolStripButton)item;
-                            match = regex.Match(castedItem.Name);
-                            if (match.Success)
-                            {
-                                //TODO replace existing tab button with new 
-                                //which is selected and write additional logic to check
-                                //the button is TAB not X
+            }
 
-                                break;
-                            }
+            return indexes;
+        }
+
+        private void FindAndClickExistingTab()
+        {
+            var found = false;
+            if (this.TabContainer.Items.Count > 1)
+            {
+                var indexForNewItem = 0;
+                foreach (var item in this.TabContainer.Items)
+                {
+                    if (item is ToolStripButton)
+                    {
+                        var castedItem = (ToolStripButton)item;
+                        if (castedItem.Name.StartsWith("Tab"))
+                        {
+                            castedItem.PerformClick();
+                            found = true;
+                            break;
                         }
-                        indexForNewItem++;
                     }
+                    indexForNewItem++;
                 }
             }
-            indexes.Reverse();
-            foreach (var inner in indexes)
+            if (!found)
             {
-                this.TabContainer.Items.RemoveAt(inner);
+                ExitToolStripMenuItem.PerformClick();
             }
         }
+        #endregion
 
         private void Tab_Click(object sender, EventArgs e)
         {
@@ -958,6 +979,9 @@ namespace Draw
             Match match = regex.Match(button.Name);
             var index = int.Parse(match.Value);
             this.dialogProcessor.CurrentTab = index;
+            ButtonMainNavigator.Checked = false;
+            ButtonMainNavigator.PerformClick();
         }
+
     }
 }
