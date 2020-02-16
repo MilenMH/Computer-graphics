@@ -141,6 +141,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="src\Demo\BirdAsCustomExport.txt" />
+    <Content Include="src\Demo\BirdAsJSON.txt" />
     <Content Include="src\Images\AboutGlyph.bmp" />
     <Content Include="src\Images\Draw.ico" />
     <Content Include="src\Images\DrawIcon.png" />
@@ -161,4 +163,5 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
 </Project>

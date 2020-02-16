@@ -1,0 +1,251 @@
+﻿RectangleShape
+Point : X : 867 : Y : 510
+Point : X : 867 : Y : 510
+Point : X : 869 : Y : 510
+Point : X : 869 : Y : 510
+BorderColor : Black
+FillColor : White
+DashStyle : Solid
+TemporaryFlag : False
++++++++++++++++++
+RectangleShape
+Point : X : 2,000061 : Y : 597
+Point : X : 2 : Y : 13
+Point : X : 694,9999 : Y : 13
+Point : X : 695 : Y : 597
+BorderColor : Black
+FillColor : HotPink
+DashStyle : Solid
+TemporaryFlag : False
++++++++++++++++++
+ReuleauxTriangleShape
+Point : X : 148 : Y : 54
+Point : X : 407 : Y : 313
+BorderColor : Yellow
+FillColor : Silver
+DashStyle : Solid
+TemporaryFlag : False
+RotationAngleInDegrees : 360
+RotationAngleInRadians : 1,85602722524436E-07
++++++++++++++++++
+EllipseShape
+Point : X : 300 : Y : 110
+Point : X : 300 : Y : 93
+Point : X : 342 : Y : 93
+Point : X : 342 : Y : 110
+BorderColor : Black
+FillColor : White
+DashStyle : Solid
+TemporaryFlag : False
+RotationAngleInDegrees : 360
+RotationAngleInRadians : 6,28318512439728
++++++++++++++++++
+EllipseShape
+Point : X : 318 : Y : 111
+Point : X : 318 : Y : 93
+Point : X : 325 : Y : 93
+Point : X : 325 : Y : 111
+BorderColor : Black
+FillColor : Black
+DashStyle : Solid
+TemporaryFlag : False
+RotationAngleInDegrees : 360
+RotationAngleInRadians : 6,28318512439728
++++++++++++++++++
+RectangleShape
+Point : X : 279 : Y : 256
+Point : X : 279 : Y : 186
+Point : X : 404 : Y : 186
+Point : X : 404 : Y : 256
+BorderColor : Yellow
+FillColor : SpringGreen
+DashStyle : Solid
+TemporaryFlag : False
++++++++++++++++++
+EllipseShape
+Point : X : 151 : Y : 450
+Point : X : 151 : Y : 257
+Point : X : 531 : Y : 257
+Point : X : 531 : Y : 450
+BorderColor : Yellow
+FillColor : Silver
+DashStyle : Solid
+TemporaryFlag : False
+RotationAngleInDegrees : 360
+RotationAngleInRadians : 6,28318512439728
++++++++++++++++++
+RectangleShape
+Point : X : 233 : Y : 520
+Point : X : 233 : Y : 437
+Point : X : 246 : Y : 437
+Point : X : 246 : Y : 520
+BorderColor : Yellow
+FillColor : SpringGreen
+DashStyle : Solid
+TemporaryFlag : False
++++++++++++++++++
+RectangleShape
+Point : X : 266 : Y : 520
+Point : X : 266 : Y : 445
+Point : X : 276 : Y : 445
+Point : X : 276 : Y : 520
+BorderColor : Yellow
+FillColor : SpringGreen
+DashStyle : Solid
+TemporaryFlag : False
++++++++++++++++++
+RectangleShape
+Point : X : 212 : Y : 517
+Point : X : 212 : Y : 511
+Point : X : 232 : Y : 511
+Point : X : 232 : Y : 517
+BorderColor : Yellow
+FillColor : Yellow
+DashStyle : Solid
+TemporaryFlag : False
++++++++++++++++++
+RectangleShape
+Point : X : 253 : Y : 517
+Point : X : 253 : Y : 512
+Point : X : 267 : Y : 512
+Point : X : 267 : Y : 517
+BorderColor : Yellow
+FillColor : Yellow
+DashStyle : Solid
+TemporaryFlag : False
++++++++++++++++++
+RectangleShape
+Point : X : 428 : Y : 518
+Point : X : 428 : Y : 435
+Point : X : 440 : Y : 435
+Point : X : 440 : Y : 518
+BorderColor : Yellow
+FillColor : SpringGreen
+DashStyle : Solid
+TemporaryFlag : False
++++++++++++++++++
+RectangleShape
+Point : X : 454 : Y : 517
+Point : X : 454 : Y : 428
+Point : X : 464 : Y : 428
+Point : X : 464 : Y : 517
+BorderColor : Yellow
+FillColor : SpringGreen
+DashStyle : Solid
+TemporaryFlag : False
++++++++++++++++++
+RectangleShape
+Point : X : 406 : Y : 516
+Point : X : 406 : Y : 506
+Point : X : 427 : Y : 506
+Point : X : 427 : Y : 516
+BorderColor : Yellow
+FillColor : Yellow
+DashStyle : Solid
+TemporaryFlag : False
++++++++++++++++++
+RectangleShape
+Point : X : 446 : Y : 515
+Point : X : 446 : Y : 504
+Point : X : 454 : Y : 504
+Point : X : 454 : Y : 515
+BorderColor : Yellow
+FillColor : Yellow
+DashStyle : Solid
+TemporaryFlag : False
++++++++++++++++++
+RectangleShape
+Point : X : 535,5623 : Y : 257,3853
+Point : X : 506,5623 : Y : 307,6147
+Point : X : 494,4377 : Y : 300,6147
+Point : X : 523,4377 : Y : 250,3853
+BorderColor : Yellow
+FillColor : SpringGreen
+DashStyle : Solid
+TemporaryFlag : False
++++++++++++++++++
+TriangleShape
+Point : X : 277 : Y : 169
+Point : X : 277 : Y : 147
+Point : X : 362 : Y : 147
+BorderColor : Yellow
+FillColor : DarkViolet
+DashStyle : Solid
+TemporaryFlag : False
++++++++++++++++++
+TriangleShape
+Point : X : 181,3333 : Y : 108,3333
+Point : X : 275,3335 : Y : 108,3334
+Point : X : 275,3335 : Y : 150,3334
+BorderColor : Yellow
+FillColor : DarkViolet
+DashStyle : Solid
+TemporaryFlag : False
++++++++++++++++++
+TriangleShape
+Point : X : 276 : Y : 70,33337
+Point : X : 276 : Y : 108,3334
+Point : X : 171 : Y : 108,3333
+BorderColor : Yellow
+FillColor : DarkViolet
+DashStyle : Solid
+TemporaryFlag : False
++++++++++++++++++
+TriangleShape
+Point : X : 285 : Y : 161
+Point : X : 285 : Y : 148
+Point : X : 295 : Y : 148
+BorderColor : Yellow
+FillColor : White
+DashStyle : Solid
+TemporaryFlag : False
++++++++++++++++++
+RectangleShape
+Point : X : 516,4067 : Y : 283,2141
+Point : X : 520,4067 : Y : 276,2859
+Point : X : 538,5933 : Y : 286,7859
+Point : X : 534,5933 : Y : 293,7141
+BorderColor : Yellow
+FillColor : SpringGreen
+DashStyle : Solid
+TemporaryFlag : False
++++++++++++++++++
+RectangleShape
+Point : X : 526,4067 : Y : 267,2141
+Point : X : 530,4067 : Y : 260,2859
+Point : X : 548,5933 : Y : 270,7859
+Point : X : 544,5933 : Y : 277,7141
+BorderColor : Yellow
+FillColor : SpringGreen
+DashStyle : Solid
+TemporaryFlag : False
++++++++++++++++++
+RectangleShape
+Point : X : 487,4067 : Y : 275,2141
+Point : X : 491,4067 : Y : 268,2859
+Point : X : 509,5933 : Y : 278,7859
+Point : X : 505,5933 : Y : 285,7141
+BorderColor : Yellow
+FillColor : SpringGreen
+DashStyle : Solid
+TemporaryFlag : False
++++++++++++++++++
+RectangleShape
+Point : X : 497,4067 : Y : 259,2141
+Point : X : 501,4067 : Y : 252,2859
+Point : X : 519,5933 : Y : 262,7859
+Point : X : 515,5933 : Y : 269,7141
+BorderColor : Yellow
+FillColor : SpringGreen
+DashStyle : Solid
+TemporaryFlag : False
++++++++++++++++++
+RectangleShape
+Point : X : 506,4067 : Y : 246,2141
+Point : X : 510,4067 : Y : 239,2859
+Point : X : 528,5933 : Y : 249,7859
+Point : X : 524,5933 : Y : 256,7141
+BorderColor : Yellow
+FillColor : SpringGreen
+DashStyle : Solid
+TemporaryFlag : False

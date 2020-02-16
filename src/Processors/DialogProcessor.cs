@@ -12,12 +12,8 @@ namespace Draw
 
         public DialogProcessor()
         {
-            Random = new Random();
             Color = Color.White;
         }
-
-        public Random Random { get; set; }
-
         public Shape Selection { get; set; }
 
         public Shape SelectionCopy { get; set; }
@@ -52,41 +48,41 @@ namespace Draw
         {
             Shape rectangle = new RectangleShape(new PointF(x, y + height), new PointF(x, y),
                 new PointF(x + width, y), new PointF(x + width, y + height), Color.Black, Color.FromArgb(transparency, Color.White), dashStyle, temporary);
-            ShapeList.Add(rectangle);
+            ShapeList[CurrentTab].Add(rectangle);
         }
 
         public void AddTriangle(PointF p1, PointF p2, PointF p3, DashStyle dashStyle, bool temporary = false, int transparency = 255)
         {
             Shape triangle = new TriangleShape(p1, p2, p3, Color.Black, Color.FromArgb(transparency, Color.White), dashStyle, temporary);
-            ShapeList.Add(triangle);
+            ShapeList[CurrentTab].Add(triangle);
         }
 
         public void AddEllipse(float x, float y, float width, float height, DashStyle dashStyle, bool temporary = false, int transparency = 255)
         {
             Shape ellipse = new EllipseShape(new PointF(x, y + height), new PointF(x, y),
                 new PointF(x + width, y), new PointF(x + width, y + height), Color.Black, Color.FromArgb(transparency, Color.White), dashStyle, temporary);
-            ShapeList.Add(ellipse);
+            ShapeList[CurrentTab].Add(ellipse);
         }
 
         public void AddLine(PointF p1, PointF p2, DashStyle dashStyle, bool temporary = false, int transparency = 255)
         {
             Shape triangle = new LineShape(p1, p2, Color.Black, Color.FromArgb(transparency, Color.White), dashStyle, temporary);
-            ShapeList.Add(triangle);
+            ShapeList[CurrentTab].Add(triangle);
         }
 
         public void AddReuleauxTriangle(PointF p1, PointF p2, DashStyle dashStyle, bool temporary = false, int transparency = 255)
         {
             Shape triangle = new ReuleauxTriangleShape(p1, p2, Color.Black, Color.FromArgb(transparency, Color.White), dashStyle, temporary);
-            ShapeList.Add(triangle);
+            ShapeList[CurrentTab].Add(triangle);
         }
 
         public Shape ContainsPoint(PointF point)
         {
-            for (int i = ShapeList.Count - 1; i >= 0; i--)
+            for (int i = ShapeList[CurrentTab].Count - 1; i >= 0; i--)
             {
-                if (ShapeList[i].Contains(point))
+                if (ShapeList[CurrentTab][i].Contains(point))
                 {
-                    return ShapeList[i];
+                    return ShapeList[CurrentTab][i];
                 }
             }
             return null;

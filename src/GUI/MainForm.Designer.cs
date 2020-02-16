@@ -76,7 +76,7 @@
             this.TabContainer = new System.Windows.Forms.ToolStrip();
             this.Tab1 = new System.Windows.Forms.ToolStripButton();
             this.CloseTab1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator001 = new System.Windows.Forms.ToolStripSeparator();
             this.AddNewTab = new System.Windows.Forms.ToolStripButton();
             this.viewPort = new Draw.DoubleBufferedPanel();
             this.mainMenu.SuspendLayout();
@@ -536,7 +536,7 @@
             this.TabContainer.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Tab1,
             this.CloseTab1,
-            this.toolStripSeparator5,
+            this.toolStripSeparator001,
             this.AddNewTab});
             this.TabContainer.Location = new System.Drawing.Point(0, 55);
             this.TabContainer.Name = "TabContainer";
@@ -546,12 +546,15 @@
             // 
             // Tab1
             // 
+            this.Tab1.Checked = true;
+            this.Tab1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.Tab1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.Tab1.Image = ((System.Drawing.Image)(resources.GetObject("Tab1.Image")));
             this.Tab1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Tab1.Name = "Tab1";
             this.Tab1.Size = new System.Drawing.Size(44, 24);
             this.Tab1.Text = "Tab1";
+            this.Tab1.Click += new System.EventHandler(this.Tab_Click);
             // 
             // CloseTab1
             // 
@@ -564,10 +567,10 @@
             this.CloseTab1.ToolTipText = "Close Tab 1";
             this.CloseTab1.Click += new System.EventHandler(this.CloseTab_Click);
             // 
-            // toolStripSeparator5
+            // toolStripSeparator001
             // 
-            this.toolStripSeparator5.Name = "toolStripSeparator001";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 27);
+            this.toolStripSeparator001.Name = "toolStripSeparator001";
+            this.toolStripSeparator001.Size = new System.Drawing.Size(6, 27);
             // 
             // AddNewTab
             // 
@@ -672,6 +675,6 @@
         private System.Windows.Forms.ToolStripButton Tab1;
         private System.Windows.Forms.ToolStripButton AddNewTab;
         private System.Windows.Forms.ToolStripButton CloseTab1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator001;
     }
 }

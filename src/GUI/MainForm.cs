@@ -83,7 +83,7 @@ namespace Draw
 
             if (ButtonDelete.Checked && dialogProcessor.Selection != null)
             {
-                dialogProcessor.ShapeList.Remove(dialogProcessor.Selection);
+                dialogProcessor.ShapeList[dialogProcessor.CurrentTab].Remove(dialogProcessor.Selection);
             }
 
             if (ButtonDrawLine.Checked)
@@ -117,7 +117,7 @@ namespace Draw
                 copyOfSelection.TemporaryFlag = true;
                 copyOfSelection.UniqueIdentifier = Guid.NewGuid();
                 dialogProcessor.SelectionCopy = copyOfSelection;
-                dialogProcessor.ShapeList.Add(dialogProcessor.SelectionCopy);
+                dialogProcessor.ShapeList[dialogProcessor.CurrentTab].Add(dialogProcessor.SelectionCopy);
             }
             if (ButtonPlus.Checked && dialogProcessor.Selection != null)
             {
@@ -151,7 +151,7 @@ namespace Draw
 
             if (ButtonMultiSelect.Checked && dialogProcessor.MultiSelectFlag)
             {
-                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
+                dialogProcessor.ShapeList[dialogProcessor.CurrentTab].RemoveAll(s => s.TemporaryFlag);
                 dialogProcessor.AddRectangle(
                     shapeParams.Item1, shapeParams.Item2, shapeParams.Item5, shapeParams.Item6, DashStyle.Dot, true, 0);
 
@@ -159,13 +159,13 @@ namespace Draw
 
             if (ButtonDrawRectangle.Checked && dialogProcessor.DrawTemporaryRectangle)
             {
-                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
+                dialogProcessor.ShapeList[dialogProcessor.CurrentTab].RemoveAll(s => s.TemporaryFlag);
                 dialogProcessor.AddRectangle(
                     shapeParams.Item1, shapeParams.Item2, shapeParams.Item5, shapeParams.Item6, DashStyle.Dot, true);
             }
             if (ButtonDrowTriangle.Checked && dialogProcessor.DrawTemporaryTriangle)
             {
-                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
+                dialogProcessor.ShapeList[dialogProcessor.CurrentTab].RemoveAll(s => s.TemporaryFlag);
                 dialogProcessor.AddTriangle(
                     new PointF(shapeParams.Item1, shapeParams.Item4),
                     new PointF(shapeParams.Item1, shapeParams.Item2),
@@ -173,26 +173,26 @@ namespace Draw
             }
             if (ButtonDrawLine.Checked && dialogProcessor.DrawTemporaryLine)
             {
-                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
+                dialogProcessor.ShapeList[dialogProcessor.CurrentTab].RemoveAll(s => s.TemporaryFlag);
                 dialogProcessor.AddLine(startPoint, endPoint, DashStyle.Dot, true);
             }
             if (ButtonDrawEllipse.Checked && dialogProcessor.DrawTemporaryEllipse)
             {
-                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
+                dialogProcessor.ShapeList[dialogProcessor.CurrentTab].RemoveAll(s => s.TemporaryFlag);
                 dialogProcessor.AddEllipse(
                     shapeParams.Item1, shapeParams.Item2, shapeParams.Item5, shapeParams.Item6, DashStyle.Dot, true);
             }
             if (ButtonDrawReuleauxTriangle.Checked && dialogProcessor.DrawTemporaryReuleauxTriangle)
             {
-                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
+                dialogProcessor.ShapeList[dialogProcessor.CurrentTab].RemoveAll(s => s.TemporaryFlag);
                 dialogProcessor.AddReuleauxTriangle(startPoint, endPoint, DashStyle.Dot, true);
             }
             if (ButtonCopy.Checked && dialogProcessor.DrawTemporaryCopyShape && dialogProcessor.SelectionCopy != null)
             {
-                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
+                dialogProcessor.ShapeList[dialogProcessor.CurrentTab].RemoveAll(s => s.TemporaryFlag);
                 dialogProcessor.SelectionCopy.MoveToNextDestination(e.Location, dialogProcessor.LastLocation);
                 dialogProcessor.SelectionCopy.UniqueIdentifier = Guid.NewGuid();
-                dialogProcessor.ShapeList.Add(dialogProcessor.SelectionCopy);
+                dialogProcessor.ShapeList[dialogProcessor.CurrentTab].Add(dialogProcessor.SelectionCopy);
                 dialogProcessor.LastLocation = e.Location;
             }
             RerenderMainCanvas();
@@ -206,9 +206,9 @@ namespace Draw
             {
                 ButtonMultiSelect.Checked = false;
                 dialogProcessor.MultiSelectFlag = false;
-                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
+                dialogProcessor.ShapeList[dialogProcessor.CurrentTab].RemoveAll(s => s.TemporaryFlag);
                 var setOfShapesThatHasToBeRotated = TraverseOverSelectedMatrix(false);
-                ChageBorderOfSetOfShapes(this.dialogProcessor.ShapeList, GlobalConstants.DefaultDashStyle);
+                ChageBorderOfSetOfShapes(this.dialogProcessor.ShapeList[dialogProcessor.CurrentTab], GlobalConstants.DefaultDashStyle);
                 ChageBorderOfSetOfShapes(setOfShapesThatHasToBeRotated, DashStyle.Dot);
             }
 
@@ -229,12 +229,12 @@ namespace Draw
             if (ButtonMultiMove.Checked)
             {
                 ButtonMultiMove.Checked = false;
-                ChageBorderOfSetOfShapes(this.dialogProcessor.ShapeList, GlobalConstants.DefaultDashStyle);
+                ChageBorderOfSetOfShapes(this.dialogProcessor.ShapeList[dialogProcessor.CurrentTab], GlobalConstants.DefaultDashStyle);
                 ResetRotationProcess(GlobalConstants.DefaultDashStyle, false, true);
             }
             if (ButtonDrawRectangle.Checked && dialogProcessor.DrawTemporaryRectangle)
             {
-                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
+                dialogProcessor.ShapeList[dialogProcessor.CurrentTab].RemoveAll(s => s.TemporaryFlag);
                 dialogProcessor.AddRectangle(
                     shapeParams.Item1, shapeParams.Item2, shapeParams.Item5, shapeParams.Item6,
                     DashStyle.Solid, false);
@@ -243,7 +243,7 @@ namespace Draw
             }
             if (ButtonDrowTriangle.Checked && dialogProcessor.DrawTemporaryTriangle)
             {
-                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
+                dialogProcessor.ShapeList[dialogProcessor.CurrentTab].RemoveAll(s => s.TemporaryFlag);
                 dialogProcessor.AddTriangle(
                     new PointF(shapeParams.Item1, shapeParams.Item4),
                     new PointF(shapeParams.Item1, shapeParams.Item2),
@@ -254,7 +254,7 @@ namespace Draw
             }
             if (ButtonDrawEllipse.Checked && dialogProcessor.DrawTemporaryEllipse)
             {
-                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
+                dialogProcessor.ShapeList[dialogProcessor.CurrentTab].RemoveAll(s => s.TemporaryFlag);
                 dialogProcessor.AddEllipse(
                     shapeParams.Item1, shapeParams.Item2, shapeParams.Item5, shapeParams.Item6,
                     DashStyle.Solid, false);
@@ -263,14 +263,14 @@ namespace Draw
             }
             if (ButtonDrawLine.Checked && dialogProcessor.DrawTemporaryLine)
             {
-                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
+                dialogProcessor.ShapeList[dialogProcessor.CurrentTab].RemoveAll(s => s.TemporaryFlag);
                 dialogProcessor.AddLine(dialogProcessor.OnMouseDownPoint, dialogProcessor.OnMouseUpPoint, DashStyle.Solid, false);
                 ButtonDrawLine.Checked = false;
                 dialogProcessor.DrawTemporaryLine = false;
             }
             if (ButtonDrawReuleauxTriangle.Checked && dialogProcessor.DrawTemporaryReuleauxTriangle)
             {
-                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
+                dialogProcessor.ShapeList[dialogProcessor.CurrentTab].RemoveAll(s => s.TemporaryFlag);
                 dialogProcessor.AddReuleauxTriangle(dialogProcessor.OnMouseDownPoint, dialogProcessor.OnMouseUpPoint, DashStyle.Solid, false);
                 ButtonDrawReuleauxTriangle.Checked = false;
                 dialogProcessor.DrawTemporaryReuleauxTriangle = false;
@@ -279,9 +279,9 @@ namespace Draw
             {
                 ButtonCopy.Checked = false;
                 dialogProcessor.DrawTemporaryCopyShape = false;
-                dialogProcessor.ShapeList.RemoveAll(s => s.TemporaryFlag);
+                dialogProcessor.ShapeList[dialogProcessor.CurrentTab].RemoveAll(s => s.TemporaryFlag);
                 dialogProcessor.SelectionCopy.TemporaryFlag = false;
-                dialogProcessor.ShapeList.Add(dialogProcessor.SelectionCopy);
+                dialogProcessor.ShapeList[dialogProcessor.CurrentTab].Add(dialogProcessor.SelectionCopy);
                 dialogProcessor.SelectionCopy = null;
             }
             RerenderMainCanvas();
@@ -574,7 +574,7 @@ namespace Draw
             ButtonDrawReuleauxTriangle.Checked = false;
             ButtonDrawLine.Checked = false;
 
-            if (dialogProcessor.ShapeList != null)
+            if (dialogProcessor.ShapeList[dialogProcessor.CurrentTab] != null)
             {
                 TraverseOverSelectedMatrix(true);
                 var setOfShapes = TraverseOverSelectedMatrix(false);
@@ -602,7 +602,7 @@ namespace Draw
             ButtonDrawReuleauxTriangle.Checked = false;
             ButtonDrawLine.Checked = false;
 
-            if (dialogProcessor.ShapeList != null)
+            if (dialogProcessor.ShapeList[dialogProcessor.CurrentTab] != null)
             {
                 TraverseOverSelectedMatrix(true, GlobalConstants.RadiansRepresentationOfThreeHundredAndThirtyDegrees);
                 var setOfShapes = TraverseOverSelectedMatrix(false);
@@ -623,11 +623,11 @@ namespace Draw
             var maxYCordinate = Convert.ToInt32(Math.Max(dialogProcessor.OnMouseDownPoint.Y, dialogProcessor.OnMouseUpPoint.Y));
 
             var setOfShapesWhichNeedsToBeRotated = new HashSet<Shape>();
-            var shapeListCount = dialogProcessor.ShapeList.Count;
+            var shapeListCount = dialogProcessor.ShapeList[dialogProcessor.CurrentTab].Count;
 
             for (int i = shapeListCount - 1; i >= 0; i--)
             {
-                var shape = dialogProcessor.ShapeList[i];
+                var shape = dialogProcessor.ShapeList[dialogProcessor.CurrentTab][i];
                 for (int tempX = minXCordinate; tempX < maxXCordinate; tempX++)
                 {
                     for (int tempY = minYCordinate; tempY < maxYCordinate; tempY++)
@@ -639,8 +639,8 @@ namespace Draw
                             {
                                 var rotated = shape.NewShapeRotatedToRigth(radians);
                                 setOfShapesWhichNeedsToBeRotated.Add(rotated);
-                                dialogProcessor.ShapeList.Remove(shape);
-                                dialogProcessor.ShapeList.Add(rotated);
+                                dialogProcessor.ShapeList[dialogProcessor.CurrentTab].Remove(shape);
+                                dialogProcessor.ShapeList[dialogProcessor.CurrentTab].Add(rotated);
                             }
                         }
                     }
@@ -651,7 +651,7 @@ namespace Draw
 
         private void ResetRotationProcess(DashStyle dashStyle, bool rerenderMainCanvas, bool resetRotationMatrix)
         {
-            ChageBorderOfSetOfShapes(this.dialogProcessor.ShapeList, dashStyle);
+            ChageBorderOfSetOfShapes(this.dialogProcessor.ShapeList[dialogProcessor.CurrentTab], dashStyle);
             if (rerenderMainCanvas)
             {
                 RerenderMainCanvas();
@@ -691,7 +691,7 @@ namespace Draw
             var type = GetType(Assembly.GetExecutingAssembly(), "Draw.src.Workers", workerName);
             var worker = (ISaveFileWorker)Activator.CreateInstance(type);
 
-            this.SaveFile(dialogProcessor.ShapeList, worker);
+            this.SaveFile(dialogProcessor.ShapeList[dialogProcessor.CurrentTab], worker);
         }
 
         private void MainMenuButtonLoad_Click(object sender, EventArgs e)
@@ -752,11 +752,11 @@ namespace Draw
                         JsonSerializerSettings settings = JSONSaveBehaviourWorker.GetJSONSettings();
                         var shapes = JsonConvert.DeserializeObject<List<Shape>>(stringReporesentation, settings);
                         shapes.ForEach(s => s.UniqueIdentifier = Guid.NewGuid());
-                        dialogProcessor.ShapeList.AddRange(shapes);
+                        dialogProcessor.ShapeList[dialogProcessor.CurrentTab].AddRange(shapes);
                     }
                     else
                     {
-                        dialogProcessor.ShapeList.AddRange(CustomLoadFile(stringBuilder.ToString()));
+                        dialogProcessor.ShapeList[dialogProcessor.CurrentTab].AddRange(CustomLoadFile(stringBuilder.ToString()));
                     }
                 }
             }
@@ -860,6 +860,7 @@ namespace Draw
             newTabButton.Name = ("Tab" + newTabIndex);
             newTabButton.Size = new System.Drawing.Size(44, 24);
             newTabButton.Text = ("Tab" + newTabIndex);
+            newTabButton.Click += new System.EventHandler(this.Tab_Click);
 
             var newTabButtonX = new ToolStripButton();
             newTabButtonX.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -875,12 +876,13 @@ namespace Draw
             separator.Name = "toolStripSeparator00" + newTabIndex;
             separator.Size = new System.Drawing.Size(6, 27);
 
+            dialogProcessor.ShapeList.Add(newTabIndex, new List<Shape>());
+
             var itemsCount = this.TabContainer.Items.Count;
 
             this.TabContainer.Items.Insert(itemsCount - 1, separator);
             this.TabContainer.Items.Insert(itemsCount - 1, newTabButtonX);
             this.TabContainer.Items.Insert(itemsCount - 1, newTabButton);
-
         }
 
         private void CloseTab_Click(object sender, EventArgs e)
@@ -904,12 +906,58 @@ namespace Draw
 
                     index++;
                 }
+                var matchAsInt = int.Parse(match.Value);
+                this.dialogProcessor.ShapeList.Remove(matchAsInt);
+                if (this.TabContainer.Items.Count > 1)
+                {
+                    var indexForNewItem = 0;
+                    foreach (var item in this.TabContainer.Items)
+                    {
+                        if (item is ToolStripButton)
+                        {
+                            var castedItem = (ToolStripButton)item;
+                            match = regex.Match(castedItem.Name);
+                            if (match.Success)
+                            {
+                                //TODO replace existing tab button with new 
+                                //which is selected and write additional logic to check
+                                //the button is TAB not X
+
+                                break;
+                            }
+                        }
+                        indexForNewItem++;
+                    }
+                }
             }
             indexes.Reverse();
             foreach (var inner in indexes)
             {
                 this.TabContainer.Items.RemoveAt(inner);
             }
+        }
+
+        private void Tab_Click(object sender, EventArgs e)
+        {
+            var button = ((ToolStripButton)sender);
+
+            foreach (var item in this.TabContainer.Items)
+            {
+                if (item is ToolStripButton)
+                {
+                    var selected = ((ToolStripButton)item);
+                    selected.Checked = false;
+                    if (selected.Name.Equals(button.Name))
+                    {
+                        selected.Checked = true;
+                    }
+                }
+            }
+
+            Regex regex = new Regex(@"\d+");
+            Match match = regex.Match(button.Name);
+            var index = int.Parse(match.Value);
+            this.dialogProcessor.CurrentTab = index;
         }
     }
 }
