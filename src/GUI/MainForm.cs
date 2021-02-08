@@ -107,17 +107,29 @@ namespace Draw
             {
                 dialogProcessor.DrawTemporaryReuleauxTriangle = true;
             }
+            if (ButtonDrawEnvelope.Checked)
+            {
+                dialogProcessor.DrawTemporaryEnvelope = true;
+            }
+            if (ButtonDrawGenericCircle.Checked)
+            {
+                dialogProcessor.DrawTemporaryGenericCircle = true;
+            }
             if (ButtonCopy.Checked && dialogProcessor.Selection != null)
             {
                 dialogProcessor.DrawTemporaryCopyShape = true;
                 dialogProcessor.LastLocation = e.Location;
-                var selectionAsString = dialogProcessor.Selection.ToString();
-                var copyOfSelection = CustomLoadFile(selectionAsString.ToString()).FirstOrDefault();
 
-                copyOfSelection.TemporaryFlag = true;
+
+                JsonSerializerSettings settings = JSONSaveBehaviourWorker.GetJSONSettings();
+                var serialized = JsonConvert.SerializeObject(dialogProcessor.Selection, settings);
+
+                var copyOfSelection = JsonConvert.DeserializeObject<Shape>(serialized, settings);
                 copyOfSelection.UniqueIdentifier = Guid.NewGuid();
+                copyOfSelection.TemporaryFlag = true;
                 dialogProcessor.SelectionCopy = copyOfSelection;
-                dialogProcessor.ShapeList[dialogProcessor.CurrentTab].Add(dialogProcessor.SelectionCopy);
+                dialogProcessor.ShapeList[dialogProcessor.CurrentTab].Add(copyOfSelection);
+
             }
             if (ButtonPlus.Checked && dialogProcessor.Selection != null)
             {
@@ -186,6 +198,18 @@ namespace Draw
             {
                 dialogProcessor.ShapeList[dialogProcessor.CurrentTab].RemoveAll(s => s.TemporaryFlag);
                 dialogProcessor.AddReuleauxTriangle(startPoint, endPoint, DashStyle.Dot, true);
+            }
+            if (ButtonDrawEnvelope.Checked && dialogProcessor.DrawTemporaryEnvelope)
+            {
+                dialogProcessor.ShapeList[dialogProcessor.CurrentTab].RemoveAll(s => s.TemporaryFlag);
+                dialogProcessor.AddEnvelope(
+                    shapeParams.Item1, shapeParams.Item2, shapeParams.Item5, shapeParams.Item6, DashStyle.Dot, true);
+            }
+            if (ButtonDrawGenericCircle.Checked && dialogProcessor.DrawTemporaryGenericCircle)
+            {
+                dialogProcessor.ShapeList[dialogProcessor.CurrentTab].RemoveAll(s => s.TemporaryFlag);
+                dialogProcessor.AddGenericCircle(
+                    shapeParams.Item1, shapeParams.Item2, shapeParams.Item5, shapeParams.Item6, DashStyle.Dot, true);
             }
             if (ButtonCopy.Checked && dialogProcessor.DrawTemporaryCopyShape && dialogProcessor.SelectionCopy != null)
             {
@@ -275,6 +299,24 @@ namespace Draw
                 ButtonDrawReuleauxTriangle.Checked = false;
                 dialogProcessor.DrawTemporaryReuleauxTriangle = false;
             }
+            if (ButtonDrawEnvelope.Checked && dialogProcessor.DrawTemporaryEnvelope)
+            {
+                dialogProcessor.ShapeList[dialogProcessor.CurrentTab].RemoveAll(s => s.TemporaryFlag);
+                dialogProcessor.AddEnvelope(
+                    shapeParams.Item1, shapeParams.Item2, shapeParams.Item5, shapeParams.Item6,
+                    DashStyle.Solid, false);
+                ButtonDrawEnvelope.Checked = false;
+                dialogProcessor.DrawTemporaryEnvelope = false;
+            }
+            if (ButtonDrawGenericCircle.Checked && dialogProcessor.DrawTemporaryGenericCircle)
+            {
+                dialogProcessor.ShapeList[dialogProcessor.CurrentTab].RemoveAll(s => s.TemporaryFlag);
+                dialogProcessor.AddGenericCircle(
+                    shapeParams.Item1, shapeParams.Item2, shapeParams.Item5, shapeParams.Item6,
+                    DashStyle.Solid, false);
+                ButtonDrawGenericCircle.Checked = false;
+                dialogProcessor.DrawTemporaryGenericCircle = false;
+            }
             if (ButtonCopy.Checked && dialogProcessor.DrawTemporaryCopyShape)
             {
                 ButtonCopy.Checked = false;
@@ -289,6 +331,7 @@ namespace Draw
 
         private void DrawRectangleSpeedButton_Click(object sender, EventArgs e)
         {
+            ButtonDrawEnvelope.Checked = false;
             ButtonDrowTriangle.Checked = false;
             ButtonMultiSelect.Checked = false;
             ButtonMainNavigator.Checked = false;
@@ -302,12 +345,14 @@ namespace Draw
             ButtonMinus.Checked = false;
             ButtonDrawReuleauxTriangle.Checked = false;
             ButtonDrawLine.Checked = false;
+            ButtonDrawGenericCircle.Checked = false;
             ResetRotationProcess(GlobalConstants.DefaultDashStyle, false, true);
             viewPort.Invalidate();
         }
 
         private void DrawTriangleSpeedButton_Click(object sender, EventArgs e)
         {
+            ButtonDrawEnvelope.Checked = false;
             ButtonMultiSelect.Checked = false;
             ButtonMainNavigator.Checked = false;
             ButtonDrawEllipse.Checked = false;
@@ -321,12 +366,14 @@ namespace Draw
             ButtonMinus.Checked = false;
             ButtonDrawReuleauxTriangle.Checked = false;
             ButtonDrawLine.Checked = false;
+            ButtonDrawGenericCircle.Checked = false;
             ResetRotationProcess(GlobalConstants.DefaultDashStyle, false, true);
             viewPort.Invalidate();
         }
 
         private void DrawEllipseSpeedButton_Click(object sender, EventArgs e)
         {
+            ButtonDrawEnvelope.Checked = false;
             ButtonDrowTriangle.Checked = false;
             ButtonMultiSelect.Checked = false;
             ButtonFillColor.Checked = false;
@@ -340,12 +387,14 @@ namespace Draw
             ButtonMinus.Checked = false;
             ButtonDrawReuleauxTriangle.Checked = false;
             ButtonDrawLine.Checked = false;
+            ButtonDrawGenericCircle.Checked = false;
             ResetRotationProcess(GlobalConstants.DefaultDashStyle, false, true);
             viewPort.Invalidate();
         }
 
         private void OnMainNavigator_Click(object sender, EventArgs e)
         {
+            ButtonDrawEnvelope.Checked = false;
             ButtonDrowTriangle.Checked = false;
             ButtonMultiSelect.Checked = false;
             ButtonFillColor.Checked = false;
@@ -359,12 +408,14 @@ namespace Draw
             ButtonMinus.Checked = false;
             ButtonDrawReuleauxTriangle.Checked = false;
             ButtonDrawLine.Checked = false;
+            ButtonDrawGenericCircle.Checked = false;
             ResetRotationProcess(GlobalConstants.DefaultDashStyle, true, true);
             viewPort.Invalidate();
         }
 
         private void OnMultiSelect_Click(object sender, EventArgs e)
         {
+            ButtonDrawEnvelope.Checked = false;
             ButtonDrowTriangle.Checked = false;
             ButtonMainNavigator.Checked = false;
             ButtonFillColor.Checked = false;
@@ -378,10 +429,12 @@ namespace Draw
             ButtonMinus.Checked = false;
             ButtonDrawReuleauxTriangle.Checked = false;
             ButtonDrawLine.Checked = false;
+            ButtonDrawGenericCircle.Checked = false;
         }
 
         private void FillColor_Click(object sender, EventArgs e)
         {
+            ButtonDrawEnvelope.Checked = false;
             ButtonDrowTriangle.Checked = false;
             ButtonMultiSelect.Checked = false;
             ButtonMainNavigator.Checked = false;
@@ -395,6 +448,7 @@ namespace Draw
             ButtonMinus.Checked = false;
             ButtonDrawReuleauxTriangle.Checked = false;
             ButtonDrawLine.Checked = false;
+            ButtonDrawGenericCircle.Checked = false;
             ResetRotationProcess(GlobalConstants.DefaultDashStyle, true, true);
             viewPort.Invalidate();
         }
@@ -402,6 +456,7 @@ namespace Draw
 
         private void BorderColor_Click(object sender, EventArgs e)
         {
+            ButtonDrawEnvelope.Checked = false;
             ButtonDrowTriangle.Checked = false;
             ButtonMultiSelect.Checked = false;
             ButtonMainNavigator.Checked = false;
@@ -415,12 +470,14 @@ namespace Draw
             ButtonMinus.Checked = false;
             ButtonDrawReuleauxTriangle.Checked = false;
             ButtonDrawLine.Checked = false;
+            ButtonDrawGenericCircle.Checked = false;
             ResetRotationProcess(GlobalConstants.DefaultDashStyle, true, true);
             viewPort.Invalidate();
         }
 
         private void ButtonCopy_Click(object sender, EventArgs e)
         {
+            ButtonDrawEnvelope.Checked = false;
             ButtonDrowTriangle.Checked = false;
             ButtonMultiSelect.Checked = false;
             ButtonMainNavigator.Checked = false;
@@ -434,12 +491,14 @@ namespace Draw
             ButtonMinus.Checked = false;
             ButtonDrawReuleauxTriangle.Checked = false;
             ButtonDrawLine.Checked = false;
+            ButtonDrawGenericCircle.Checked = false;
             ResetRotationProcess(GlobalConstants.DefaultDashStyle, true, true);
             viewPort.Invalidate();
         }
 
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
+            ButtonDrawEnvelope.Checked = false;
             ButtonDrowTriangle.Checked = false;
             ButtonMultiSelect.Checked = false;
             ButtonMainNavigator.Checked = false;
@@ -453,12 +512,14 @@ namespace Draw
             ButtonMinus.Checked = false;
             ButtonDrawReuleauxTriangle.Checked = false;
             ButtonDrawLine.Checked = false;
+            ButtonDrawGenericCircle.Checked = false;
             ResetRotationProcess(GlobalConstants.DefaultDashStyle, true, true);
             viewPort.Invalidate();
         }
 
         private void ButtonMultiMove_Click(object sender, EventArgs e)
         {
+            ButtonDrawEnvelope.Checked = false;
             ButtonDrowTriangle.Checked = false;
             ButtonMultiSelect.Checked = false;
             ButtonMainNavigator.Checked = false;
@@ -472,10 +533,12 @@ namespace Draw
             ButtonMinus.Checked = false;
             ButtonDrawReuleauxTriangle.Checked = false;
             ButtonDrawLine.Checked = false;
+            ButtonDrawGenericCircle.Checked = false;
         }
 
         private void Plus_Click(object sender, EventArgs e)
         {
+            ButtonDrawEnvelope.Checked = false;
             ButtonDrowTriangle.Checked = false;
             ButtonMultiSelect.Checked = false;
             ButtonMainNavigator.Checked = false;
@@ -489,11 +552,13 @@ namespace Draw
             ButtonMinus.Checked = false;
             ButtonDrawReuleauxTriangle.Checked = false;
             ButtonDrawLine.Checked = false;
+            ButtonDrawGenericCircle.Checked = false;
             ResetRotationProcess(GlobalConstants.DefaultDashStyle, true, true);
         }
 
         private void Minus_Click(object sender, EventArgs e)
         {
+            ButtonDrawEnvelope.Checked = false;
             ButtonDrowTriangle.Checked = false;
             ButtonMultiSelect.Checked = false;
             ButtonMainNavigator.Checked = false;
@@ -507,11 +572,13 @@ namespace Draw
             ButtonPlus.Checked = false;
             ButtonDrawReuleauxTriangle.Checked = false;
             ButtonDrawLine.Checked = false;
+            ButtonDrawGenericCircle.Checked = false;
             ResetRotationProcess(GlobalConstants.DefaultDashStyle, true, true);
         }
 
         private void DrawRelauxTriangleSpeedButton_Click(object sender, EventArgs e)
         {
+            ButtonDrawEnvelope.Checked = false;
             ButtonDrowTriangle.Checked = false;
             ButtonMultiSelect.Checked = false;
             ButtonMainNavigator.Checked = false;
@@ -525,10 +592,31 @@ namespace Draw
             ButtonPlus.Checked = false;
             ButtonMinus.Checked = false;
             ButtonDrawLine.Checked = false;
+            ButtonDrawGenericCircle.Checked = false;
             ResetRotationProcess(GlobalConstants.DefaultDashStyle, true, true);
         }
 
         private void DrawLineSpeedButton_Click(object sender, EventArgs e)
+        {
+            ButtonDrawEnvelope.Checked = false;
+            ButtonDrowTriangle.Checked = false;
+            ButtonMultiSelect.Checked = false;
+            ButtonMainNavigator.Checked = false;
+            ButtonDrawEllipse.Checked = false;
+            ButtonDrawRectangle.Checked = false;
+            ButtonFillColor.Checked = false;
+            ButtonDelete.Checked = false;
+            ButtonCopy.Checked = false;
+            ButtonBorderColor.Checked = false;
+            ButtonMultiMove.Checked = false;
+            ButtonPlus.Checked = false;
+            ButtonDrawReuleauxTriangle.Checked = false;
+            ButtonMinus.Checked = false;
+            ButtonDrawGenericCircle.Checked = false;
+            ResetRotationProcess(GlobalConstants.DefaultDashStyle, true, true);
+        }
+
+        private void DrawEnvelopeSpeedButton_Click(object sender, EventArgs e)
         {
             ButtonDrowTriangle.Checked = false;
             ButtonMultiSelect.Checked = false;
@@ -543,6 +631,26 @@ namespace Draw
             ButtonPlus.Checked = false;
             ButtonDrawReuleauxTriangle.Checked = false;
             ButtonMinus.Checked = false;
+            ButtonDrawGenericCircle.Checked = false;
+            ResetRotationProcess(GlobalConstants.DefaultDashStyle, true, true);
+        }
+
+        private void DrawGenericCircleSpeedButton_Click(object sender, EventArgs e)
+        {
+            ButtonDrowTriangle.Checked = false;
+            ButtonMultiSelect.Checked = false;
+            ButtonMainNavigator.Checked = false;
+            ButtonDrawEllipse.Checked = false;
+            ButtonDrawRectangle.Checked = false;
+            ButtonFillColor.Checked = false;
+            ButtonDelete.Checked = false;
+            ButtonCopy.Checked = false;
+            ButtonBorderColor.Checked = false;
+            ButtonMultiMove.Checked = false;
+            ButtonPlus.Checked = false;
+            ButtonDrawReuleauxTriangle.Checked = false;
+            ButtonMinus.Checked = false;
+            ButtonDrawEnvelope.Checked = false;
             ResetRotationProcess(GlobalConstants.DefaultDashStyle, true, true);
         }
 
@@ -982,6 +1090,7 @@ namespace Draw
             ButtonMainNavigator.Checked = false;
             ButtonMainNavigator.PerformClick();
         }
+
 
     }
 }

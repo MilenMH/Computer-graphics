@@ -1,0 +1,8 @@
+TriangleShape
+Point : X : 185 : Y : 410
+Point : X : 185 : Y : 185
+Point : X : 453 : Y : 185
+BorderColor : Black
+FillColor : #FFFFFF
+DashStyle : Solid
+TemporaryFlag : False

@@ -88,6 +88,8 @@
     <Compile Include="src\Helpers\PropertyMapper.cs" />
     <Compile Include="src\Interfaces\ISaveFileWorker.cs" />
     <Compile Include="src\Models\EllipseShape.cs" />
+    <Compile Include="src\Models\EnvelopeShape.cs" />
+    <Compile Include="src\Models\GenericCircle.cs" />
     <Compile Include="src\Models\LineShape.cs" />
     <Compile Include="src\Models\RectangleShape.cs" />
     <Compile Include="src\Models\ReuleauxTriangleShape.cs" />

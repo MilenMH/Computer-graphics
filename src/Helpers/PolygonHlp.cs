@@ -37,6 +37,12 @@ namespace Draw.src.Helpers
             return polygon;
         }
 
+        public static double ConvertDegreesToRadians(double degrees)
+        {
+            double radians = (Math.PI / 180) * degrees;
+            return (radians);
+        }
+
         public static PointF RotatePoint(PointF point, PointF centroid, double radians)
         {
             float x = (float)(centroid.X + ((point.X - centroid.X) * Math.Cos(radians) - (point.Y - centroid.Y) * Math.Sin(radians)));
